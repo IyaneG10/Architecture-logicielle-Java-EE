@@ -63,7 +63,11 @@ Git sur linux:
 
 aller dans le repertoire:
 
+<<<<<<< HEAD
 	cd ~/.ssh/
+=======
+    cd ~/.ssh/
+>>>>>>> e5fb72bbae1631a5cc4d2f32430cd6724b085757
 
 generer la cle√ publique dans le fichier ssh_git:
 
