@@ -7,7 +7,8 @@
 ################################################################################
 								Installations
 ################################################################################
-	# VM Java
+
+VM Java
 
 https://doc.ubuntu-fr.org/openjdk
 
@@ -56,15 +57,18 @@ https://www.rabbitmq.com/jms-client.html
 --------------------------------------------------------------------------------
 Git sur linux:
 
-aller dans le repertoire
+aller dans le repertoire:
+
  cd ~/.ssh/
 
 générer la clé publique dans le fichier ssh_git:
+
  ssh-keygen -t ed25519 -f ssh_git
 
 copier le contenu du fichier et le rajoutter à la liste des clé sur gitlab 
 
-clone tout le contenu sur git vers le répertoire
+clone tout le contenu sur git vers le répertoire:
+
  git clone https://gitlab.univ-lille.fr/mamadoumalick.seck.etu/sysco.git
  git add *
  git status nano ssh_git.pub ^C
