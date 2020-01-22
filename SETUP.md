@@ -63,7 +63,7 @@ Git sur linux:
 
 aller dans le repertoire:
 
- c  d ~/.ssh/
+    cd ~/.ssh/
 
 générer la clé publique dans le fichier ssh_git:
 
