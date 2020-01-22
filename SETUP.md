@@ -63,11 +63,11 @@ Git sur linux:
 
 aller dans le repertoire:
 
- cd ~/.ssh/
+ c  d ~/.ssh/
 
 générer la clé publique dans le fichier ssh_git:
 
- ssh-keygen -t ed25519 -f ssh_git
+    ssh-keygen -t ed25519 -f ssh_git
 
 copier le contenu du fichier et le rajoutter à la liste des clé sur gitlab 
 
