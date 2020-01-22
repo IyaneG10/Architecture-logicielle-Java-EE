@@ -34,11 +34,15 @@ Recuperer la URL du projet sur Git
 --------------------------------------------------------------------------------
 RabbitMQ:
 
-tutorial:
+tutorial pour install:
 https://computingforgeeks.com/how-to-install-latest-rabbitmq-server-on-ubuntu-18-04-lts/
 
 https://packagecloud.io/rabbitmq/rabbitmq-server
 
+
+tutorial pour installer sur la VM Radius:
+
+ https://tecadmin.net/install-rabbitmq-server-on-ubuntu/
 
 ajouter les users:
 
