@@ -4,9 +4,9 @@
 
 	https://tvantroys.plil.fr/IMA5/AL/docs/2.4_Architecture.pdf
 	
-################################################################################
+##################################
 Installations
-################################################################################
+##################################
 
 VM Java
 
@@ -65,7 +65,7 @@ aller dans le repertoire:
 
 	cd ~/.ssh/
 
-generer la cle√ publique dans le fichier ssh_git:
+generer la cle publique dans le fichier ssh_git:
 
 	ssh-keygen -t ed25519 -f ssh_git
 
