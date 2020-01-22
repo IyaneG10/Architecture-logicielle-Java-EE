@@ -7,3 +7,15 @@ Data to measure:
  5. Humidite
  6. Pression atmosperique
  7. Particules fines
+
+
+
+RPi message:
+ 1. RPiNumber.DataType.DataValue.Date
+ 2. RPiNumber.State
+
+
+
+Data Type:
+ 1. Data to measure: float
+ 2. Date:  datetime
