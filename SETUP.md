@@ -40,7 +40,7 @@ https://computingforgeeks.com/how-to-install-latest-rabbitmq-server-on-ubuntu-18
 https://packagecloud.io/rabbitmq/rabbitmq-server
 
 
-tutorial pour installer sur la VM Radius:
+tutorial pour installer sur la VM Cordouan:
 
  https://tecadmin.net/install-rabbitmq-server-on-ubuntu/
 
