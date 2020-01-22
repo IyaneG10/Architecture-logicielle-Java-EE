@@ -63,27 +63,23 @@ Git sur linux:
 
 aller dans le repertoire:
 
-<<<<<<< HEAD
 	cd ~/.ssh/
-=======
-    cd ~/.ssh/
->>>>>>> e5fb72bbae1631a5cc4d2f32430cd6724b085757
 
 generer la cle� publique dans le fichier ssh_git:
 
-    ssh-keygen -t ed25519 -f ssh_git
+	ssh-keygen -t ed25519 -f ssh_git
 
 copier le contenu du fichier et le rajoutter à la liste des clé sur gitlab 
 
-    nano ssh_git.pub 
+	nano ssh_git.pub 
 
 clone tout le contenu sur git vers le répertoire:
 
-    git clone https://gitlab.univ-lille.fr/mamadoumalick.seck.etu/sysco.git
-    git add *
-    git status 
-    git config --global user.email "jorge.cabraldasdores.etu@univ-lille.fr"
-    git config --global user.email "jorge.cabraldasdores.etu"
-    git commit -m "RabbitMQ"
-
+	git clone https://gitlab.univ-lille.fr/mamadoumalick.seck.etu/sysco.git
+	git add *
+	git status 
+	git config --global user.email "jorge.cabraldasdores.etu@univ-lille.fr"
+	git config --global user.email "jorge.cabraldasdores.etu"
+	git commit -m "RabbitMQ"
+	git push
 
