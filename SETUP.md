@@ -71,18 +71,15 @@ générer la clé publique dans le fichier ssh_git:
 
 copier le contenu du fichier et le rajoutter à la liste des clé sur gitlab 
 
+    nano ssh_git.pub 
+
 clone tout le contenu sur git vers le répertoire:
 
- git clone https://gitlab.univ-lille.fr/mamadoumalick.seck.etu/sysco.git
- 
- git add *
- 
- git status nano ssh_git.pub ^C
- 
- git config --global user.email "jorge.cabraldasdores.etu@univ-lille.fr"
- 
- git config --global user.email "jorge.cabraldasdores.etu"
- 
- git commit -m "RabbitMQ"
+    git clone https://gitlab.univ-lille.fr/mamadoumalick.seck.etu/sysco.git
+    git add *
+    git status 
+    git config --global user.email "jorge.cabraldasdores.etu@univ-lille.fr"
+    git config --global user.email "jorge.cabraldasdores.etu"
+    git commit -m "RabbitMQ"
 
 
