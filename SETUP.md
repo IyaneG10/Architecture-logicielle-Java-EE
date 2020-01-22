@@ -5,7 +5,7 @@
 	https://tvantroys.plil.fr/IMA5/AL/docs/2.4_Architecture.pdf
 	
 ################################################################################
-								Installations
+Installations
 ################################################################################
 
 VM Java
@@ -63,9 +63,9 @@ Git sur linux:
 
 aller dans le repertoire:
 
- c  d ~/.ssh/
+	cd ~/.ssh/
 
-générer la clé publique dans le fichier ssh_git:
+generer la cle� publique dans le fichier ssh_git:
 
     ssh-keygen -t ed25519 -f ssh_git
 
