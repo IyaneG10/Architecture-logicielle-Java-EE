@@ -75,7 +75,7 @@ clone tout le contenu sur git vers le répertoire:
  
  git status nano ssh_git.pub ^C
  
- jcabrald@jcabrald-VirtualBox:~/eclipse-workspace/sysco$ git config --global user.email "jorge.cabraldasdores.etu@univ-lille.fr"
+ git config --global user.email "jorge.cabraldasdores.etu@univ-lille.fr"
  
  git config --global user.email "jorge.cabraldasdores.etu"
  
