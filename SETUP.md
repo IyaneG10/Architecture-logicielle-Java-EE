@@ -70,10 +70,15 @@ copier le contenu du fichier et le rajoutter à la liste des clé sur gitlab
 clone tout le contenu sur git vers le répertoire:
 
  git clone https://gitlab.univ-lille.fr/mamadoumalick.seck.etu/sysco.git
+ 
  git add *
+ 
  git status nano ssh_git.pub ^C
+ 
  jcabrald@jcabrald-VirtualBox:~/eclipse-workspace/sysco$ git config --global user.email "jorge.cabraldasdores.etu@univ-lille.fr"
+ 
  git config --global user.email "jorge.cabraldasdores.etu"
+ 
  git commit -m "RabbitMQ"
 
 
