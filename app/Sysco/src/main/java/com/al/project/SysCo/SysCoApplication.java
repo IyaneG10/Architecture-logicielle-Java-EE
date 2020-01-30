@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SysCoApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(SysCoApplication.class, args);
 	}
 

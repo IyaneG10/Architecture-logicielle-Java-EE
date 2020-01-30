@@ -1,37 +1,42 @@
 package com.al.project.SysCo.RPi;
 
-import javax.jms;
-import javax.jms.ConnectionFactory;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jms.listener.DefaultMessageListenerContainer;
-import org.springframework.jms.listener.adapter.MessageListenerAdapter;
+import java.nio.charset.StandardCharsets;
 
 
 class Subscriber {
 
-    private static final Log log = LogFactory.getLog(StockConsumer.class);
 
-    @Bean
-    public DefaultMessageListenerContainer jmsListener(ConnectionFactory connectionFactory) {
-        DefaultMessageListenerContainer jmsListener = new DefaultMessageListenerContainer();
-        jmsListener.setConnectionFactory(connectionFactory);
-        jmsListener.setDestinationName("rabbit-trader-channel");
-        jmsListener.setPubSubDomain(true);
+    private static final String EXCHANGE_NAME = "topic_logs";
 
-        MessageListenerAdapter adapter = new MessageListenerAdapter(new Receiver());
-        adapter.setDefaultListenerMethod("receive");
+    public static void main(String[] argv) throws Exception {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel();
 
-        jmsListener.setMessageListener(adapter);
-        return jmsListener;
-    }
+        channel.exchangeDeclare(EXCHANGE_NAME, "topic");
+        String queueName = channel.queueDeclare().getQueue();
 
-    protected static class Receiver {
-        public void receive(String message) {
-            log.info("Received " + message);
+        if (argv.length < 1) {
+            System.err.println("Usage: ReceiveLogsTopic [binding_key]...");
+            System.exit(1);
         }
+
+        for (String bindingKey : argv) {
+            channel.queueBind(queueName, EXCHANGE_NAME, bindingKey);
+        }
+
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+
+        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+            System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
+        };
+        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
     }
 }
