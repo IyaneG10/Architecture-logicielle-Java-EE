@@ -1,15 +1,18 @@
 package com.al.project.SysCo.RPi;
 
+import rabbitmq.client.Channel;
+import rabbitmq.client.Connection;
+import rabbitmq.client.ConnectionFactory;
 
 import java.nio.charset.StandardCharsets;
 
 public class Publisher {
 
-    private static String EXCHANGE_NAME="";
+    private static String EXCHANGE_NAME;
 
     public Publisher(String topic_name){
 
-        EXCHANGE_NAME = topic_name;
+        this.EXCHANGE_NAME = topic_name;
     }
 
     public static void main(String[] argv) throws Exception {
