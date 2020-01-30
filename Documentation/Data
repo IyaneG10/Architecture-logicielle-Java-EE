@@ -1,20 +1,24 @@
 Data to measure:
- 1. Oxygene
- 2. Monoxyde de carbone
- 3. Dioxyde de carbone
- 4. Temperature
+ 1. Oxygene						(%)
+ 2. Monoxyde de carbone			(%)
+ 3. Dioxyde de carbone			(%)
+ 4. Temperature					(°C)
  5. Humidite
- 6. Pression atmosperique
- 7. Particules fines
+ 6. Pression atmospherique		(hPa)
+ 7. Particules fines			()
 
 
 
 RPi message:
- 1. RPiNumber.DataType.DataValue.Date
- 2. RPiNumber.State
+ 1. "RPi".Id.Topic.Value.Date
+ 2. "RPi".Id."State".Value.Topic.Value
 
 
 
 Data Type:
- 1. Data to measure: float
- 2. Date:  datetime
+ 1. RPi Id		: Integer
+ 2. Topic name	: String
+ 3. Topic Value	: float
+ 4. State Value	: boolean
+ 5. Date		: datetime
+ 

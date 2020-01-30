@@ -1,19 +1,21 @@
 package com.al.project.SysCo.RPi;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 
 import java.nio.charset.StandardCharsets;
 
 public class Publisher {
 
+    private static String EXCHANGE_NAME="";
 
-    private static final String EXCHANGE_NAME = "topic_logs";
+    public Publisher(String topic_name){
+
+        EXCHANGE_NAME = topic_name;
+    }
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
+
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
 
