@@ -10,6 +10,16 @@ public class Rpi {
     private Topic topic;
     private Publisher publisher = new Publisher();
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    private String state;
+
     private String [] topicListName = {
         "Oxygene","Monoxyde de carbone",
         "Dioxyde de carbone","Temperature",
@@ -18,7 +28,7 @@ public class Rpi {
     } ;
 
 
-    private List<Topic> topicList = new ArrayList<Topic>();
+    private List<Topic> topicList = new ArrayList<>();
 
     public Rpi(Integer id){
         this.id = id;
@@ -39,7 +49,15 @@ public class Rpi {
     @Scheduled(fixedRate = 30000)           //30 seconds
     private void sendTopic_Oxy(){
         try {
-            publisher.publish(topicListName[0],"DB",id+);
+            String [] elements = {
+                    Integer.toString(id),
+                    topicListName[0],
+                    Double.toString(topicList.get(0).getValue()),
+                    "",
+                    ""
+            };
+            String message = xmlFormater(elements);
+            publisher.publish(topicListName[0],"DB",message);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,4 +92,20 @@ public class Rpi {
     private void sendTopic_PartFi(){
 
     }
+
+    private String xmlFormater(String[] elements){
+        String xml = " <?xml version = \"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>"
+            + "<RPi>"
+                + "<Id>" + elements[0] + "</Id>"
+                + "<Topic>"
+                    + "<Name>" + elements[1] + "</Name>"
+                    + "<Value>" + elements[2] + "</Value>"
+                +"</Topic>"
+                + "<State>" + elements[3] + "</State>"
+                + "<Date>" + elements[4] + "</Date>"
+            + "</RPi>";
+        return xml;
+    }
+
+
 }

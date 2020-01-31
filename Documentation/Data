@@ -1,24 +1,37 @@
 Data to measure:
- 1. Oxygene						(%)
- 2. Monoxyde de carbone			(%)
- 3. Dioxyde de carbone			(%)
- 4. Temperature					(°C)
- 5. Humidite
- 6. Pression atmospherique		(hPa)
- 7. Particules fines			()
+	1. Oxygene						(%)
+	2. Monoxyde de carbone			(%)
+	3. Dioxyde de carbone			(%)
+	4. Temperature					(°C)
+	5. Humidite
+	6. Pression atmospherique		(hPa)
+	7. Particules fines			()
 
 
-
+---------------------------------------------------------------
 RPi message:
- 1. Id.TopicName.TopicValue.Date					->DB
- 2. Id.StateValue.TopicName.TopicValue.Date			->RT
+	1. Id.TopicName.TopicValue.Date					->DB
+	2. Id.StateValue.TopicName.TopicValue.Date			->RT
 
+XML Format:
+	1. Data for DB:
+		<?xml version = \"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>
+		<RPi>
+			<Id> RPi id </Id>
+			<Topic>
+				<Name> Topic name </Name>
+				<Value> Topic value </Value>
+			</Topic>
+			<State> state </State>
+			<Date> date </Date>
+		</RPi>;
 
-
+ 
+---------------------------------------------------------------
 Data Type:
- 1. RPi Id		: Integer
- 2. TopicName	: String
- 3. TopicValue	: float
- 4. State Value	: boolean
- 5. Date		: datetime
+	1. RPi Id		: Integer
+	2. TopicName	: String
+	3. TopicValue	: float
+	4. State Value	: boolean
+	5. Date		: datetime
  
