@@ -2,23 +2,34 @@ package com.al.project.SysCo.RPi;
 
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class Rpi {
     private Integer id;
     private Topic topic;
+    private String date;
+    private boolean state;
     private Publisher publisher = new Publisher();
 
-    public String getState() {
+    public boolean getState() {
+        // create random object
+        Random random = new Random();
+        // get next next boolean value
+        boolean state = random.nextBoolean();
+
         return state;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date dateObj = new Date();
+        System.out.println(formatter.format(dateObj));
+        return date;
     }
-
-    private String state;
 
     private String [] topicListName = {
         "Oxygene","Monoxyde de carbone",
@@ -53,7 +64,7 @@ public class Rpi {
                     Integer.toString(id),
                     topicListName[0],
                     Double.toString(topicList.get(0).getValue()),
-                    "",
+                    Boolean.toString(getState()),
                     ""
             };
             String message = xmlFormater(elements);
