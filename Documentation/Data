@@ -10,15 +10,15 @@ Data to measure:
 
 
 RPi message:
- 1. "RPi".Id.Topic.Value.Date
- 2. "RPi".Id."State".Value.Topic.Value
+ 1. Id.TopicName.TopicValue.Date					->DB
+ 2. Id.StateValue.TopicName.TopicValue.Date			->RT
 
 
 
 Data Type:
  1. RPi Id		: Integer
- 2. Topic name	: String
- 3. Topic Value	: float
+ 2. TopicName	: String
+ 3. TopicValue	: float
  4. State Value	: boolean
  5. Date		: datetime
  
