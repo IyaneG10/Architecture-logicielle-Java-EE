@@ -8,7 +8,7 @@ import com.rabbitmq.client.DeliverCallback;
 import java.nio.charset.StandardCharsets;
 
 
-class Subscriber {
+public class Subscriber {
 
 
     private static final String EXCHANGE_NAME = "topic_logs";

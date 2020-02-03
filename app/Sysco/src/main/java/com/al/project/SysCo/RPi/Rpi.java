@@ -11,7 +11,7 @@ import java.util.Random;
 public class Rpi {
     private Integer id;
     private Topic topic;
-    private String date;
+    private static String date;
     private boolean state;
     private Publisher publisher = new Publisher();
 
@@ -24,10 +24,12 @@ public class Rpi {
         return state;
     }
 
-    public String getDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    public static String getDate() {
+        SimpleDateFormat formatter;
+        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date dateObj = new Date();
-        System.out.println(formatter.format(dateObj));
+        date = formatter.format(dateObj);
+        //System.out.println(date);
         return date;
     }
 
@@ -59,52 +61,40 @@ public class Rpi {
 
     @Scheduled(fixedRate = 30000)           //30 seconds
     private void sendTopic_Oxy(){
-        try {
-            String [] elements = {
-                    Integer.toString(id),
-                    topicListName[0],
-                    Double.toString(topicList.get(0).getValue()),
-                    Boolean.toString(getState()),
-                    ""
-            };
-            String message = xmlFormater(elements);
-            publisher.publish(topicListName[0],"DB",message);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        SendTopic(0);
     }
 
     @Scheduled(fixedRate = 30000)           //30 seconds
     private void sendTopic_Mono(){
-
+        SendTopic(1);
     }
 
     @Scheduled(fixedRate = 30000)           //30 seconds
     private void sendTopic_Diox(){
-
+        SendTopic(2);
     }
 
     @Scheduled(fixedRate = 1800000)         //30 minutes
     private void sendTopic_Temp(){
-
+        SendTopic(3);
     }
 
     @Scheduled(fixedRate = 1800000)         //30 minutes
     private void sendTopic_Humid(){
-
+        SendTopic(4);
     }
 
     @Scheduled(fixedRate = 1800000)         //30 minutes
     private void sendTopic_Press(){
-
+        SendTopic(5);
     }
 
     @Scheduled(fixedRate = 1800000)         //30 minutes
     private void sendTopic_PartFi(){
-
+        SendTopic(6);
     }
 
-    private String xmlFormater(String[] elements){
+    private String XMLFormater(String[] elements){
         String xml = " <?xml version = \"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>"
             + "<RPi>"
                 + "<Id>" + elements[0] + "</Id>"
@@ -118,5 +108,36 @@ public class Rpi {
         return xml;
     }
 
+    private String CreateFakeTopics(int topicNumber){
+        try {
+            String [] elements = {
+                    Integer.toString(id),
+                    topicListName[topicNumber],
+                    Double.toString(topicList.get(topicNumber).getValue()),
+                    Boolean.toString(getState()),
+                    ""
+            };
+            String topicMessage = XMLFormater(elements);
+            return topicMessage;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    private void SendTopic(int topicNumber){
+
+        try {
+            String message = CreateFakeTopics(topicNumber);
+            if(message!= "")
+                publisher.publish(topicListName[topicNumber],"DB",message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] argv){
+    System.out.println(getDate());
+    }
 }
