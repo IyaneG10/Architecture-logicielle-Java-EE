@@ -1,7 +1,10 @@
 package com.al.project.SysCo.RPi;
 
+import jdk.jfr.DataAmount;
+import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import javax.persistence.Entity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
