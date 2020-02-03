@@ -1,4 +1,4 @@
-package com.al.project.SysCo.Model;
+package com.al.project.SysCo.RPi;
 
 
 import java.util.Random;
