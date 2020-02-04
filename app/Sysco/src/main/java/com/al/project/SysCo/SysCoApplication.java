@@ -14,14 +14,15 @@ public class SysCoApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication app = new SpringApplication(SysCoApplication.class);
-		app.run();
+		SpringApplication.run(SysCoApplication.class, args);
+		//SpringApplication app = new SpringApplication(SysCoApplication.class);
+		//app.run();
 
 	}
 
-	public void run(String... args) throws Exception {
-		System.out.println("using environment: " + myConfig.getEnvironment());
-		System.out.println("name: " + myConfig.getName());
-		System.out.println("servers: " + myConfig.getServers());
+	public void TestYML(){
+		System.out.println("using environment: " + myConfig.getServers());
+		//System.out.println("name: " + myConfig.getName());
+		//System.out.println("servers: " + myConfig.getServers());
 	}
 }

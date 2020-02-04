@@ -1,6 +1,8 @@
 package com.al.project.SysCo.RPi;
 
 import com.al.project.SysCo.Model.*;
+import com.al.project.SysCo.YAMLConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.text.SimpleDateFormat;
@@ -20,6 +22,21 @@ public class Rpi {
     private Topic topic;
     //private static String date;
     //private boolean state;
+
+
+    @Autowired
+    //private YAMLConfig myConfig;
+    private static YAMLConfig appConfig = new YAMLConfig();
+
+    public static void TestYML(){
+
+        List<myConfig.Server> serverList = appConfig.getServers();
+        System.out.println("servers list: " + appConfig.getServers());
+        //System.out.println("name: " + myConfig.getName());
+        //System.out.println("servers: " + myConfig.getServers());
+    }
+
+
     private Publisher publisher = new Publisher();
 
     private boolean getState() {
@@ -134,6 +151,7 @@ public class Rpi {
     }
 
     public static void main(String[] argv){
-    System.out.println(getDate());
+        System.out.println(getDate());
+        TestYML();
     }
 }

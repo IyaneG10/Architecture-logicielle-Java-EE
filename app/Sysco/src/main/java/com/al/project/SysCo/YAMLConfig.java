@@ -11,11 +11,16 @@ import java.util.List;
 @Component
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties
+@ConfigurationProperties(prefix = "appConfig")
+
 
 public class YAMLConfig {
 
     private List<Server> servers = new ArrayList<Server>();
+
+    public YAMLConfig() {
+    }
+
     public List<Server> getServers() {
         return this.servers;
     }
@@ -107,5 +112,4 @@ public class YAMLConfig {
     }
 
     // standard getters and setters
-
 }
