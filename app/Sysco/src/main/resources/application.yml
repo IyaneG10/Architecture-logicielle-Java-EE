@@ -10,3 +10,12 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+
+rabbitmq:
+  server:
+    address: "193.48.57.166"
+    port: 15672
+  login:
+    username: "ima2a5-4fun"
+    password: "glopglop"
+

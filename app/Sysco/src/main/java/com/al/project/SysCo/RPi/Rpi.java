@@ -12,7 +12,7 @@ public class Rpi {
         return id;
     }
 
-    public void setId(Integer id) {
+    private void setId(Integer id) {
         this.id = id;
     }
 
@@ -22,7 +22,7 @@ public class Rpi {
     //private boolean state;
     private Publisher publisher = new Publisher();
 
-    public boolean getState() {
+    private boolean getState() {
         // create random object
         Random random = new Random();
         // get next next boolean value
@@ -31,7 +31,7 @@ public class Rpi {
         return state;
     }
 
-    public static String getDate() {
+    private static String getDate() {
         SimpleDateFormat formatter;
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date dateObj = new Date();
@@ -40,12 +40,12 @@ public class Rpi {
         return formatter.format(dateObj);
     }
 
-    private String [] topicListName = {
-        "Oxygene","Monoxyde de carbone",
-        "Dioxyde de carbone","Temperature",
-        "Humidite","Pression atmospherique",
-        "Particules fines"
-    } ;
+    private String [] topicListName = new String []{
+            "Oxygene", "Monoxyde de carbone",
+            "Dioxyde de carbone", "Temperature",
+            "Humidite", "Pression atmospherique",
+            "Particules fines"
+    };
 
 
     private List<Topic> topicList = new ArrayList<>();
@@ -126,7 +126,7 @@ public class Rpi {
 
         try {
             String message = CreateFakeTopics(topicNumber);
-            if(Objects.nonNull(message))
+            if(Objects.nonNull(message))                                                                                //avoids filling DB with values when sensor if off
                 publisher.publish(topicListName[topicNumber],"DB",message);
         } catch (Exception e) {
             e.printStackTrace();
