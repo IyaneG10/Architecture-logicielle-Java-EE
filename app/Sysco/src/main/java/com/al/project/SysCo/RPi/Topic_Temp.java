@@ -1,12 +1,12 @@
-package com.al.project.SysCo.Model;
+package com.al.project.SysCo.RPi;
 
 
 import java.util.Random;
 
-public class Topic_Press extends Topic {
+public class Topic_Temp extends Topic {
 
-    private final double min = 500.0;
-    private final double max = 1200.0;
+    private final double min = 15.0;
+    private final double max = 38.0;
     private double value;
 
     public double getValue() {
@@ -15,7 +15,8 @@ public class Topic_Press extends Topic {
         return value;
     }
 
-   public Topic_Press(String name) {
+
+   public Topic_Temp(String name) {
         super(name);
     }
 }

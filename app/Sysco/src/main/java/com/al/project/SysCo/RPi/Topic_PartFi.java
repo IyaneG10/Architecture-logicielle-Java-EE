@@ -1,12 +1,12 @@
-package com.al.project.SysCo.Model;
+package com.al.project.SysCo.RPi;
 
 
 import java.util.Random;
 
-public class Topic_Mono extends Topic {
+public class Topic_PartFi extends Topic {
 
-    private final double min = 0.0;
-    private final double max = 2.0;
+    private final double min = 10.0;
+    private final double max = 40.0;
     private double value;
 
     public double getValue() {
@@ -16,7 +16,7 @@ public class Topic_Mono extends Topic {
     }
 
 
-   public Topic_Mono(String name) {
+   public Topic_PartFi(String name) {
         super(name);
     }
 }
