@@ -114,7 +114,7 @@ public class Rpi {
             if( ! data.isState() || Objects.isNull(data))                                               //if sensor is off, then don't send it's value
                 return null;
 
-            return data.ToXMLString();
+            return data.toString();
 
         } catch (Exception e) {
             e.printStackTrace();

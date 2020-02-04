@@ -64,12 +64,18 @@ public class Data {
     private String date;
 
 
-    public String ToXMLString(){
-        return String.format("<RPi><Id>%s</Id><Topic><Name>%s</Name><Value>%s</Value></Topic><State>%s</State><Date>%s</Date></RPi>",
-                rpiId,
-                topicName,
-                topicValue,
-                state,
-                date);
+    @Override
+    public String toString() {
+        try {
+            return String.format("<RPi><Id>%s</Id><Topic><Name>%s</Name><Value>%s</Value></Topic><State>%s</State><Date>%s</Date></RPi>",
+                    rpiId,
+                    topicName,
+                    topicValue,
+                    state,
+                    date);
+        }
+        catch (Exception e){
+            return null;
+        }
     }
 }

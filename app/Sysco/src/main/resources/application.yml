@@ -1,5 +1,15 @@
-server:
-  port: 8787
+servers:
+  - name : "tomcat"
+    address: "193.48.57.166"
+    port: 8787
+  - name: "rabbitmq"
+    address: "193.48.57.166"
+    port: 15672
+
+logins:
+  - name: "rabbitmq"
+    username: "ima2a5-4fun"
+    password: "glopglop"
 
 spring:
   datasource:
@@ -11,11 +21,4 @@ spring:
     generate-ddl: true
     show-sql: true
 
-rabbitmq:
-  server:
-    address: "193.48.57.166"
-    port: 15672
-  login:
-    username: "ima2a5-4fun"
-    password: "glopglop"
 
