@@ -1,13 +1,12 @@
 package com.al.project.SysCo.RPi;
 
 import com.al.project.SysCo.Model.*;
-import com.al.project.SysCo.YAMLConfig;
+import appConfig.SysCoConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 
 public class Rpi {
     public Integer getId() {
@@ -25,13 +24,17 @@ public class Rpi {
 
 
     @Autowired
+    private static SysCoConfig appConfig = new SysCoConfig();
+    //private final Map<String, SysCoConfig> servers = new HashMap<>();
     //private YAMLConfig myConfig;
-    private static YAMLConfig appConfig = new YAMLConfig();
 
+    @Autowired
     public static void TestYML(){
 
-        List<myConfig.Server> serverList = appConfig.getServers();
-        System.out.println("servers list: " + appConfig.getServers());
+        Map<String, SysCoConfig.Server> servers;
+        servers = appConfig.getServers();
+        //List<SysCoConfig.Sysco> serverList = appConfig.getServers();
+        System.out.println("servers list: " + servers.get("rabbitmq"));
         //System.out.println("name: " + myConfig.getName());
         //System.out.println("servers: " + myConfig.getServers());
     }

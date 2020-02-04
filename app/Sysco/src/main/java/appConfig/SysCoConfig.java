@@ -1,37 +1,37 @@
-package com.al.project.SysCo;
+package appConfig;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "appConfig")
+@ConfigurationProperties(prefix="SysCoConfig")
+@Data
 
+public class SysCoConfig {
 
-public class YAMLConfig {
+    private final Map<String, Server> servers = new HashMap<>();
+    private final Map<String, Login> logins = new HashMap<>();
 
-    private List<Server> servers = new ArrayList<Server>();
-
-    public YAMLConfig() {
-    }
-
-    public List<Server> getServers() {
+    public Map<String, Server> getServers() {
         return this.servers;
     }
-
-    private List<Login> logins = new ArrayList<Login>();
-    public List<Login> getLogins() {
+    public Map<String, Login>getLogins() {
         return this.logins;
     }
 
-    public static class Server
-    {
+
+    @Data
+    public static class Server{
         private String name;
         private String address;
         private Integer port;
@@ -63,13 +63,14 @@ public class YAMLConfig {
         @Override
         public String toString() {
             return "Server{" +
-                    "name='" + name + '\'' +
                     ", ip='" + address + '\'' +
                     ", port='" + port + '\'' +
                     '}';
         }
     }
 
+
+    @Data
     public static class Login
     {
         private String name;
