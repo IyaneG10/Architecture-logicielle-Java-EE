@@ -121,6 +121,12 @@ public class Rpi {
         SendTopic(6);
     }
 
+    public void sendTopicResponse(){
+        // Send all topics
+        for(int i=0; i<topicList.size();i++)
+            SendTopic(i);
+    }
+
     private String CreateFakeTopics(int topicNumber){
         try {
 
@@ -146,9 +152,9 @@ public class Rpi {
 
         try {
             String message = CreateFakeTopics(topicNumber);
-            if(Objects.nonNull(message))                                                                                //avoids filling DB with values when sensor if off
+            if(Objects.nonNull(message))                                                                                // Avoids filling DB with values when sensor if off
                 publisher.publish(topicListName[topicNumber],"DB",message);
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
