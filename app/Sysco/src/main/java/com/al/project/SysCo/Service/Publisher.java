@@ -1,4 +1,4 @@
-package com.al.project.SysCo.RPi;
+package com.al.project.SysCo.Service;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

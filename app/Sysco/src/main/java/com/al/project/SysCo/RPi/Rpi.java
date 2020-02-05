@@ -2,6 +2,7 @@ package com.al.project.SysCo.RPi;
 
 import com.al.project.SysCo.Model.*;
 import appConfig.SysCoConfig;
+import com.al.project.SysCo.Service.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
