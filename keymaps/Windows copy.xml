@@ -13,7 +13,5 @@
   <action id="OpenFile">
     <keyboard-shortcut first-keystroke="ctrl o" />
   </action>
-  <action id="OverrideMethods">
-    <keyboard-shortcut first-keystroke="shift o" />
-  </action>
+  <action id="OverrideMethods" />
 </keymap>
