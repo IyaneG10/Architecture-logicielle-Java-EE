@@ -1,5 +1,6 @@
 package com.al.project.SysCo.Service;
 
+
 public interface SecurityService {
     String findLoggedInUsername();
 
