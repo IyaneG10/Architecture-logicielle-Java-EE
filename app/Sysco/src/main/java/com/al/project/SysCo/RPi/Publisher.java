@@ -10,18 +10,17 @@ import static java.lang.System.*;
 public class Publisher {
 
     private static String EXCHANGE_NAME;
-    private final String hostIP;
-
-    public Publisher(){
-
-        hostIP = "localhost";
-    }
+    private final String hostIP = "193.48.57.166";
+    private final String username = "ima2a5-4fun";
+    private final String password = "glopglop";
 
 
     public void publish(String topicName, String routingKey, String message) throws Exception{
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(hostIP);
+        factory.setUsername(username);
+        factory.setPassword(password);
         EXCHANGE_NAME = topicName;
 
         try (Connection connection = factory.newConnection();

@@ -24,11 +24,10 @@ public class Rpi {
 
 
     @Autowired
-    private static SysCoConfig appConfig = new SysCoConfig();
+    private static SysCoConfig appConfig;
     //private final Map<String, SysCoConfig> servers = new HashMap<>();
     //private YAMLConfig myConfig;
 
-    @Autowired
     public static void TestYML(){
 
         Map<String, SysCoConfig.Server> servers;

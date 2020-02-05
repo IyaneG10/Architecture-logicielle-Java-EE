@@ -1,4 +1,4 @@
-SysCoConfig:
+sysco:
   servers:
     rabbitmq:
       adress: "193.48.57.166"

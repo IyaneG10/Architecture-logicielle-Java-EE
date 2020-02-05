@@ -1,21 +1,17 @@
 package appConfig;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Component
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix="SysCoConfig")
-@Data
+@ConfigurationProperties(prefix="sysco")
 
 public class SysCoConfig {
 
@@ -30,7 +26,6 @@ public class SysCoConfig {
     }
 
 
-    @Data
     public static class Server{
         private String name;
         private String address;
@@ -70,7 +65,6 @@ public class SysCoConfig {
     }
 
 
-    @Data
     public static class Login
     {
         private String name;
