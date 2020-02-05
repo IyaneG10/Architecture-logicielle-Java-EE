@@ -1,4 +1,4 @@
-package com.al.project.SysCo.Web;
+package com.al.project.SysCo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,10 +29,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/resources/**", "/registration").permitAll()
+                //.antMatchers("/webapp/WEB-INF/view/", "/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login.jsp")
                 .permitAll()
                 .and()
                 .logout()

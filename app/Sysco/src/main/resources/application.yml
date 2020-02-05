@@ -21,3 +21,9 @@ sysco:
       hibernate.ddl-auto: update
       generate-ddl: true
       show-sql: true
+    mvc:
+      view:
+        prefix: /webapp/
+        suffix: .jsp
+    message:
+      basename: validation
