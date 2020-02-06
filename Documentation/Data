@@ -5,17 +5,41 @@ Data to measure:
 	4. Temperature					(°C)
 	5. Humidite
 	6. Pression atmospherique		(hPa)
-	7. Particules fines			()
+	7. Particules fines				()
 
 
 ---------------------------------------------------------------
+Routing Keys:
+	source.destination.room.room_number
+	
+	A- RPiApplication	
+		1. Publish
+			a. Real-time values:
+				"RPi.User.Room."+Integer.toString(id)										// RPi to user
+			b. Data base values:
+				"RPi.DataBase.Room."+Integer.toString(id)									// RPi to DB
+
+		2. Subscribe
+			a. Real-time values:
+				"User.RPi.Room."+Integer.toString(id)										// user to RPi			
+	B- DataApplication	
+		1. Publish
+			a. Real-time values:
+				"User.RPi.Room."+Integer.toString(id)										// user to RPi
+
+		2. Subscribe
+			a. Real-time values:
+				"RPi.User.Room."+Integer.toString(id)										// RPi to user
+			b. Data base values:
+				"RPi.DataBase.Room."+Integer.toString(id)									// RPi to DB
+
+
 RPi message:
-	1. Id.TopicName.TopicValue.Date					->DB
-	2. Id.StateValue.TopicName.TopicValue.Date			->RT
+	1. Id.TopicName.TopicValue.Date													// DB
+	2. Id.StateValue.TopicName.TopicValue.Date										// RT
 
 XML Format:
-	1. Data for DB:
-		<?xml version = \"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>
+	1. Dxata for DB:
 		<RPi>
 			<Id> RPi id </Id>
 			<Topic>

@@ -11,11 +11,11 @@ spring:
     generate-ddl: true
     show-sql: true
 
-
-logins:
-    name: "rabbitmq"
-    username: "ima2a5-4fun"
-    password: "glopglop"
+rabbitmq:
+  address: 193.48.57.166
+  port: 15672
+  username: "ima2a5-4fun"
+  password: "glopglop"
 
 
 #######################################################

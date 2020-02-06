@@ -1,9 +1,9 @@
 package com.al.project.SysCo;
 
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.al.project.SysCo.RPi.Rpi;
+
+import java.util.*;
 
 //@SpringBootApplication
 //@EnableAutoConfiguration
@@ -12,7 +12,10 @@ public class RpiApplication {
 
 	public static void main(String[] args) {
 
-		//SpringApplication rpiApp = new SpringApplication(RpiApplication.class);
-		//rpiApp.run();
+		ArrayList<Rpi> rpiList = new ArrayList<>();
+
+		for (int id=0; id<50; id++){
+			rpiList.add(new Rpi(id));
+		}
 	}
 }

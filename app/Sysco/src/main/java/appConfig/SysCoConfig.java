@@ -11,7 +11,7 @@ import java.util.Map;
 @Component
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix="sysco")
+@ConfigurationProperties
 
 public class SysCoConfig {
 
