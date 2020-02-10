@@ -37,6 +37,7 @@ public class UserController {
             return "registration";
         }
 
+
         userService.save(userForm);
 
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
