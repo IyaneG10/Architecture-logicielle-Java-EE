@@ -9,19 +9,19 @@ import static java.lang.System.*;
 
 public class Publisher {
 
-    private static String EXCHANGE_NAME;
+    //private static String EXCHANGE_NAME;
     private final String hostIP = "193.48.57.166";
     private final String username = "ima2a5-4fun";
     private final String password = "glopglop";
 
 
-    public void publish(String topicName, String routingKey, String message) throws Exception{
+    public void publish(String EXCHANGE_NAME, String routingKey, String message) throws Exception{
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(hostIP);
         factory.setUsername(username);
         factory.setPassword(password);
-        EXCHANGE_NAME = topicName;
+        //EXCHANGE_NAME = EXCHANGE_NAME;
 
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {

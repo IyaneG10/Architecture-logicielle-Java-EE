@@ -3,13 +3,11 @@ package com.al.project.SysCo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class Data {
 
-    public Long getId() {
-        return id;
-    }
 
     public int getRpiId() {
         return rpiId;
@@ -27,12 +25,8 @@ public class Data {
         return topicValue;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setRpiId(int rpiId) {
@@ -51,31 +45,20 @@ public class Data {
         this.topicValue = topicValue;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
     @Id
-    private Long id;
     private int rpiId;
     private boolean state;
     private String topicName;
     private double topicValue;
-    private String date;
+    private Date date;
 
 
-    @Override
-    public String toString() {
-        try {
-            return String.format("<RPi><Id>%s</Id><Topic><Name>%s</Name><Value>%s</Value></Topic><State>%s</State><Date>%s</Date></RPi>",
-                    rpiId,
-                    topicName,
-                    topicValue,
-                    state,
-                    date);
-        }
-        catch (Exception e){
-            return null;
-        }
+    public Data toData(String dataString){
+
+        return this;
     }
 }

@@ -1,3 +1,24 @@
+server:
+  port: 8787
+
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+rabbitmq:
+  address: 193.48.57.166
+  port: 15672
+  username: "ima2a5-4fun"
+  password: "glopglop"
+
+
+#######################################################
 sysco:
   servers:
     rabbitmq:
@@ -21,3 +42,9 @@ sysco:
       hibernate.ddl-auto: update
       generate-ddl: true
       show-sql: true
+    mvc:
+      view:
+        prefix: /webapp/
+        suffix: .jsp
+    message:
+      basename: validation
