@@ -6,6 +6,10 @@ spring:
     view:
       prefix: /
       suffix: .jsp
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
   datasource:
      url: jdbc:mariadb://localhost:3306/sysco
      username: admin
@@ -42,9 +46,6 @@ sysco:
       hibernate.ddl-auto: update
       generate-ddl: true
       show-sql: true
-    mvc:
-      view:
-        prefix: /webapp/
-        suffix: .jsp
+
     message:
       basename: validation
