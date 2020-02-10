@@ -3,9 +3,11 @@ package com.al.project.SysCo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
+@Table(name = "data") // si le nom de la table n'est pas précisée, celui de la classe sera pris par défaut
 public class Data {
 
 

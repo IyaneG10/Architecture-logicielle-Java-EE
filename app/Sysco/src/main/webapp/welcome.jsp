@@ -17,6 +17,11 @@
         </form>
 
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+
+        <p>My first paragraph.</p>
+        <p>My second paragraph.</p>
+        <p>My third paragraph.</p>
+
     </c:if>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

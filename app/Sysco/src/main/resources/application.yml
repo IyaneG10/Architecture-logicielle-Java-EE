@@ -1,9 +1,9 @@
-server:
+server: # Serveur Tomcat embarqueé
   port: 8787
 
 spring:
-  mvc:
-    view:
+  mvc: # Modele Vue Controle
+    view: # pour préciser où se trouvent les jsp pour la Vue (affichage coté client)
       prefix: /
       suffix: .jsp
   jpa:
@@ -11,7 +11,7 @@ spring:
     generate-ddl: true
     show-sql: true
   datasource:
-     url: jdbc:mariadb://localhost:3306/sysco
+     url: jdbc:mariadb://localhost:3306/sysco # sysco: le nom de la BDD
      username: admin
      password: admin
 
@@ -22,30 +22,15 @@ logins:
     password: "glopglop"
 
 
-#######################################################
+###############################################################################
+# Les trucs en bas ne marchent pas pour le moment (probleme d'indentation déja)
+###############################################################################
 sysco:
   servers:
     rabbitmq:
       adress: "193.48.57.166"
       port: 15672
-    tomcat:
-      address: "193.48.57.166"
-      port: 8787
-
-  logins:
-    - name: "rabbitmq"
-      username: "ima2a5-4fun"
-      password: "glopglop"
 
   spring:
-    datasource:
-      url: jdbc:mariadb://localhost:3306/sysco
-      username: root
-      password: glopglop
-    jpa:
-      hibernate.ddl-auto: update
-      generate-ddl: true
-      show-sql: true
-
     message:
       basename: validation
