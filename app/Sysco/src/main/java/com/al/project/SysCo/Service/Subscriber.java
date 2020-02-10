@@ -54,15 +54,15 @@ public class Subscriber {
 
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 
-                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+                String response = new String(delivery.getBody(), StandardCharsets.UTF_8);
                 if(obj.getClass().toString().equals("Rpi")){
                     Rpi rpi = (Rpi)obj;
-                    rpi.sendTopicResponseToRabbit(message);
+                    rpi.sendTopicResponseToRabbit(response);
                 }
                 else{
 
-                    DataApplication dataApplication = (DataApplication)obj;
-                    dataApplication.sendTopicResponseToDataBase(message);
+                    DataService dataService = (DataService)obj;
+                    dataService.sendTopicResponse(delivery.getEnvelope().getRoutingKey(), response);
                 }
                 //System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
             };

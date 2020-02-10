@@ -6,8 +6,13 @@ public class RabbitMQService {
 
 
 
-    private  Subscriber subscriber = new Subscriber(this);
-    private   Publisher publisher = new Publisher();
+    private  Subscriber subscriber;
+    private   Publisher publisher;
+
+    public RabbitMQService() {
+        this.publisher = new Publisher();
+        this.subscriber =  new Subscriber(this);
+    }
 
 
     public   void SubscribeToTopics(){

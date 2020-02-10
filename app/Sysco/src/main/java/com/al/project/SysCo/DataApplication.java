@@ -9,29 +9,14 @@ import java.util.Objects;
 public class DataApplication {
 
     public static void main(String[] args) {
-        RabbitMQService rabbitMQService = new RabbitMQService();
-        rabbitMQService.SubscribeToTopics();
 
-        //if(demande données)
+        //if( demande données )
             //GetRealTimeData()
+        //else
+            //GetDataFromBaseData()
     }
 
 
-    private void  GetRealTimeData(RabbitMQService rabbitMQService, int rpiId, String request){
 
-        rabbitMQService.GetRealTimeTopics("RpiTopics","User.RPi.Room."+Integer.toString(rpiId),request);
-    }
-
-    private void GetDataBaseData(){
-
-    }
-
-    private void SendDataToUser(){
-
-    }
-
-    private void SendDataToDB(){
-
-    }
 }
 

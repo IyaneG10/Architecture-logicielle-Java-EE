@@ -2,10 +2,11 @@ package com.al.project.SysCo;
 
 
 import com.al.project.SysCo.RPi.Rpi;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.*;
 
-//@SpringBootApplication
+@SpringBootApplication
 //@EnableAutoConfiguration
 
 public class RpiApplication {

@@ -18,6 +18,30 @@ public class DataService {
         }
     }
 
+
+    private void  GetRealTimeData(RabbitMQService rabbitMQService, int rpiId, String request){
+
+        rabbitMQService.GetRealTimeTopics("RpiTopics","User.RPi.Room."+Integer.toString(rpiId),request);
+    }
+
+
+    public void sendTopicResponse(String routingKey, String response){
+
+        if(routingKey.contains("RPi.User."))
+            SendDataToUser();
+        else
+            SendDataToDB();
+    }
+
+    private void SendDataToUser(){
+
+    }
+
+    private void SendDataToDB(){
+
+    }
+
+
     public void sendTopicToDataBase(String request){                                                            // Send response to the publish we subscribed
 
         System.out.println(" [x] Received Request: " + request);
