@@ -1,4 +1,0 @@
-
-
-+ Les choses essayées, mais ratées:
-	1. application.yaml
