@@ -19,7 +19,7 @@
 		<!-- My CSS -->
 		<link href="./CSS/page1.css" rel="stylesheet" type="text/css"/>
 
-		<title> Green World | Home</title>
+		<title> Green World | Page d'accueil'</title>
 		<link rel="icon" type="image/png" href="./images/logo2.png">
 </head>
 
@@ -31,7 +31,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
-        <h2>Connecte en tant que: ${pageContext.request.userPrincipal.name}</h2>
+        <h2>Connecté en tant que: ${pageContext.request.userPrincipal.name}</h2>
     </c:if>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
