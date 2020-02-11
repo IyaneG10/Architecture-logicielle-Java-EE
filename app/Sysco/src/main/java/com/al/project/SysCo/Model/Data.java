@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "data") // si le nom de la table n'est pas précisée, celui de la classe sera pris par défaut
+@Table(name = "data") // si le nom de la table n'est pas précisée, celui de la classe sera pris par défau
 public class Data {
 
 
