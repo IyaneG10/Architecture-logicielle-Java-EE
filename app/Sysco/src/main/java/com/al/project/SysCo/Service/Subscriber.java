@@ -13,10 +13,9 @@ import java.util.Objects;
 
 public class Subscriber {
 
+    private static final String EXCHANGE_NAME = "RPiTopics";
 
-    //private static final String EXCHANGE_NAME = "topic_logs";
-
-    private static String EXCHANGE_NAME;
+    //private static String EXCHANGE_NAME;
     private final String hostIP = "193.48.57.166";
     private final String username = "ima2a5-4fun";
     private final String password = "glopglop";
@@ -29,7 +28,7 @@ public class Subscriber {
 
     public void Subscribe(String routingKey) throws Exception{
 
-        EXCHANGE_NAME = routingKey;
+        //EXCHANGE_NAME = routingKey;
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(hostIP);
         factory.setUsername(username);
@@ -41,16 +40,16 @@ public class Subscriber {
             channel.exchangeDeclare(EXCHANGE_NAME, "topic");
             String queueName = channel.queueDeclare().getQueue();
 
-            if (Objects.isNull(routingKey)) {
+            /*if (Objects.isNull(routingKey)) {
                 System.err.println("Bad usage subscribe method");
                 System.exit(1);
-            }
+            }*/
 
             //for (String bindingKey : argv) {
             channel.queueBind(queueName, EXCHANGE_NAME, routingKey);
             //}
 
-            System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+            System.out.println(" [*] Waiting for messages. To exit type 'exit'");
 
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 
@@ -64,7 +63,7 @@ public class Subscriber {
                     DataService dataService = (DataService)obj;
                     dataService.sendTopicResponse(delivery.getEnvelope().getRoutingKey(), response);
                 }
-                //System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
+                System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + response + "'");
             };
             channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
             });

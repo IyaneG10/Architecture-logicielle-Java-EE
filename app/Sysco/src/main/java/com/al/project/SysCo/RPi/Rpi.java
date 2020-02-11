@@ -1,19 +1,23 @@
 package com.al.project.SysCo.RPi;
 
 import com.al.project.SysCo.Model.*;
-import appConfig.SysCoConfig;
 import com.al.project.SysCo.Service.Publisher;
 import com.al.project.SysCo.Service.Subscriber;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Rpi extends  Object {
     public Integer getId() {
         return id;
     }
+
+    ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
     private void setId(Integer id) {
         this.id = id;
@@ -78,7 +82,7 @@ public class Rpi extends  Object {
         TopicSetting();
         publisher = new Publisher();
         subscriber = new Subscriber((Object) this);
-        Subscribe();
+        //Subscribe();
     }
 
 
@@ -94,38 +98,58 @@ public class Rpi extends  Object {
         listExchangeName.add(new Topic_PartFi(exchangeNameList[6]));
     }
 
-    @Scheduled(fixedRate = 30000)           //30 seconds
-    private void sendTopic_Oxy(){SendTopic(0,"Rpi.DataBase.Room."+Integer.toString(id));}
+    public void Start(){
 
-    @Scheduled(fixedRate = 30000)           //30 seconds
-    private void sendTopic_Mono(){
+        executor.schedule(sendTopic_Oxy, 30 , TimeUnit.SECONDS);
+        executor.schedule(sendTopic_Mono, 30 , TimeUnit.SECONDS);
+        executor.schedule(sendTopic_Diox, 30 , TimeUnit.SECONDS);
+        executor.schedule(sendTopic_Humid, 1800 , TimeUnit.SECONDS);
+        executor.schedule(sendTopic_Press, 1800 , TimeUnit.SECONDS);
+        executor.schedule(sendTopic_PartFi, 1800 , TimeUnit.SECONDS);
+
+        try {
+            executor.awaitTermination(1, TimeUnit.DAYS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        executor.shutdown();
+    }
+
+   //@Scheduled(fixedRate = 30000)           //30 seconds
+    Runnable  sendTopic_Oxy = () -> {
+        SendTopic(0,"Rpi.DataBase.Room."+Integer.toString(id));
+    };
+
+    ///@Scheduled(fixedRate = 30000)           //30 seconds
+    Runnable  sendTopic_Mono = () -> {
         SendTopic(1,"Rpi.DataBase.Room."+Integer.toString(id));
-    }
+    };
 
-    @Scheduled(fixedRate = 30000)           //30 seconds
-    private void sendTopic_Diox(){
+    //@Scheduled(fixedRate = 30000)           //30 seconds
+    Runnable  sendTopic_Diox = () -> {
         SendTopic(2,"Rpi.DataBase.Room."+Integer.toString(id));
-    }
+    };
 
-    @Scheduled(fixedRate = 1800000)         //30 minutes
-    private void sendTopic_Temp(){
+    //@Scheduled(fixedRate = 1800000)         //30 minutes
+    Runnable  sendTopic_Temp = () -> {
         SendTopic(3,"Rpi.DataBase.Room."+Integer.toString(id));
-    }
+    };
 
-    @Scheduled(fixedRate = 1800000)         //30 minutes
-    private void sendTopic_Humid(){
+    //@Scheduled(fixedRate = 1800000)         //30 minutes
+    Runnable  sendTopic_Humid = () -> {
         SendTopic(4,"Rpi.DataBase.Room."+Integer.toString(id));
-    }
+    };
 
-    @Scheduled(fixedRate = 1800000)         //30 minutes
-    private void sendTopic_Press(){
+    //@Scheduled(fixedRate = 1800000)         //30 minutes
+    Runnable  sendTopic_Press = () -> {
         SendTopic(5,"Rpi.DataBase.Room."+Integer.toString(id));
-    }
+    };
 
-    @Scheduled(fixedRate = 1800000)         //30 minutes
-    private void sendTopic_PartFi(){
+    //@Scheduled(fixedRate = 1800000)         //30 minutes
+    Runnable  sendTopic_PartFi = () -> {
         SendTopic(6, "Rpi.DataBase.Room."+Integer.toString(id));
-    }
+    };
 
 
     private  void Subscribe(){
@@ -170,7 +194,7 @@ public class Rpi extends  Object {
         try {
             String message = CreateFakeTopics(topicNumber);
             if(Objects.nonNull(message))                                                                   // Avoids filling DB with values when sensor if off
-                publisher.publish(exchangeNameList[topicNumber],routingKey,message);
+                publisher.publish("RPiTopics"/*exchangeNameList[topicNumber]*/,routingKey,message);
         } catch (Exception e){
             e.printStackTrace();
         }

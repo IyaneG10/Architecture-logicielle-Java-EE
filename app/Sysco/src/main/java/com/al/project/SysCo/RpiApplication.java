@@ -6,17 +6,24 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.*;
 
-@SpringBootApplication
+//@SpringBootApplication
 //@EnableAutoConfiguration
 
 public class RpiApplication {
 
 	public static void main(String[] args) {
 
+		final int numberRoom = 2;
 		ArrayList<Rpi> rpiList = new ArrayList<>();
 
-		for (int id=0; id<50; id++){
+		for (int id=0; id<numberRoom; id++){
 			rpiList.add(new Rpi(id));
 		}
+
+		Scanner sc = new Scanner(System.in);
+
+		//sc.nextLine();
+		//String str = sc.nextLine();
+		System.out.println("FIN ! ");
 	}
 }

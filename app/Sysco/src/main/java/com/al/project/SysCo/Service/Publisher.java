@@ -29,7 +29,7 @@ public class Publisher {
             channel.exchangeDeclare(EXCHANGE_NAME, "topic");
 
             channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes(StandardCharsets.UTF_8));
-            out.println(" [x] Sent '" + routingKey + "':'" + message + "'");
+            //out.println(" [x] Sent '" + routingKey + "':'" + message + "'");
         }
     }
 }
