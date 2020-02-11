@@ -12,8 +12,8 @@ spring:
     show-sql: true
   datasource:
      url: jdbc:mariadb://localhost:3306/sysco # sysco: le nom de la BDD
-     username: admin
-     password: admin
+     username: admin # root
+     password: admin # glopglop
 
 
 logins:
