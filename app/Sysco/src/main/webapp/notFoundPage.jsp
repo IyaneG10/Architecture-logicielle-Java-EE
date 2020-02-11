@@ -22,7 +22,8 @@
 		<title> Green World | Home</title>
 		<link rel="icon" type="image/png" href="./images/logo2.png">
 </head>
-<body>
+	<body>
+		<div class
   <div class="container">
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
@@ -68,49 +69,48 @@
 			</div>
   		</nav>
 
-  		<div class="main">
-  			<br>
-  			<h2>SysCo</h2>
-  			<h2> Architechture Logicielle </h2>
-  			<h5>Smart Eco Rooms</h5>
-  			<br>
-  			<br>
-  			<!-- <div class="fakeimg">Fake Image</div> -->
-  			<p>
-  			</p>
-  		<!-- END MAIN -->
-  		</div>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
+		<div class="main">
+			<br>
+			<h2>Page Not Found:</h2>
+			<h2> Error 404 </h2>
+			<br>
+			<br>
+			<!-- <div class="fakeimg">Fake Image</div> -->
+			<p>
+			</p>
+		<!-- END MAIN -->
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 
-  		<div class="jumbotron text-center" style="margin-bottom:0;padding-bottom: 1rem;padding-top: 1rem;">
-  			<img src="./images/logoPolytech.png" alt="">
-  			<img src="./images/logoUnivLille.png" alt="">
-  		</div>
+		<div class="jumbotron text-center" style="margin-bottom:0;padding-bottom: 1rem;padding-top: 1rem;">
+			<img src="./images/logoPolytech.png" alt="">
+			<img src="./images/logoUnivLille.png" alt="">
+		</div>
 
-  		<!-- Optional JavaScript -->
+		<!-- Optional JavaScript -->
 
-  		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-  		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-  		</script>
-  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-  		</script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-  		</script>
-  		<script type="text/javascript">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+		</script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+		</script>
+		<script type="text/javascript">
 
-  			function ChangePage(arg1){
-  			window.location.replace(arg1);
-  			}
+			function ChangePage(arg1){
+			window.location.replace(arg1);
+			}
 
-  		</script>
-    </body>
+		</script>
+	</body>
 </html>

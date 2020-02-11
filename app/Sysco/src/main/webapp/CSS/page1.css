@@ -1,0 +1,20 @@
+﻿.fakeimg {
+	width: 228px;
+	background: #aaa;
+	height: 128px;
+}
+
+.dropdown-item.active{
+	background-color: #666;
+	color: white;
+}
+
+.jumbotron {
+	max-height: 180px; 
+}
+
+/* Center website */
+	.main {
+		max-width: 1000px;
+		margin: auto;
+	}
