@@ -60,4 +60,10 @@ public class UserController {
     public String welcome(Model model) {
         return "welcome";
     }
+
+
+        @GetMapping("/products")
+        public String list(){
+            return "products";
+        }
 }

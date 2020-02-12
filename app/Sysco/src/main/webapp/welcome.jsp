@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Create an account</title>
+    <title>Page d''accueil</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
