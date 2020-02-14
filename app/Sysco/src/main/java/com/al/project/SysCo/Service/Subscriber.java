@@ -54,15 +54,15 @@ public class Subscriber {
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 
                 String response = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                if(obj.getClass().toString().equals("Rpi")){
+                /*if(obj.getClass().toString().equals("Rpi")){
                     Rpi rpi = (Rpi)obj;
                     rpi.sendTopicResponseToRabbit(response);
                 }
                 else{
 
-                    DataService dataService = (DataService)obj;
-                    dataService.sendTopicResponse(delivery.getEnvelope().getRoutingKey(), response);
-                }
+                    RabbitMQService rabbitService = (RabbitMQService)obj;
+                    rabbitService.sendTopicResponse(delivery.getEnvelope().getRoutingKey(), response);
+                }*/
                 System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + response + "'");
             };
             channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {

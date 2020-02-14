@@ -1,10 +1,10 @@
 package com.al.project.SysCo.Service;
 
-import com.al.project.SysCo.Model.Data;
+//import com.al.project.SysCo.Model.Data;
 
 public class DataService {
 
-    public String toString(Data data) {
+    /*public String toString(Data data) {
         try {
             return String.format("<RPi><Id>%s</Id><Topic><Name>%s</Name><Value>%s</Value></Topic><State>%s</State><Date>%s</Date></RPi>",
                     data.getRpiId(),
@@ -16,7 +16,7 @@ public class DataService {
         catch (Exception e){
             return null;
         }
-    }
+    }*/
 
 
     private void  GetRealTimeData(RabbitMQService rabbitMQService, int rpiId, String request){
@@ -25,13 +25,7 @@ public class DataService {
     }
 
 
-    public void sendTopicResponse(String routingKey, String response){
 
-        if(routingKey.contains("RPi.User."))
-            SendDataToUser();
-        else
-            SendDataToDB();
-    }
 
     private void SendDataToUser(){
 

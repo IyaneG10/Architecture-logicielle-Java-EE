@@ -3,7 +3,6 @@ package com.al.project.SysCo.RPi;
 import com.al.project.SysCo.Model.*;
 import com.al.project.SysCo.Service.Publisher;
 import com.al.project.SysCo.Service.Subscriber;
-import org.springframework.scheduling.annotation.Scheduled;
 
 
 import java.text.SimpleDateFormat;
@@ -12,21 +11,23 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Rpi extends  Object {
-    public Integer getId() {
+public class Rpi extends   Thread{
+    public long getId() {
         return id;
     }
 
-    ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+    ScheduledExecutorService executor = Executors.newScheduledThreadPool(6);
+
+    //private volatile boolean isRunning = true;
+
+
 
     private void setId(Integer id) {
         this.id = id;
     }
 
     private Integer id;
-    private Topic topic;
-    //private static String date;
-    //private boolean state;
+    //private Topic topic;
 
     /*
     @Autowired
@@ -49,7 +50,8 @@ public class Rpi extends  Object {
     private Publisher publisher;
     private Subscriber subscriber;
 
-    private boolean getState() {
+
+    private boolean State() {
         // create random object
         Random random = new Random();
         // get next next boolean value
@@ -57,6 +59,16 @@ public class Rpi extends  Object {
 
         return state;
     }
+
+    public boolean isStopThread() {
+        return stopThread;
+    }
+
+    public void setStopThread(boolean stopThread) {
+        this.stopThread = stopThread;
+    }
+
+    private boolean stopThread;
 
     private static Date getDate() {
         SimpleDateFormat formatter;
@@ -78,6 +90,7 @@ public class Rpi extends  Object {
     private List<Topic> listExchangeName = new ArrayList<>();
 
     public Rpi(Integer rpiId){
+        stopThread = false;
         setId(rpiId);
         TopicSetting();
         publisher = new Publisher();
@@ -98,55 +111,30 @@ public class Rpi extends  Object {
         listExchangeName.add(new Topic_PartFi(exchangeNameList[6]));
     }
 
-    public void Start(){
-
-        executor.schedule(sendTopic_Oxy, 30 , TimeUnit.SECONDS);
-        executor.schedule(sendTopic_Mono, 30 , TimeUnit.SECONDS);
-        executor.schedule(sendTopic_Diox, 30 , TimeUnit.SECONDS);
-        executor.schedule(sendTopic_Humid, 1800 , TimeUnit.SECONDS);
-        executor.schedule(sendTopic_Press, 1800 , TimeUnit.SECONDS);
-        executor.schedule(sendTopic_PartFi, 1800 , TimeUnit.SECONDS);
-
-        try {
-            executor.awaitTermination(1, TimeUnit.DAYS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        executor.shutdown();
-    }
-
-   //@Scheduled(fixedRate = 30000)           //30 seconds
     Runnable  sendTopic_Oxy = () -> {
         SendTopic(0,"Rpi.DataBase.Room."+Integer.toString(id));
     };
 
-    ///@Scheduled(fixedRate = 30000)           //30 seconds
     Runnable  sendTopic_Mono = () -> {
         SendTopic(1,"Rpi.DataBase.Room."+Integer.toString(id));
     };
 
-    //@Scheduled(fixedRate = 30000)           //30 seconds
     Runnable  sendTopic_Diox = () -> {
         SendTopic(2,"Rpi.DataBase.Room."+Integer.toString(id));
     };
 
-    //@Scheduled(fixedRate = 1800000)         //30 minutes
     Runnable  sendTopic_Temp = () -> {
         SendTopic(3,"Rpi.DataBase.Room."+Integer.toString(id));
     };
 
-    //@Scheduled(fixedRate = 1800000)         //30 minutes
     Runnable  sendTopic_Humid = () -> {
         SendTopic(4,"Rpi.DataBase.Room."+Integer.toString(id));
     };
 
-    //@Scheduled(fixedRate = 1800000)         //30 minutes
     Runnable  sendTopic_Press = () -> {
         SendTopic(5,"Rpi.DataBase.Room."+Integer.toString(id));
     };
 
-    //@Scheduled(fixedRate = 1800000)         //30 minutes
     Runnable  sendTopic_PartFi = () -> {
         SendTopic(6, "Rpi.DataBase.Room."+Integer.toString(id));
     };
@@ -174,7 +162,7 @@ public class Rpi extends  Object {
             Data data =  new Data();
             data.setDate(getDate());
             data.setRpiId(id);
-            data.setState(getState());
+            data.setState(State());
             data.setTopicName(exchangeNameList[topicNumber]);
             data.setTopicValue(listExchangeName.get(topicNumber).getValue());
 
@@ -198,5 +186,26 @@ public class Rpi extends  Object {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void run() {
+        try {
+            executor.scheduleAtFixedRate(sendTopic_Oxy, 0, 3, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Mono, 0, 3, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Diox, 0, 3, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Humid, 0, 6, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Press, 0, 6, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_PartFi, 0, 6, TimeUnit.SECONDS);
+
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+
+    public void stopTasks() {
+        executor.shutdownNow();
+        //this.isRunning = false;
     }
 }
