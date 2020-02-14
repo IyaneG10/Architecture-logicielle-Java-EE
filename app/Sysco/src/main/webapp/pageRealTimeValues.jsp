@@ -28,6 +28,7 @@
 				<canvas id="display2" width="200" height="60"></canvas>
 			</div>
 
+
 		<!-- END MAIN -->
 		</div>
 <%@ include file="pied.jsp"%>
