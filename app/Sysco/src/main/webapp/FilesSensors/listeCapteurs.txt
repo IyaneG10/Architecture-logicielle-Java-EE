@@ -1,4 +1,0 @@
-Capteur1
-Capteur2
-Capteur3
-Capteur4

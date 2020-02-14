@@ -2,10 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+
     <title>Graphics Data</title>
 <%@ include file="head.jsp"%>
 
@@ -20,15 +24,15 @@
 		<script>
 			function scanSensorOnNetwork(fileContent){
 
-				var listeCapteurs = [];
-				listeCapteurs = (fileContent.split('\r\n'));				//récupere la liste des capteurs
+				var listeSalles = [];
+				listeSalles = (fileContent.split('\r\n'));				//récupere la liste des capteurs
 
 
-				var dropdownList = document.getElementById("listeCapteurs");
+				var dropdownList = document.getElementById("listeSalles");
 				dropdownList.innerHTML='';
-				listeCapteurs.forEach(function(item, index) {
+				listeSalles.forEach(function(item, index) {
 
-					dropdownList.innerHTML += '<button class="dropdown-item" type="button" onclick=\'getFilesOnServer("./FilesSensors/'+item+".txt"+'",showGraphic)\'>'+item+'</button>';
+					dropdownList.innerHTML += '<button class="dropdown-item" type="button" onclick=\'getFilesOnServer("./FilesSensors/'+item+".json"+'",showGraphic)\'>'+item+'</button>';
 				});
 			}
 
@@ -100,14 +104,14 @@
 		<div class="main">
 			<br>
 			<p>
-				Vous pouvez selectionner un capteur et la plage temporelle directement sur le graphique
+				Vous pouvez selectionner une salle et la plage temporelle directement sur le graphique
 			</p>
 			<br>
-			<div class="dropdown"  align="right"  onclick="getFilesOnServer('./FilesSensors/listeCapteurs.txt',scanSensorOnNetwork)">
+			<div class="dropdown"  align="right"  onclick="getFilesOnServer('./FilesSensors/listeSalles.txt',scanSensorOnNetwork)">
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Capteurs
+					Salles
 				</button>
-				<div id="listeCapteurs" class="dropdown-menu" aria-labelledby="dropdownMenu2">
+				<div id="listeSalles" class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
 				</div>
 			</div>
