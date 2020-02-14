@@ -66,4 +66,5 @@ public class UserController {
         public String list(){
             return "products";
         }
+
 }

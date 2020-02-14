@@ -12,9 +12,21 @@
 
       <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
       <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+
   </head>
 
   <body>
+
+
+<div class="jumbotron text-center" style="margin-bottom:0;padding-top: 2rem;padding-bottom: 1rem;" onclick="ChangePage('welcome.jsp');">
+      			<h1>GREEN WORLD</h1>
+      			<p>Weather Station: Pollution</p>
+      		</div>
+
+
+
+
+
 
     <div class="container">
       <form method="POST" action="${contextPath}/login" class="form-signin">
@@ -34,7 +46,10 @@
       </form>
     </div>
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+
+
   </body>
 </html>
