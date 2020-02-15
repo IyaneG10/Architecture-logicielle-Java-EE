@@ -21,7 +21,7 @@
 
       	<div class="jumbotron text-center" style="margin-bottom:0;padding-top: 2rem;padding-bottom: 1rem;" onclick="ChangePage('welcome.jsp');">
       			<h1>GREEN WORLD</h1>
-      			<p>Weather Station: Pollution</p>
+      			<p>Projet Architecture Logicielle JEE: Smart Eco Rooms</p>
       		</div>
 
       		<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -37,12 +37,12 @@
     				<ul class="navbar-nav mr-auto">
     					<li class="nav-item">
     						<a class="nav-link" href="pageRealTimeValues.jsp">
-    							Valeurs Actuelles
+    							Valeurs instantannées
     						</a>
     					</li>
 
     					<li class="nav-item">
-    						<a class="nav-link" href="pageGraphics.jsp">Historique
+    						<a class="nav-link" href="pageGraphics.jsp">Historique des valeurs
     						</a>
     					</li>
     				</ul>

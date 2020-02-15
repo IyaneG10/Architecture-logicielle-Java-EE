@@ -16,9 +16,15 @@
 
   		<div class="main">
   			<br>
-  			<h2>SysCo</h2>
-  			<h2> Architechture Logicielle </h2>
-  			<h5>Smart Eco Rooms</h5>
+  			<h2>Membres de projet</h2>
+  			<ul>
+              <li>Jorge CABRAL</li>
+              <li>Hamza FAHIM</li>
+              <li>Loïck MOLLET</li>
+              <li>Malick SECK</li>
+            </ul>
+            <h2>Référent pédagogique: Thomas VANTROYS</h2>
+
   			<br>
   			<br>
   			<!-- <div class="fakeimg">Fake Image</div> -->

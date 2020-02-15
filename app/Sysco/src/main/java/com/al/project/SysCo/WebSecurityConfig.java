@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/resources/**",
                         "/registration**",
+                        "/webapp**",
                         "/api**",
                         "/templates**",
                         "/static**",

@@ -196,7 +196,6 @@ public class Rpi extends   Thread{
             executor.scheduleAtFixedRate(sendTopic_Humid, 0, 6, TimeUnit.SECONDS);
             executor.scheduleAtFixedRate(sendTopic_Press, 0, 6, TimeUnit.SECONDS);
             executor.scheduleAtFixedRate(sendTopic_PartFi, 0, 6, TimeUnit.SECONDS);
-
         }
         catch (Exception e){
             System.out.println(e);

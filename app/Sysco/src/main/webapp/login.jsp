@@ -23,7 +23,7 @@
 
 <div class="jumbotron text-center" style="margin-bottom:0;padding-top: 2rem;padding-bottom: 1rem;" onclick="ChangePage('welcome.jsp');">
       			<h1>GREEN WORLD</h1>
-      			<p>Weather Station: Pollution</p>
+      			<p>Projet Architecture Logicielle JEE: Smart Eco Rooms</p>
       		</div>
 
 

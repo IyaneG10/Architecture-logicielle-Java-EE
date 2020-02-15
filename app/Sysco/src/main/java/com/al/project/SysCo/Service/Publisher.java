@@ -23,6 +23,7 @@ public class Publisher {
         factory.setPassword(password);
         //EXCHANGE_NAME = EXCHANGE_NAME;
 
+
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
 
