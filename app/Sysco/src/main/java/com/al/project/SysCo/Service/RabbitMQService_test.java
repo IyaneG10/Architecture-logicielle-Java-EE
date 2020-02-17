@@ -9,7 +9,6 @@ import com.rabbitmq.client.DeliverCallback;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class RabbitMQService_test {
 
@@ -81,14 +80,7 @@ public class RabbitMQService_test {
             System.err.println("Bad usage subscribe method: \n"+e.getMessage());
         }*/
 
-        Scanner sc = new Scanner(System.in);
 
-        String txt = sc.nextLine();
-
-        while (! "exit".equalsIgnoreCase(txt)){
-            System.out.println(" Wrong command. Type 'exit'");
-            txt = sc.nextLine();
-        }
     }
 
 
