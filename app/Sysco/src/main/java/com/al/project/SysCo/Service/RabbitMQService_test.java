@@ -11,25 +11,27 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class RabbitMQService {
+public class RabbitMQService_test {
 
     /*public RabbitMQService() {
         this.publisher = new Publisher();
         this.subscriber =  new Subscriber(this);
     }*/
 
-    /*
+
+
     private static final String EXCHANGE_NAME = "RPiTopics";
 
     //private static String EXCHANGE_NAME;
     private static final String hostIP = "193.48.57.166";
     private static final String username = "ima2a5-4fun";
     private static final String password = "glopglop";
+    private Object obj;
 
 
     public static  void SubscribeToTopics(){
 
-        Subscriber subscriber =  new Subscriber(null);
+         Subscriber subscriber =  new Subscriber(null);
         try {
             Subscribe("RPi.DataBase.Room.*");
             Subscribe("RPi.User.Room.*");
@@ -37,9 +39,9 @@ public class RabbitMQService {
         catch (Exception e){
             System.err.println("Bad usage subscribe method: \n"+e.getMessage());
         }
-    }*/
+    }
 
-    /*
+
     public void GetRealTimeTopics(String EXCHANGE_NAME, String routingKey, String request){
 
         try {
@@ -58,20 +60,19 @@ public class RabbitMQService {
         System.out.println(" routingKey: " + routingKey + "\n response: " + response);
 
         ///if(routingKey.contains("RPi.User."))
-        //SendDataToUser();
+            //SendDataToUser();
         //else
-        //SendDataToDB();
+            //SendDataToDB();
     }
-    */
 
 
 
-    public static void main(String[] args)  throws Exception{
+    public static void main(String[] args) {
 
         System.out.println(" START !\n To stop, type 'exit'");
 
-        /*SubscribeToTopics();
-        Subscriber subscriber =  new Subscriber(null);
+        SubscribeToTopics();
+        /*Subscriber subscriber =  new Subscriber(null);
         try {
             subscriber.Subscribe("RPi.DataBase.Room.*");
             subscriber.Subscribe("RPi.User.Room.*");
@@ -80,54 +81,18 @@ public class RabbitMQService {
             System.err.println("Bad usage subscribe method: \n"+e.getMessage());
         }*/
 
-
-
-        final String EXCHANGE_NAME = "RPiTopics";
-
-        ConnectionFactory factory = new ConnectionFactory();
-
-        final String hostIP = "193.48.57.166";
-        final String username = "ima2a5-4fun";
-        final String password = "glopglop";
-
-
-        factory.setHost(hostIP);
-        factory.setUsername(username);
-        factory.setPassword(password);
-
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
-
-        channel.exchangeDeclare(EXCHANGE_NAME, "topic");
-        String queueName = channel.queueDeclare().getQueue();
-
-
-        channel.queueBind(queueName, EXCHANGE_NAME, "Rpi.DataBase.");
-
-
-        System.out.println(" [*] Waiting for messages. To exit type 'exit'");
-
-        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-
-            String response = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + response + "'");
-        };
-        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
-        });
-
-
-        /*Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         String txt = sc.nextLine();
 
         while (! "exit".equalsIgnoreCase(txt)){
             System.out.println(" Wrong command. Type 'exit'");
             txt = sc.nextLine();
-        }*/
+        }
     }
 
 
-   /*public static void Subscribe(String routingKey) throws Exception{
+    public static void Subscribe(String routingKey) throws Exception{
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(hostIP);
@@ -154,5 +119,5 @@ public class RabbitMQService {
             channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
             });
         }
-    }*/
+    }
 }

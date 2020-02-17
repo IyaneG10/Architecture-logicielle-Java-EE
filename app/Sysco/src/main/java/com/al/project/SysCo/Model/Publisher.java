@@ -1,4 +1,4 @@
-package com.al.project.SysCo.Service;
+package com.al.project.SysCo.Model;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

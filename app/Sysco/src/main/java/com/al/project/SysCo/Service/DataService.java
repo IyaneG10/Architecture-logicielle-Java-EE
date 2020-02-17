@@ -19,10 +19,10 @@ public class DataService {
     }*/
 
 
-    private void  GetRealTimeData(RabbitMQService rabbitMQService, int rpiId, String request){
+    /*private void  GetRealTimeData(RabbitMQService rabbitMQService, int rpiId, String request){
 
         rabbitMQService.GetRealTimeTopics("RpiTopics","User.RPi.Room."+Integer.toString(rpiId),request);
-    }
+    }*/
 
 
 

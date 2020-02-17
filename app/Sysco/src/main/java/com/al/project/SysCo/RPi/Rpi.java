@@ -1,8 +1,8 @@
 package com.al.project.SysCo.RPi;
 
 import com.al.project.SysCo.Model.*;
-import com.al.project.SysCo.Service.Publisher;
-import com.al.project.SysCo.Service.Subscriber;
+import com.al.project.SysCo.Model.Publisher;
+import com.al.project.SysCo.Model.Subscriber;
 
 
 import java.text.SimpleDateFormat;
@@ -190,12 +190,12 @@ public class Rpi extends   Thread{
 
     public void run() {
         try {
-            executor.scheduleAtFixedRate(sendTopic_Oxy, 0, 3, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Mono, 0, 3, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Diox, 0, 3, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Humid, 0, 6, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Press, 0, 6, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_PartFi, 0, 6, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Oxy, 0, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Mono, 0, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Diox, 0, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Humid, 0, 1800, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Press, 0, 1800, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_PartFi, 0, 1800, TimeUnit.SECONDS);
         }
         catch (Exception e){
             System.out.println(e);
