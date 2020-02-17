@@ -2,9 +2,8 @@ package com.al.project.SysCo.Model;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -71,10 +70,10 @@ public class DataTopic {
         //Date currentDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(str);
 
         newDataObj.setDate(recurseKeys(jsonObject,"Date"));
-        newDataObj.setRpiId(recurseKeys(jsonObject,"Id").);
-        newDataObj.setState(jsonObject.getBoolean("State"));
-        newDataObj.setTopicName(jsonObject.getString("Name"));
-        newDataObj.setTopicValue(jsonObject.getDouble("Value"));
+        newDataObj.setRpiId(Integer.parseInt(recurseKeys(jsonObject,"Id")));
+        newDataObj.setState(Boolean.parseBoolean(recurseKeys(jsonObject,"State")));
+        newDataObj.setTopicName(recurseKeys(jsonObject,"Name"));
+        newDataObj.setTopicValue(Double.parseDouble(recurseKeys(jsonObject,"Value")));
 
         return newDataObj;
         /*

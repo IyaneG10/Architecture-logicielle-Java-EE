@@ -18,11 +18,11 @@ public class Rpi extends   Thread{
 
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(6);
 
-    private void setId(Long id) {
+    private void setId(int id) {
         this.id = id;
     }
 
-    private Long id;
+    private int id;
 
     /*
     @Autowired
@@ -53,22 +53,11 @@ public class Rpi extends   Thread{
         return state;
     }
 
-    public boolean isStopThread() {
-        return stopThread;
-    }
-
-    public void setStopThread(boolean stopThread) {
-        this.stopThread = stopThread;
-    }
-
-    private boolean stopThread;
 
     private static String getDate() {
         SimpleDateFormat formatter;
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date dateObj = new Date();
-        //dateObj = formatter.format(dateObj);
-        //System.out.println(date);
         return formatter.format(dateObj);
     }
 
@@ -82,13 +71,11 @@ public class Rpi extends   Thread{
 
     private List<Topic> listExchangeName = new ArrayList<>();
 
-    public Rpi(Long rpiId){
-        stopThread = false;
+    public Rpi(int rpiId){
         setId(rpiId);
         TopicSetting();
         publisher = new Publisher();
         subscriber = new Subscriber((Object) this);
-        //Subscribe();
     }
 
 
@@ -161,11 +148,6 @@ public class Rpi extends   Thread{
             if( ! data.isState() || Objects.isNull(data))                                               //if sensor is off, then don't send it's value
                 return null;
 
-
-            System.out.println("22222: " + data.jsonstringToData(data.dataToJsonstring()).dataToJsonstring());
-            System.out.println("11111: " + data.dataToJsonstring());
-
-
             return data.dataToJsonstring();
 
         } catch (Exception e) {
@@ -190,11 +172,12 @@ public class Rpi extends   Thread{
     public void run() {
         try {
             executor.scheduleAtFixedRate(sendTopic_Oxy, 0, 30, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Mono, 0, 30, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Diox, 0, 30, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Humid, 0, 1800, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Press, 0, 1800, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_PartFi, 0, 1800, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Mono, 5, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Diox, 10, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Temp, 15, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Humid, 20, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_Press, 25, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendTopic_PartFi, 30, 30, TimeUnit.SECONDS);
         }
         catch (Exception e){
             System.out.println(e);

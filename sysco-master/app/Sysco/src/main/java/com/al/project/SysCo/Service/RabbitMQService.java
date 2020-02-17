@@ -1,7 +1,6 @@
 package com.al.project.SysCo.Service;
 
 import com.al.project.SysCo.Model.Publisher;
-import com.al.project.SysCo.Model.Subscriber;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -9,7 +8,6 @@ import com.rabbitmq.client.DeliverCallback;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class RabbitMQService {
 
@@ -63,9 +61,6 @@ public class RabbitMQService {
         //SendDataToDB();
     }
 
-
-
-
     public static void main(String[] args)  throws Exception{
 
         System.out.println(" START !\n To stop, type 'exit'");
@@ -103,6 +98,8 @@ public class RabbitMQService {
 
 
         channel.queueBind(queueName, EXCHANGE_NAME, "Rpi.DataBase.Room.*");
+
+        channel.queueBind(queueName, EXCHANGE_NAME, "Rpi.User.Room.*");
 
 
         System.out.println(" [*] Waiting for messages. To exit type 'exit'");
