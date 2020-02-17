@@ -39,7 +39,7 @@ public class RabbitMQService {
         }
     }*/
 
-    /*
+
     public void GetRealTimeTopics(String EXCHANGE_NAME, String routingKey, String request){
 
         try {
@@ -62,7 +62,7 @@ public class RabbitMQService {
         //else
         //SendDataToDB();
     }
-    */
+
 
 
 

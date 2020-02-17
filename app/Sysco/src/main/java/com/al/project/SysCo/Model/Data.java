@@ -63,4 +63,19 @@ public class Data {
 
         return this;
     }
+
+
+    public String toString(Data data) {
+        try {
+            return String.format("<RPi><Id>%s</Id><Topic><Name>%s</Name><Value>%s</Value></Topic><State>%s</State><Date>%s</Date></RPi>",
+                    data.getRpiId(),
+                    data.getTopicName(),
+                    data.getTopicValue(),
+                    data.isState(),
+                    data.getDate());
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
 }
