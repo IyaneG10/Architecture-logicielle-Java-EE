@@ -102,7 +102,7 @@ public class RabbitMQService {
         String queueName = channel.queueDeclare().getQueue();
 
 
-        channel.queueBind(queueName, EXCHANGE_NAME, "Rpi.DataBase.");
+        channel.queueBind(queueName, EXCHANGE_NAME, "Rpi.DataBase.Room.*");
 
 
         System.out.println(" [*] Waiting for messages. To exit type 'exit'");

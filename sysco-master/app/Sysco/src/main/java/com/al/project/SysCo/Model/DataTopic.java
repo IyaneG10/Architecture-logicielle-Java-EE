@@ -1,19 +1,13 @@
 package com.al.project.SysCo.Model;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.io.StringReader;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-
-
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 public class DataTopic {
@@ -35,7 +29,7 @@ public class DataTopic {
         return topicValue;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -55,7 +49,7 @@ public class DataTopic {
         this.topicValue = topicValue;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -63,66 +57,88 @@ public class DataTopic {
     private boolean state;
     private String topicName;
     private double topicValue;
-    private Date date;
+    private String date;
 
 
-    public DataTopic xmlStringToData(String dataString){
+    public DataTopic jsonstringToData(String dataString) throws JSONException, ParseException {
 
         DataTopic newDataObj = new DataTopic();
 
-        //Document xml = convertStringToDocument( dataString );
-        try{
+        JSONObject jsonObject = new JSONObject(dataString);
 
-            String xmlStr = dataString;
+        //newDataObj.setDate(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(jsonObject.getString("Date")));
+        //String str = recurseKeys(jsonObject,"Date");
+        //Date currentDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(str);
 
-            System.out.println("Sample.xml contents = "+ xmlStr);
+        newDataObj.setDate(recurseKeys(jsonObject,"Date"));
+        newDataObj.setRpiId(recurseKeys(jsonObject,"Id").);
+        newDataObj.setState(jsonObject.getBoolean("State"));
+        newDataObj.setTopicName(jsonObject.getString("Name"));
+        newDataObj.setTopicValue(jsonObject.getDouble("Value"));
 
-            //org.w3c.dom.Document doc = toXmlDocument(xmlStr);
-            return newDataObj;
-        }
-        catch(Exception e ){
-            e.printStackTrace();
-            return null;
-        }
-
-        //final Element[] rootNodes = xml.getRootElements();
-        //System.out.println(rootNodes.toString());
-
-        /*for(Element el : list){
-            System.out.println("Nom : " + el.getNodeName() + " - Valeur : " + el.getTextContent());
-        }
-
-        newDataObj.setDate(getDate());
-        newDataObj.setRpiId(id);
-        newDataObj.setState(State());
-        newDataObj.setTopicName(exchangeNameList[topicNumber]);
-        newDataObj.setTopicValue(listExchangeName.get(topicNumber).getValue());
+        return newDataObj;
+        /*
         */
     }
+    public static String recurseKeys(JSONObject jObj, String findKey) throws JSONException {
+        String finalValue = "";
+        if (jObj == null) {
+            return "";
+        }
 
+        Iterator<String> keyItr = jObj.keys();
+        Map<String, String> map = new HashMap<>();
 
-    protected String getString(String tagName, Element element) {
-        NodeList list = element.getElementsByTagName(tagName);
-        if (list != null && list.getLength() > 0) {
-            NodeList subList = list.item(0).getChildNodes();
+        while(keyItr.hasNext()) {
+            String key = keyItr.next();
+            map.put(key, jObj.getString(key));
+        }
 
-            if (subList != null && subList.getLength() > 0) {
-                return subList.item(0).getNodeValue();
+        for (Map.Entry<String, String> e : (map).entrySet()) {
+            String key = e.getKey();
+            if (key.equalsIgnoreCase(findKey)) {
+                return jObj.getString(key);
+            }
+
+            // read value
+            Object value = jObj.get(key);
+
+            if (value instanceof JSONObject) {
+                finalValue = recurseKeys((JSONObject)value, findKey);
             }
         }
 
-        return null;
+        // key is not found
+        return finalValue;
     }
 
-
-    public String dataToXmlString() {
+    public String dataToJsonstring() {
         try {
-            return String.format("<RPi><Id>%s</Id><Topic><Name>%s</Name><Value>%s</Value></Topic><State>%s</State><Date>%s</Date></RPi>",
-                    this.getRpiId(),
+            String st1 = Integer.toString(this.getRpiId());
+            String st2 = this.getTopicName().toString();
+            String st3 = Double.toString(this.getTopicValue());
+            String st4 = Boolean.toString(this.isState());
+            String st5 = this.getDate().toString();
+
+
+            return "{" +
+                                "\"Rpi\":" +
+                                    "{" +
+                                        "\"Id\":"+ st1+"," +
+                                        "\"Topic\":" +
+                                            "{" +
+                                                "\"Name\":\""+ st2+"\"," +
+                                                "\"Value\":"+ st3 +
+                                            "}," +
+                                        "\"State\":"+ st4+ "," +
+                                        "\"Date\":\""+st5 +
+                                    "\"}" +
+                                "}";
+                   /* this.getRpiId(),
                     this.getTopicName(),
                     this.getTopicValue(),
                     this.isState(),
-                    this.getDate());
+                    this.getDate());*/
         }
         catch (Exception e){
             return null;

@@ -3,9 +3,6 @@ package com.al.project.SysCo.RPi;
 import com.al.project.SysCo.Model.*;
 import com.al.project.SysCo.Model.Publisher;
 import com.al.project.SysCo.Model.Subscriber;
-import com.al.project.SysCo.Repository.DataRepository;
-import com.al.project.SysCo.Service.DataService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.text.SimpleDateFormat;
@@ -15,21 +12,17 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Rpi extends   Thread{
-
-
-
-
     public long getId() {
         return id;
     }
 
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(6);
 
-    private void setId(Integer id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
-    private Integer id;
+    private Long id;
 
     /*
     @Autowired
@@ -70,13 +63,13 @@ public class Rpi extends   Thread{
 
     private boolean stopThread;
 
-    private static Date getDate() {
+    private static String getDate() {
         SimpleDateFormat formatter;
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date dateObj = new Date();
-        //date = formatter.format(dateObj);
+        //dateObj = formatter.format(dateObj);
         //System.out.println(date);
-        return dateObj;//formatter.format(dateObj);
+        return formatter.format(dateObj);
     }
 
     private String [] exchangeNameList = new String []{
@@ -89,7 +82,7 @@ public class Rpi extends   Thread{
 
     private List<Topic> listExchangeName = new ArrayList<>();
 
-    public Rpi(Integer rpiId){
+    public Rpi(Long rpiId){
         stopThread = false;
         setId(rpiId);
         TopicSetting();
@@ -101,7 +94,6 @@ public class Rpi extends   Thread{
 
     private void TopicSetting(){
 
-       // for (int i=0; i<listExchangeName.size();i++)
         listExchangeName.add(new Topic_Oxy(exchangeNameList[0]));
         listExchangeName.add(new Topic_Mono(exchangeNameList[1]));
         listExchangeName.add(new Topic_Diox(exchangeNameList[2]));
@@ -112,37 +104,37 @@ public class Rpi extends   Thread{
     }
 
     Runnable  sendTopic_Oxy = () -> {
-        SendTopic(0,"Rpi.DataBase.Room."+Integer.toString(id));
+        SendTopic(0,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
     Runnable  sendTopic_Mono = () -> {
-        SendTopic(1,"Rpi.DataBase.Room."+Integer.toString(id));
+        SendTopic(1,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
     Runnable  sendTopic_Diox = () -> {
-        SendTopic(2,"Rpi.DataBase.Room."+Integer.toString(id));
+        SendTopic(2,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
     Runnable  sendTopic_Temp = () -> {
-        SendTopic(3,"Rpi.DataBase.Room."+Integer.toString(id));
+        SendTopic(3,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
     Runnable  sendTopic_Humid = () -> {
-        SendTopic(4,"Rpi.DataBase.Room."+Integer.toString(id));
+        SendTopic(4,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
     Runnable  sendTopic_Press = () -> {
-        SendTopic(5,"Rpi.DataBase.Room."+Integer.toString(id));
+        SendTopic(5,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
     Runnable  sendTopic_PartFi = () -> {
-        SendTopic(6, "Rpi.DataBase.Room."+Integer.toString(id));
+        SendTopic(6, "Rpi.DataBase.Room."+Long.toString(id));
     };
 
 
     private  void Subscribe(){
         try {
-            subscriber.Subscribe("User.Rpi.Room."+Integer.toString(id));
+            subscriber.Subscribe("User.Rpi.Room."+Long.toString(id));
         }
         catch (Exception e){
             System.err.println("Bad usage subscribe method: \n"+e.getMessage());
@@ -153,7 +145,7 @@ public class Rpi extends   Thread{
 
         System.out.println(" [x] Received Request: " + request);
         for(int i=0; i<listExchangeName.size();i++)                                                                            // Send all topics
-            SendTopic(i,"Rpi.User.Room."+Integer.toString(id));
+            SendTopic(i,"Rpi.User.Room."+Long.toString(id));
     }
 
     private String CreateFakeTopics(int topicNumber){
@@ -169,12 +161,12 @@ public class Rpi extends   Thread{
             if( ! data.isState() || Objects.isNull(data))                                               //if sensor is off, then don't send it's value
                 return null;
 
-           // DataService dataService ;
-            //dataService.sendTopicToDataBase(data);
 
-            System.out.println(data.xmlStringToData(data.dataToXmlString()));
+            System.out.println("22222: " + data.jsonstringToData(data.dataToJsonstring()).dataToJsonstring());
+            System.out.println("11111: " + data.dataToJsonstring());
 
-            return data.dataToXmlString();
+
+            return data.dataToJsonstring();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -186,12 +178,10 @@ public class Rpi extends   Thread{
 
         try {
             String message = CreateFakeTopics(topicNumber);
-            if(Objects.nonNull(message))                                                                   // Avoids filling DB with values when sensor if off
-                publisher.publish("RPiTopics"/*exchangeNameList[topicNumber]*/,routingKey,message);
-
-
-            //DataService(dataRepository);
-            System.out.println(message);
+            if(Objects.nonNull(message)) {                                                                   // Avoids filling DB with values when sensor if off
+                publisher.publish("RPiTopics"/*exchangeNameList[topicNumber]*/, routingKey, message);
+                System.out.println(message);
+            }
         } catch (Exception e){
             e.printStackTrace();
         }
