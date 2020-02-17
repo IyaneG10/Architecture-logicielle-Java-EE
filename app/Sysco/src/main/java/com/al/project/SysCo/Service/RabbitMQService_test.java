@@ -79,8 +79,6 @@ public class RabbitMQService_test {
         catch (Exception e){
             System.err.println("Bad usage subscribe method: \n"+e.getMessage());
         }*/
-
-
     }
 
 

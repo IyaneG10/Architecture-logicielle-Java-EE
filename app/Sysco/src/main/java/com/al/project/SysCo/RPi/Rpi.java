@@ -18,20 +18,14 @@ public class Rpi extends   Thread{
 
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(6);
 
-    //private volatile boolean isRunning = true;
-
-
-
     private void setId(Integer id) {
         this.id = id;
     }
 
     private Integer id;
-    //private Topic topic;
 
     /*
     @Autowired
-
     private static SysCoConfig appConfig;
     //private final Map<String, SysCoConfig> servers = new HashMap<>();
     //private YAMLConfig myConfig;
@@ -49,7 +43,6 @@ public class Rpi extends   Thread{
 
     private Publisher publisher;
     private Subscriber subscriber;
-
 
     private boolean State() {
         // create random object
@@ -159,7 +152,7 @@ public class Rpi extends   Thread{
     private String CreateFakeTopics(int topicNumber){
         try {
 
-            Data data =  new Data();
+            DataTopic data =  new DataTopic();
             data.setDate(getDate());
             data.setRpiId(id);
             data.setState(State());
@@ -169,7 +162,9 @@ public class Rpi extends   Thread{
             if( ! data.isState() || Objects.isNull(data))                                               //if sensor is off, then don't send it's value
                 return null;
 
-            return data.toString();
+            System.out.println(data.xmlStringToData(data.dataToXmlString()));
+
+            return data.dataToXmlString();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,6 +178,8 @@ public class Rpi extends   Thread{
             String message = CreateFakeTopics(topicNumber);
             if(Objects.nonNull(message))                                                                   // Avoids filling DB with values when sensor if off
                 publisher.publish("RPiTopics"/*exchangeNameList[topicNumber]*/,routingKey,message);
+
+            System.out.println(message);
         } catch (Exception e){
             e.printStackTrace();
         }

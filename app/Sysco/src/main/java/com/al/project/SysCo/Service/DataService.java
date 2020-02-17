@@ -1,7 +1,5 @@
 package com.al.project.SysCo.Service;
 
-import com.al.project.SysCo.Model.Data;
-
 public class DataService {
 
         private void  GetRealTimeData(RabbitMQService rabbitMQService, int rpiId, String request){
