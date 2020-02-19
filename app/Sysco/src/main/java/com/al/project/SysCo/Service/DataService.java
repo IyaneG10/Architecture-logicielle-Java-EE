@@ -2,9 +2,14 @@ package com.al.project.SysCo.Service;
 
 import com.al.project.SysCo.Model.Data;
 import com.al.project.SysCo.Model.DataTopic;
+import com.al.project.SysCo.Model.Product;
 import com.al.project.SysCo.Repository.DataRepository;
+import com.al.project.SysCo.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -30,7 +35,7 @@ public class DataService {
 
 
 
-    private void  GetRealTimeData(RabbitMQService rabbitMQService, int rpiId, String request){
+        private void  GetRealTimeData(RabbitMQService rabbitMQService, int rpiId, String request){
 
         rabbitMQService.GetRealTimeTopics("RpiTopics","User.RPi.Room."+Integer.toString(rpiId),request);
     }
