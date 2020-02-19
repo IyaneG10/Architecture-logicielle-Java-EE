@@ -2,35 +2,23 @@ package com.al.project.SysCo.Service;
 
 import com.al.project.SysCo.Model.Data;
 import com.al.project.SysCo.Model.Publisher;
-import com.al.project.SysCo.Repository.DataRepository;
-import com.al.project.SysCo.api.DataAPI;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+import java .sql.*;
 
 
-//@SpringBootApplication
+@SpringBootApplication
 public class RabbitMQService {
 
-    public static void GetRealTimeTopics(String idRpi, String request){
-
-        try {
-            String EXCHANGE_NAME = "RpiTopics";
-            Publisher publisher = new Publisher();
-
-            if(Objects.nonNull(idRpi)) {                                                                              // Avoids filling DB with values when sensor if off
-                publisher.publish(EXCHANGE_NAME,"User.RPi.Room."+idRpi,request);
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
+    @Autowired
+   private static DataService dataService;
 
     public static void main(String[] args)  throws Exception{
 
@@ -64,6 +52,7 @@ public class RabbitMQService {
             String response = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + response + "'");
 
+
             if(delivery.getEnvelope().getRoutingKey().contains("Rpi.User.Room.")){
                 //se connecter au controller
                 //Voir avec MAlick
@@ -74,22 +63,102 @@ public class RabbitMQService {
                 //sauvegarder dans bdd
 
                 try {
-                    DataService dataService= new DataService();
 
-                    System.out.println(" TOUT EST BIEN RECU");
-                    //DataAPI.saveData(new Data().jsonstringToData(response));
-                    Data data = new Data().jsonstringToData(response);
-
+                 //   DataService dataService= new DataService();
+                    Data data= new Data().jsonstringToData(response);
+                    System.out.println(data);
                     dataService.saveData(data);
 
-                    System.out.println(" TOUT EST BIEN SAUVEGARDE");
+                    //DataAPI.saveData(new Data().jsonstringToData(response));
+                    //Data data = new Data().jsonstringToData(response);
+
+                    //dataService.saveData(data);
                 }
+
+
                  catch (Exception ex){
                     System.out.println(ex);
                 }
+
+
             }
         };
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
         });
     }
+
+
+
+    public static void GetRealTimeTopics(String idRpi, String request){
+
+        try {
+            String EXCHANGE_NAME = "RpiTopics";
+            Publisher publisher = new Publisher();
+
+            if(Objects.nonNull(idRpi)) {                                                                              // Avoids filling DB with values when sensor if off
+                publisher.publish(EXCHANGE_NAME,"User.RPi.Room."+idRpi,request);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    // JDBC driver name and database URL
+
+    /*static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
+    static final String DB_URL = "jdbc:mariadb://192.168.100.174/db";
+
+    //  Database credentials
+    static final String USER = "root";
+    static final String PASS = "root";
+
+*/
+
+    /* Config MariaDB */
+        /*java.sql.Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            //STEP 2: Register JDBC driver
+            Class.forName("org.mariadb.jdbc.Driver");
+
+            //STEP 3: Open a connection
+            System.out.println("Connecting to a selected database...");
+            conn = DriverManager.getConnection(
+                    "jdbc:mariadb://localhost/db", "root", "glopglop");
+            System.out.println("Connected database successfully...");
+
+            //STEP 4: Execute a query
+            System.out.println("Creating table in given database...");
+            stmt = ((java.sql.Connection) conn).createStatement();
+
+
+        } catch (SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        } finally {
+            //finally block used to close resources
+            try {
+                if (stmt != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+            }// do nothing
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+
+
+*/
+
+
 }

@@ -25,7 +25,7 @@
 			function scanSensorOnNetwork(fileContent){
 
 				var listeSalles = [];
-				listeSalles = (fileContent.split('\r\n'));				//récupere la liste des capteurs
+				listeSalles = (fileContent.split('\n'));				//récupere la liste des capteurs
 
 
 				var dropdownList = document.getElementById("listeSalles");

@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 @Entity
-//@Table(name = "data") // si le nom de la table n'est pas précisée, celui de la classe sera pris par défau
+@Table(name = "data") // si le nom de la table n'est pas précisée, celui de la classe sera pris par défau
 public class Data {
 
 

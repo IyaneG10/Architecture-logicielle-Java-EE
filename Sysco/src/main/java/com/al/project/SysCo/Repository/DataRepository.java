@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DataRepository extends JpaRepository<Data, Integer> {
 
-    public Data save(Data data) ;
+    Data save(Data data) ;
+    //public  Data saveData(Data data);
 
 }
