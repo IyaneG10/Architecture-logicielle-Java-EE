@@ -41,8 +41,6 @@ public class MariaDBService {
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             System.out.println("Connected database successfully...");
 
-            //STEP 4: Execute a query
-            stmt = ((java.sql.Connection) conn).createStatement();
         }
         catch (SQLException se) {
 
@@ -81,6 +79,9 @@ public class MariaDBService {
 
     public void addData(Data data) throws ErrorSavingInDB, SQLException {
 
+
+        //STEP 4: Execute a query
+        stmt = ((java.sql.Connection) conn).createStatement();
         String sql = "INSERT INTO Data"
                 + "(roomId, state, measureName, measureValue, date), "
                 +"VALUES "

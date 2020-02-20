@@ -28,7 +28,7 @@ public class RabbitMQService {
         final String hostIP = "193.48.57.166";
         final String username = "ima2a5-4fun";
         final String password = "glopglop";
-        MariaDBService mariaDBService = new MariaDBService("jdbc:mariadb://localhost/", "root", "glopglop");
+        MariaDBService mariaDBService = new MariaDBService("jdbc:mariadb://localhost:3306/sysco", "admin", "admin");
 
 
         ConnectionFactory factory = new ConnectionFactory();
