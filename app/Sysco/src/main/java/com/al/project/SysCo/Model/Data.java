@@ -26,11 +26,11 @@ public class Data {
     }
 
     public String getMeasureName() {
-        return topicName;
+        return measureName;
     }
 
     public double getMeasureValue() {
-        return topicValue;
+        return measureValue;
     }
 
     public String getDate() {
@@ -45,12 +45,12 @@ public class Data {
         this.state = state;
     }
 
-    public void setMeasureName(String topicName) {
-        this.topicName = topicName;
+    public void setMeasureName(String measureName) {
+        this.measureName = measureName;
     }
 
-    public void setMeasureValue(double topicValue) {
-        this.topicValue = topicValue;
+    public void setMeasureValue(double measureValue) {
+        this.measureValue = measureValue;
     }
 
     public void setDate(String date) {
@@ -60,8 +60,8 @@ public class Data {
     @Id
     private Integer rpiId;
     private boolean state;
-    private String topicName;
-    private double topicValue;
+    private String measureName;
+    private double measureValue;
     private String date;
     public Data(){
 
@@ -91,8 +91,8 @@ public class Data {
         newDataObj.setDate(recurseKeys(jsonObject,"Date"));
         newDataObj.setRpiId(Integer.parseInt(recurseKeys(jsonObject,"Id")));
         newDataObj.setState(Boolean.parseBoolean(recurseKeys(jsonObject,"State")));
-        newDataObj.setTopicName(recurseKeys(jsonObject,"Name"));
-        newDataObj.setTopicValue(Double.parseDouble(recurseKeys(jsonObject,"Value")));
+        newDataObj.setmeasureName(recurseKeys(jsonObject,"Name"));
+        newDataObj.setmeasureValue(Double.parseDouble(recurseKeys(jsonObject,"Value")));
 
         return newDataObj;
     }*/
@@ -143,7 +143,7 @@ public class Data {
                     "\"Rpi\":" +
                     "{" +
                     "\"Id\":"+ st1+"," +
-                    "\"Topic\":" +
+                    "\"Measure\":" +
                     "{" +
                     "\"Name\":\""+ st2+"\"," +
                     "\"Value\":"+ st3 +
