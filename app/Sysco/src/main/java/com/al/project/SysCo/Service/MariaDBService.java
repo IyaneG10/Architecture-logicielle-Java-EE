@@ -81,8 +81,9 @@ public class MariaDBService {
 
     public void addData(Data data) throws ErrorSavingInDB, SQLException {
 
-        String sql = "INSERT  INTO data"
+        String sql = "INSERT INTO Data"
                 + "(roomId, state, measureName, measureValue, date), "
+                +"VALUES "
                 + "("  + data.getRpiId()
                 + ", " + data.isState()
                 + ", '" + data.getMeasureName()

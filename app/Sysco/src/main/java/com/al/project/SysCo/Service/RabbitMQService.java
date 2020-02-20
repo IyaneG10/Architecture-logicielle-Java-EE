@@ -57,8 +57,6 @@ public class RabbitMQService {
             if(delivery.getEnvelope().getRoutingKey().contains("Rpi.User.Room.")){
                 //se connecter au controller
                 //Voir avec MAlick
-
-
             }
             else{
                 try {

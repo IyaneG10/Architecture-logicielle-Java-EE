@@ -38,7 +38,7 @@ public class Rpi extends   Thread{
 
     private static String getDate() {
         SimpleDateFormat formatter;
-        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date dateObj = new Date();
         return formatter.format(dateObj);
     }
