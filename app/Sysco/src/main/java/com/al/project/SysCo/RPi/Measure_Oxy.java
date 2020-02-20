@@ -3,10 +3,10 @@ package com.al.project.SysCo.RPi;
 
 import java.util.Random;
 
-public class Topic_Temp extends Topic {
+public class Measure_Oxy extends Measure {
 
     private final double min = 15.0;
-    private final double max = 38.0;
+    private final double max = 35.0;
     private double value;
 
     public double getValue() {
@@ -16,7 +16,7 @@ public class Topic_Temp extends Topic {
     }
 
 
-   public Topic_Temp(String name) {
+   public Measure_Oxy(String name) {
         super(name);
     }
 }

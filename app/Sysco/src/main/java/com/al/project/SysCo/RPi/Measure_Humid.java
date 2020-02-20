@@ -3,10 +3,10 @@ package com.al.project.SysCo.RPi;
 
 import java.util.Random;
 
-public class Topic_Diox extends Topic {
+public class Measure_Humid extends Measure {
 
-    private final double min = 0.0;
-    private final double max = 3.0;
+    private final int min = 25;
+    private final int max = 70;
     private double value;
 
     public double getValue() {
@@ -16,7 +16,7 @@ public class Topic_Diox extends Topic {
     }
 
 
-   public Topic_Diox(String name) {
+   public Measure_Humid(String name) {
         super(name);
     }
 }

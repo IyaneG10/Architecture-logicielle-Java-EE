@@ -3,7 +3,7 @@ package com.al.project.SysCo.RPi;
 
 import java.util.Random;
 
-public class Topic_PartFi extends Topic {
+public class Measure_PartFi extends Measure {
 
     private final double min = 10.0;
     private final double max = 40.0;
@@ -16,7 +16,7 @@ public class Topic_PartFi extends Topic {
     }
 
 
-   public Topic_PartFi(String name) {
+   public Measure_PartFi(String name) {
         super(name);
     }
 }

@@ -25,11 +25,11 @@ public class Data {
         return state;
     }
 
-    public String getTopicName() {
+    public String getMeasureName() {
         return topicName;
     }
 
-    public double getTopicValue() {
+    public double getMeasureValue() {
         return topicValue;
     }
 
@@ -45,11 +45,11 @@ public class Data {
         this.state = state;
     }
 
-    public void setTopicName(String topicName) {
+    public void setMeasureName(String topicName) {
         this.topicName = topicName;
     }
 
-    public void setTopicValue(double topicValue) {
+    public void setMeasureValue(double topicValue) {
         this.topicValue = topicValue;
     }
 
@@ -63,9 +63,22 @@ public class Data {
     private String topicName;
     private double topicValue;
     private String date;
+    public Data(){
 
+    }
 
-    public Data jsonstringToData(String dataString) throws JSONException, ParseException {
+    public Data( String dataString)throws JSONException, ParseException {
+
+        JSONObject jsonObject = new JSONObject(dataString);
+
+        this.setDate(recurseKeys(jsonObject,"Date"));
+        this.setRpiId(Integer.parseInt(recurseKeys(jsonObject,"Id")));
+        this.setState(Boolean.parseBoolean(recurseKeys(jsonObject,"State")));
+        this.setMeasureName(recurseKeys(jsonObject,"Name"));
+        this.setMeasureValue(Double.parseDouble(recurseKeys(jsonObject,"Value")));
+    }
+
+    /*public Data jsonstringToData(String dataString) throws JSONException, ParseException {
 
         Data newDataObj = new Data();
 
@@ -82,9 +95,9 @@ public class Data {
         newDataObj.setTopicValue(Double.parseDouble(recurseKeys(jsonObject,"Value")));
 
         return newDataObj;
-        /*
-         */
-    }
+    }*/
+
+
     public static String recurseKeys(JSONObject jObj, String findKey) throws JSONException {
         String finalValue = "";
         if (jObj == null) {
@@ -120,8 +133,8 @@ public class Data {
     public String dataToJsonstring() {
         try {
             String st1 = Integer.toString(this.getRpiId());
-            String st2 = this.getTopicName().toString();
-            String st3 = Double.toString(this.getTopicValue());
+            String st2 = this.getMeasureName().toString();
+            String st3 = Double.toString(this.getMeasureValue());
             String st4 = Boolean.toString(this.isState());
             String st5 = this.getDate().toString();
 
@@ -139,11 +152,6 @@ public class Data {
                     "\"Date\":\""+st5 +
                     "\"}" +
                     "}";
-                   /* this.getRpiId(),
-                    this.getTopicName(),
-                    this.getTopicValue(),
-                    this.isState(),
-                    this.getDate());*/
         }
         catch (Exception e){
             return null;

@@ -25,12 +25,13 @@ public class RabbitMQService {
         System.out.println(" START !\n To stop, type 'exit'");
 
         final String EXCHANGE_NAME = "RPiTopics";
-
-        ConnectionFactory factory = new ConnectionFactory();
-
         final String hostIP = "193.48.57.166";
         final String username = "ima2a5-4fun";
         final String password = "glopglop";
+        MariaDBService mariaDBService = new MariaDBService("jdbc:mariadb://localhost/", "root", "glopglop");
+
+
+        ConnectionFactory factory = new ConnectionFactory();
 
         factory.setHost(hostIP);
         factory.setUsername(username);
@@ -49,8 +50,8 @@ public class RabbitMQService {
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 
-            String response = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + response + "'");
+            String jsonStringData = new String(delivery.getBody(), StandardCharsets.UTF_8);
+            System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + jsonStringData + "'");
 
 
             if(delivery.getEnvelope().getRoutingKey().contains("Rpi.User.Room.")){
@@ -60,17 +61,16 @@ public class RabbitMQService {
 
             }
             else{
-                //sauvegarder dans bdd
-
                 try {
 
                  //   DataService dataService= new DataService();
-                    Data data= new Data().jsonstringToData(response);
+                    Data data= new Data(jsonStringData);
                     System.out.println(data);
-                    dataService.saveData(data);
+                    //dataService.saveData(data);
 
-                    //DataAPI.saveData(new Data().jsonstringToData(response));
-                    //Data data = new Data().jsonstringToData(response);
+                    mariaDBService.addData(data);
+                    //DataAPI.saveData(new Data(jsonStringData));
+                    //Data data = new Data(jsonStringData);
 
                     //dataService.saveData(data);
                 }
@@ -88,7 +88,6 @@ public class RabbitMQService {
     }
 
 
-
     public static void GetRealTimeTopics(String idRpi, String request){
 
         try {
@@ -102,63 +101,4 @@ public class RabbitMQService {
             e.printStackTrace();
         }
     }
-
-
-    // JDBC driver name and database URL
-
-    /*static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    static final String DB_URL = "jdbc:mariadb://192.168.100.174/db";
-
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "root";
-
-*/
-
-    /* Config MariaDB */
-        /*java.sql.Connection conn = null;
-        Statement stmt = null;
-
-        try {
-            //STEP 2: Register JDBC driver
-            Class.forName("org.mariadb.jdbc.Driver");
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(
-                    "jdbc:mariadb://localhost/db", "root", "glopglop");
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
-            stmt = ((java.sql.Connection) conn).createStatement();
-
-
-        } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null) {
-                    conn.close();
-                }
-            } catch (SQLException se) {
-            }// do nothing
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }//end finally try
-        }//end try
-
-
-*/
-
-
 }

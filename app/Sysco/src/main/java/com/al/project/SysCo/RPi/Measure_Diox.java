@@ -3,10 +3,10 @@ package com.al.project.SysCo.RPi;
 
 import java.util.Random;
 
-public class Topic_Press extends Topic {
+public class Measure_Diox extends Measure {
 
-    private final double min = 500.0;
-    private final double max = 1200.0;
+    private final double min = 0.0;
+    private final double max = 3.0;
     private double value;
 
     public double getValue() {
@@ -15,7 +15,8 @@ public class Topic_Press extends Topic {
         return value;
     }
 
-   public Topic_Press(String name) {
+
+   public Measure_Diox(String name) {
         super(name);
     }
 }

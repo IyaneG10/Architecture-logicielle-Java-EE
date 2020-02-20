@@ -24,23 +24,6 @@ public class Rpi extends   Thread{
 
     private int id;
 
-    /*
-    @Autowired
-    private static SysCoConfig appConfig;
-    //private final Map<String, SysCoConfig> servers = new HashMap<>();
-    //private YAMLConfig myConfig;
-
-    public static void TestYML(){
-
-        Map<String, SysCoConfig.Server> servers;
-        servers = appConfig.getServers();
-        //List<SysCoConfig.Sysco> serverList = appConfig.getServers();
-        System.out.println("servers list: " + servers.get("rabbitmq"));
-        //System.out.println("name: " + myConfig.getName());
-        //System.out.println("servers: " + myConfig.getServers());
-    }
-    */
-
     private Publisher publisher;
     private Subscriber subscriber;
 
@@ -53,7 +36,6 @@ public class Rpi extends   Thread{
         return state;
     }
 
-
     private static String getDate() {
         SimpleDateFormat formatter;
         formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -61,60 +43,58 @@ public class Rpi extends   Thread{
         return formatter.format(dateObj);
     }
 
-    private String [] exchangeNameList = new String []{
+    private String [] measureNameList = new String []{
             "Oxygene", "Monoxyde de carbone",
             "Dioxyde de carbone", "Temperature",
             "Humidite", "Pression atmospherique",
             "Particules fines"
     };
 
-
-    private List<Topic> listExchangeName = new ArrayList<>();
+    private List<Measure> listMeasureName = new ArrayList<>();
 
     public Rpi(int rpiId){
         setId(rpiId);
-        TopicSetting();
+        MeasureSetting();
         publisher = new Publisher();
         subscriber = new Subscriber((Object) this);
     }
 
+    private void MeasureSetting(){
 
-    private void TopicSetting(){
-
-        listExchangeName.add(new Topic_Oxy(exchangeNameList[0]));
-        listExchangeName.add(new Topic_Mono(exchangeNameList[1]));
-        listExchangeName.add(new Topic_Diox(exchangeNameList[2]));
-        listExchangeName.add(new Topic_Temp(exchangeNameList[3]));
-        listExchangeName.add(new Topic_Humid(exchangeNameList[4]));
-        listExchangeName.add(new Topic_Press(exchangeNameList[5]));
-        listExchangeName.add(new Topic_PartFi(exchangeNameList[6]));
+        listMeasureName.add(new Measure_Oxy(measureNameList[0]));
+        listMeasureName.add(new Measure_Mono(measureNameList[1]));
+        listMeasureName.add(new Measure_Diox(measureNameList[2]));
+        listMeasureName.add(new Measure_Temp(measureNameList[3]));
+        listMeasureName.add(new Measure_Humid(measureNameList[4]));
+        listMeasureName.add(new Measure_Press(measureNameList[5]));
+        listMeasureName.add(new Measure_PartFi(measureNameList[6]));
     }
 
-    Runnable  sendTopic_Oxy = () -> {
+    Runnable  sendMeasure_Oxy = () -> {
         SendTopic(0,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
-    Runnable  sendTopic_Mono = () -> {
+    Runnable  sendMeasure_Mono = () -> {
         SendTopic(1,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
-    Runnable  sendTopic_Diox = () -> {
+    Runnable  sendMeasure_Diox = () -> {
         SendTopic(2,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
-    Runnable  sendTopic_Temp = () -> {
+    Runnable  sendMeasure_Temp = () -> {
         SendTopic(3,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
-    Runnable  sendTopic_Humid = () -> {
+    Runnable  sendMeasure_Humid = () -> {
         SendTopic(4,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
-    Runnable  sendTopic_Press = () -> {
+    Runnable  sendMeasure_Press = () -> {
         SendTopic(5,"Rpi.DataBase.Room."+Long.toString(id));
     };
 
-    Runnable  sendTopic_PartFi = () -> {
+    Runnable  sendMeasure_PartFi = () -> {
         SendTopic(6, "Rpi.DataBase.Room."+Long.toString(id));
     };
 
@@ -131,19 +111,19 @@ public class Rpi extends   Thread{
     public void sendTopicResponseToRabbit(String request){                                                                      // Send response to the publish we subscribed
 
         System.out.println(" [x] Received Request: " + request);
-        for(int i=0; i<listExchangeName.size();i++)                                                                            // Send all topics
+        for(int i=0; i<listMeasureName.size();i++)                                                                            // Send all measures
             SendTopic(i,"Rpi.User.Room."+Long.toString(id));
     }
 
-    private String CreateFakeTopics(int topicNumber){
+    private String CreateFakeMeasures(int measureNumber){
         try {
 
             Data data =  new Data();
             data.setDate(getDate());
             data.setRpiId(id);
             data.setState(State());
-            data.setTopicName(exchangeNameList[topicNumber]);
-            data.setTopicValue(listExchangeName.get(topicNumber).getValue());
+            data.setMeasureName(measureNameList[measureNumber]);
+            data.setMeasureValue(listMeasureName.get(measureNumber).getValue());
 
             if( ! data.isState() || Objects.isNull(data))                                               //if sensor is off, then don't send it's value
                 return null;
@@ -156,12 +136,12 @@ public class Rpi extends   Thread{
         }
     }
 
-    private void SendTopic(int topicNumber, String routingKey){
+    private void SendTopic(int measureNumber, String routingKey){
 
         try {
-            String message = CreateFakeTopics(topicNumber);
+            String message = CreateFakeMeasures(measureNumber);
             if(Objects.nonNull(message)) {                                                                   // Avoids filling DB with values when sensor if off
-                publisher.publish("RPiTopics"/*exchangeNameList[topicNumber]*/, routingKey, message);
+                publisher.publish("RPiTopics", routingKey, message);
                 System.out.println(message);
             }
         } catch (Exception e){
@@ -171,22 +151,20 @@ public class Rpi extends   Thread{
 
     public void run() {
         try {
-            executor.scheduleAtFixedRate(sendTopic_Oxy, 0, 30, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Mono, 5, 30, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Diox, 10, 30, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Temp, 15, 30, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Humid, 20, 30, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_Press, 25, 30, TimeUnit.SECONDS);
-            executor.scheduleAtFixedRate(sendTopic_PartFi, 30, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendMeasure_Oxy, 0, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendMeasure_Mono, 5, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendMeasure_Diox, 10, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendMeasure_Temp, 15, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendMeasure_Humid, 20, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendMeasure_Press, 25, 30, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(sendMeasure_PartFi, 30, 30, TimeUnit.SECONDS);
         }
         catch (Exception e){
             System.out.println(e);
         }
     }
 
-
     public void stopTasks() {
         executor.shutdownNow();
-        //this.isRunning = false;
     }
 }

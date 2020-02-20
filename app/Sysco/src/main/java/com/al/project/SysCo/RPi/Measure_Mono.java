@@ -3,7 +3,7 @@ package com.al.project.SysCo.RPi;
 
 import java.util.Random;
 
-public class Topic_Mono extends Topic {
+public class Measure_Mono extends Measure {
 
     private final double min = 0.0;
     private final double max = 2.0;
@@ -16,7 +16,7 @@ public class Topic_Mono extends Topic {
     }
 
 
-   public Topic_Mono(String name) {
+   public Measure_Mono(String name) {
         super(name);
     }
 }
