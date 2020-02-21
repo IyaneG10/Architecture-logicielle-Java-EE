@@ -21,7 +21,7 @@ public class MariaDBService {
 
 
     java.sql.Connection conn = null;
-    Statement stmt = null;
+    static Statement stmt = null;
 
     public MariaDBService(String DB_URL, String USER, String PASSWORD) {
         this.DB_URL = DB_URL;
@@ -106,6 +106,19 @@ public class MariaDBService {
         System.out.println(" Data saved in database...");
     }
 
+    public static   ResultSet getDataByAll() throws  SQLException {
+
+
+        //STEP 4: Execute a query
+        String sql = "SELECT FROM data";
+
+        ResultSet rs = stmt.executeQuery(sql);
+
+        return rs;
+
+        //return DBManager.GetObjectsFromDB(Query, rs -> FetchUserFromDB(rs));
+    }
+
     public class ErrorSavingInDB extends Exception {
         public ErrorSavingInDB(String errorMessage) {
             super(errorMessage);
@@ -113,3 +126,5 @@ public class MariaDBService {
     }
 
 }
+
+

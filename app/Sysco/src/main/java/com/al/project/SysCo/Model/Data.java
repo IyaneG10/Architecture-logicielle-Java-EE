@@ -4,9 +4,7 @@ package com.al.project.SysCo.Model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -58,6 +56,8 @@ public class Data {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Integer rpiId;
     private boolean state;
     private String measureName;
