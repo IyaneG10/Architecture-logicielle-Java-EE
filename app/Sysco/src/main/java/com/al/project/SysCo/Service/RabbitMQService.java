@@ -70,14 +70,13 @@ public class RabbitMQService {
                     //DataAPI.saveData(new Data(jsonStringData));
                     //Data data = new Data(jsonStringData);
 
-                    //dataService.saveData(data);
+                    //dataService.saveData(data);''''''''''''''''''''''''''''''''''y
                 }
-
 
                  catch (Exception ex){
+
                     System.out.println(ex);
                 }
-
 
             }
         };
@@ -90,6 +89,12 @@ public class RabbitMQService {
 
         try {
             String EXCHANGE_NAME = "RpiTopics";
+
+
+
+
+
+
             Publisher publisher = new Publisher();
 
             if(Objects.nonNull(idRpi)) {                                                                              // Avoids filling DB with values when sensor if off
