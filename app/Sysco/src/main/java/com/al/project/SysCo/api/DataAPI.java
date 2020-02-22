@@ -4,6 +4,9 @@ package com.al.project.SysCo.api;
 import com.al.project.SysCo.Model.Data;
 import com.al.project.SysCo.Service.DataService;
 import com.al.project.SysCo.Service.MariaDBService;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +26,11 @@ public class DataAPI {
 
     @Autowired
 
-/*
+
     public DataAPI(DataService dataService) {
         this.dataService = dataService;
     }
-
+/*
     @GetMapping
     public static ResponseEntity<Data> saveData(Data data) {
         //dataService.save(data);
@@ -35,27 +38,15 @@ public class DataAPI {
         dataService.saveData(data);
         return null;
     }
-      */
+*/
 
 
-
-
-    @GetMapping
-    public ResponseEntity<ResultSet> findAll() throws SQLException {
-        return ResponseEntity.ok(MariaDBService.getDataByAll());
-    }
 
 /*
-
-    public  void sauvegarderData(Data data) {
-
-        //pusblish vers rpi
-        //GetRealTimeTopics();
-        dataService.saveData(data);
-        System.out.println("METHODE BIEN APPELLEE DANS API");
-
+    @GetMapping
+    public ResponseEntity<List<JSONObject>> findAll() throws SQLException, JSONException {
+        return ResponseEntity.ok(MariaDBService.getDataByAll());
     }
-    */
-
+*/
 
 }

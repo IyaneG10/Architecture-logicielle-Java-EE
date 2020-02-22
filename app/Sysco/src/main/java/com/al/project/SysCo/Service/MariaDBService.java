@@ -1,11 +1,11 @@
 package com.al.project.SysCo.Service;
 
 import com.al.project.SysCo.Model.Data;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class MariaDBService {
 
@@ -74,47 +74,31 @@ public class MariaDBService {
 
         ResultSet rs = stmt.executeQuery(sql);
 
-        /*String st ="";
 
-        if (rs.next())
-            st= rs.getString(1);
-
-
-        System.out.println(st);
-
-        if (rs.next())
-            st = rs.getString(2);
-
-        System.out.println(st);
-
-        if (rs.next())
-            st = rs.getString(3);
-
-        System.out.println(st);
-
-        if (rs.next())
-            st = rs.getString(4);
-
-        System.out.println(st);
-
-        if (rs.next())
-            st = rs.getString(5);
-
-        System.out.println(st);
-
-    */
         System.out.println(" Data saved in database...");
     }
 
-    public static   ResultSet getDataByAll() throws  SQLException {
+    public static JSONArray getDataByAll() throws SQLException, JSONException {
 
 
         //STEP 4: Execute a query
-        String sql = "SELECT FROM data";
+        String sql = "SELECT * FROM data";
 
         ResultSet rs = stmt.executeQuery(sql);
 
-        return rs;
+        JSONArray json = new JSONArray();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        while(rs.next()) {
+            int numColumns = rsmd.getColumnCount();
+            JSONObject obj = new JSONObject();
+            for (int i=1; i<=numColumns; i++) {
+                String column_name = rsmd.getColumnName(i);
+                obj.put(column_name, rs.getObject(column_name));
+            }
+            json.put(obj);
+        }
+        System.out.println(json);
+        return json;
 
         //return DBManager.GetObjectsFromDB(Query, rs -> FetchUserFromDB(rs));
     }

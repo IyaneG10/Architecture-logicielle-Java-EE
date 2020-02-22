@@ -67,6 +67,7 @@ public class RabbitMQService {
                     //dataService.saveData(data);
 
                     mariaDBService.addData(data);
+                    mariaDBService.getDataByAll();
                     //DataAPI.saveData(new Data(jsonStringData));
                     //Data data = new Data(jsonStringData);
 
