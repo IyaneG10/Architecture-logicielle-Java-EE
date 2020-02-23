@@ -14,7 +14,6 @@
     </head>
 
 	<body>
-
         <%@ include file="entete.jsp"%>
 		<script>
 			function scanSensorOnNetwork(fileContent){

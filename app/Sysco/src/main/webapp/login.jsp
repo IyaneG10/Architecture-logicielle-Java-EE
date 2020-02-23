@@ -10,7 +10,6 @@
 
 <html lang="en">
     <head>
-
         <title>Log in with your account</title>
 
         <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -43,6 +42,6 @@
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+        <%@ include file="pied.jsp"%>
     </body>
 </html>

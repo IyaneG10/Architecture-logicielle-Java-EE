@@ -13,8 +13,8 @@
     </head>
 
 	<body>
-        <%@ include file="entete.jsp"%>
 
+        <%@ include file="entete.jsp"%>
 		<div class="main">
             <br>
 			<h2>Valeurs instantanées :</h2>

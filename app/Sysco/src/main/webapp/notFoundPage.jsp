@@ -11,6 +11,7 @@
     </head>
 
 	<body>
+
         <%@ include file="entete.jsp"%>
 
         <div class="main">
