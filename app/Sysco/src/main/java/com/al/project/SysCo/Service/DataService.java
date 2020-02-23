@@ -25,14 +25,14 @@ public class DataService {
     private  DataRepository dataRepository;
 
 
-    public  Data saveData(Data data) {
+    /*public  Data saveData(Data data) {
 
 
         System.out.println(" entree saveData de DataService");
         Data ret = dataRepository.save(data);
         System.out.println(" sortie saveData de DataService");
         return ret;
-    }
+    }*/
 
     private void getData( int rpiId, String topicName){
 

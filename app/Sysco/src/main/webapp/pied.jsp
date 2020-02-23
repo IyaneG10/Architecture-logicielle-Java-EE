@@ -3,11 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
-
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   		<div class="jumbotron text-center" style="margin-bottom:0;padding-bottom: 1rem;padding-top: 1rem;">
   			<img src="./images/logoPolytech.png" alt="">
   			<img src="./images/logoUnivLille.png" alt="">
@@ -25,9 +22,13 @@
   		</script>
 
 
-
-
 		<!-- Optional JavaScript -->
+		<script type="text/javascript">
+            function ChangePage(arg1){
+            window.location.replace(arg1);
+            }
+        </script>
+
 
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
@@ -42,12 +43,5 @@
 		<!--[if IE]>
 			<script type="text/javascript" src="./JS/excanvas.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src="./JS/segment-display.js"></script>
-
-
-
-
-
-</head>
-</body>
+    </head>
 </html>

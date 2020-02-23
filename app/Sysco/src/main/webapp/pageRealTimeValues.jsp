@@ -7,49 +7,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
-<head>
-    <title>Real Time Data</title>
-<%@ include file="head.jsp"%>
-</head>
+    <head>
+        <%@ include file="head.jsp"%>
+        <title>Real Time Data</title>
+    </head>
 
 	<body>
-<%@ include file="entete.jsp"%>
+        <%@ include file="entete.jsp"%>
 
 		<div class="main">
             <br>
 			<h2>Valeurs instantanées :</h2>
-			<p>Valeur Capteur 1 :</p>
 			<div>
+			    <p>Oxygene</p>
 				<canvas id="display1" width="200" height="60"></canvas>
-			</div>
 
-			<p>Valeur Capteur 2 :</p>
-			<div>
+			    <p>Monoxyde de carbone</p>
 				<canvas id="display2" width="200" height="60"></canvas>
+
+			    <p>Dioxyde de carbone</p>
+				<canvas id="display3" width="200" height="60"></canvas>
 			</div>
 
+			<div>
+			    <p>Temperature</p>
+				<canvas id="display4" width="200" height="60"></canvas>
 
-		<!-- END MAIN -->
+			    <p>Humidite</p>
+				<canvas id="display5" width="200" height="60"></canvas>
+
+			    <p>Pression atmospherique</p>
+				<canvas id="display6" width="200" height="60"></canvas>
+
+			    <p>Particules fines</p>
+				<canvas id="display7" width="200" height="60"></canvas>
+			</div>
 		</div>
-<%@ include file="pied.jsp"%>
 
-
-		<!-- Optional JavaScript -->
-
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-		</script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-		</script>
-
-		<!-- 16 Segment Display -->
-		<!--[if IE]>
-			<script type="text/javascript" src="./JS/excanvas.js"></script>
-		<![endif]-->
-		<script type="text/javascript" src="./JS/segment-display.js"></script>
+        <!-- END MAIN -->
+        <%@ include file="pied.jsp"%>
 
 		<script type="text/javascript">
 
@@ -97,8 +93,6 @@
 				dispValue1+=1;
 				if(dispValue1>=9)dispValue1=0;
 				display1.setValue("'"+dispValue1+"'");
-
-
 			}
 
 			function animateDisplay2() {

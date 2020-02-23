@@ -62,9 +62,9 @@ public class UserController {
     }
 
 
-        @GetMapping("/products")
-        public String list(){
-            return "products";
-        }
+    @GetMapping("/products")
+    public String list(){
+        return "products";
+    }
 
 }

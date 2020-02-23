@@ -8,22 +8,16 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+        <%@ include file="head.jsp"%>
+        <title>Graphics Data</title>
+    </head>
 
-    <title>Graphics Data</title>
-<%@ include file="head.jsp"%>
-
-
-</head>
 	<body>
 
-
-<%@ include file="entete.jsp"%>
-
-
+        <%@ include file="entete.jsp"%>
 		<script>
 			function scanSensorOnNetwork(fileContent){
-
 				var listeSalles = [];
 				listeSalles = (fileContent.split('\n'));				//récupere la liste des capteurs
 
@@ -35,8 +29,6 @@
 					dropdownList.innerHTML += '<button class="dropdown-item" type="button" onclick=\'getFilesOnServer("./FilesSensors/'+item+".json"+'",showGraphic)\'>'+item+'</button>';
 				});
 			}
-
-
 
 			function getFilesOnServer(url, callbackFunction){
 				var xhttp = new XMLHttpRequest();
@@ -52,12 +44,12 @@
 				xhttp.send();
 			}
 
+			function  showGraphic(dataString) {
 
-			function  showGraphic(jsonTexte) {
-
-				var jsonData = JSON.parse(jsonTexte+"]}");
+				var jsonData = JSON.parse(dataString);
 				var dps = [];
 				var unity = " kg/m²";
+				var measureName = "Nom de la mesure";//sonData.Name;
 
 				for (i in jsonData.DATA) {
 					dps.push({
@@ -68,13 +60,13 @@
 				//Better to construct options first and then pass it as a parameter
 				var options = {
 					title: {
-						text: "Historique Journalier"
+						text: "Historique" + measureName
 					},
 					animationEnabled: true,
 					exportEnabled: true,
 					zoomEnabled: true,
 					axisY: {
-						title: "Taux CO2",
+						title: measureName,
 						valueFormatString: "#0.",
 						suffix: unity,
 						/*stripLines: [{
@@ -91,15 +83,10 @@
 					}
 					]
 				};
-
-
 				var chart = new CanvasJS.Chart("chart-container",options);
-
 				chart.render();
-
 			}
 		</script>
-
 
 		<div class="main">
 			<br>
@@ -112,39 +99,17 @@
 					Salles
 				</button>
 				<div id="listeSalles" class="dropdown-menu" aria-labelledby="dropdownMenu2">
-
 				</div>
 			</div>
-
 
 			<br>
 			<div id="chart-container" style="height: 370px; max-width: 100%;">
 			  <canvas id="mycanvas"></canvas>
 			</div>
 		</div>
+
 		<!-- END MAIN -->
 
-<%@ include file="pied.jsp"%>
-
-
-		<!-- Optional JavaScript -->
-
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-		</script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-		</script>
-
-		 <script type="text/javascript">
-			function ChangePage(arg1){
-			window.location.replace(arg1);
-			}
-		</script>
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-	</body>
+        <%@ include file="pied.jsp"%>
+    </body>
 </html>
