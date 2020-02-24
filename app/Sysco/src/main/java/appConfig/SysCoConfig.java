@@ -13,7 +13,7 @@ import java.util.Map;
 @EnableConfigurationProperties
 @ConfigurationProperties
 
-public class SysCoYamlConfig {
+public class SysCoConfig {
 
     private final Map<String, Server> servers = new HashMap<>();
     private final Map<String, Login> logins = new HashMap<>();

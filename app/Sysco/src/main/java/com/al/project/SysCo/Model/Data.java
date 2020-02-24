@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 @Entity
-@Table(name = "data") // si le nom de la table n'est pas précisée, celui de la classe sera pris par défaut
+@Table(name = "data") // si le nom de la table n'est pas précisée, celui de la classe sera pris par défau
 public class Data {
 
 
@@ -77,6 +77,25 @@ public class Data {
         this.setMeasureName(recurseKeys(jsonObject,"Name"));
         this.setMeasureValue(Double.parseDouble(recurseKeys(jsonObject,"Value")));
     }
+
+    /*public Data jsonstringToData(String dataString) throws JSONException, ParseException {
+
+        Data newDataObj = new Data();
+
+        JSONObject jsonObject = new JSONObject(dataString);
+
+        //newDataObj.setDate(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(jsonObject.getString("Date")));
+        //String str = recurseKeys(jsonObject,"Date");
+        //Date currentDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(str);
+
+        newDataObj.setDate(recurseKeys(jsonObject,"Date"));
+        newDataObj.setRpiId(Integer.parseInt(recurseKeys(jsonObject,"Id")));
+        newDataObj.setState(Boolean.parseBoolean(recurseKeys(jsonObject,"State")));
+        newDataObj.setmeasureName(recurseKeys(jsonObject,"Name"));
+        newDataObj.setmeasureValue(Double.parseDouble(recurseKeys(jsonObject,"Value")));
+
+        return newDataObj;
+    }*/
 
 
     public static String recurseKeys(JSONObject jObj, String findKey) throws JSONException {

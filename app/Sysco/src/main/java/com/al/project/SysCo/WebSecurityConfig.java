@@ -1,4 +1,4 @@
-package appConfig;
+package com.al.project.SysCo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

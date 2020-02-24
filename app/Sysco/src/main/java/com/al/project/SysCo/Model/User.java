@@ -20,7 +20,7 @@ public class User {
     @Transient
     private String passwordConfirm;
 
-     @ManyToMany
+    @ManyToMany
     private Set<Role> roles;
 
     public Long getId() {
