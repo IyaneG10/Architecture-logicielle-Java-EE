@@ -12,9 +12,7 @@ import org.mariadb.jdbc.internal.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,8 +27,13 @@ public class DataAPI {
 
 
     @GetMapping("/all")
-    public ResponseEntity<String> findData() throws SQLException, JSONException {
+    public ResponseEntity<String> findAllDatas() throws SQLException, JSONException {
         return new ResponseEntity<String>(mariaDBService.getDataByAll()+ "", HttpStatus.OK);
+    }
+
+    @GetMapping("/room{room_id}")
+    public ResponseEntity<String> findDataByRoom(@PathVariable("room_id") int id)  throws SQLException, JSONException {
+        return new ResponseEntity<String>(mariaDBService.getDataByRoom(id)+ "", HttpStatus.OK);
     }
   //  private static   DataService dataService;
 

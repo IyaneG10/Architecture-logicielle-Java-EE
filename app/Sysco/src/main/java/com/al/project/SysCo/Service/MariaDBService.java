@@ -104,6 +104,29 @@ public class MariaDBService {
         //return DBManager.GetObjectsFromDB(Query, rs -> FetchUserFromDB(rs));
     }
 
+    public  JSONArray getDataByRoom(int room) throws SQLException, JSONException {
+
+
+        //STEP 4: Execute a query
+        String sql = "SELECT * FROM data WHERE rpi_id = "+ room;
+
+        ResultSet rs = stmt.executeQuery(sql);
+
+        JSONArray json = new JSONArray();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        while(rs.next()) {
+            int numColumns = rsmd.getColumnCount();
+            JSONObject obj = new JSONObject();
+            for (int i=1; i<=numColumns; i++) {
+                String column_name = rsmd.getColumnName(i);
+                obj.put(column_name, rs.getObject(column_name));
+
+            }
+            json.put(obj);
+        }
+        return json;
+    }
+
     public class ErrorSavingInDB extends Exception {
         public ErrorSavingInDB(String errorMessage) {
             super(errorMessage);
