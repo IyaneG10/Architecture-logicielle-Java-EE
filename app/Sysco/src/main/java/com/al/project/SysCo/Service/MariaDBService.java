@@ -69,7 +69,6 @@ public class MariaDBService {
         //sql = "SHOW COLUMNS FROM data";
 
         ResultSet rs = stmt.executeQuery(sql);
-        System.out.println(" Data saved in database...");
     }
 
 

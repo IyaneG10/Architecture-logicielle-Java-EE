@@ -44,24 +44,22 @@
 
 
 			function getDataFromServer(callbackFunction){
-				var xhttp = new XMLHttpRequest();
-
-				xhttp.onreadystatechange = function(){
-					if (this.readyState == 4 && this.status == 200){
-						callbackFunction(this.responseText);
-					}
-				};
-
 				var listRoom =  document.getElementById("listeSalles");
 				var listMeasure = document.getElementById("listMeasures");
 
 				var room =listRoom.options[listRoom.selectedIndex].text ;                                               //  récupérer la sélection
                 var measureName = listMeasure.options[listMeasure.selectedIndex].text; ;                               //  récupérer la sélection
 
-                //alert(room);
-                //alert(measureName);
                 if(room != "Choose Room..." && measureName != "Choose Sensor..."){
-                    alert('/api-datas/historic/'+room+'/'+measureName);
+
+                    var xhttp = new XMLHttpRequest();
+
+                    xhttp.onreadystatechange = function(){
+                        if (this.readyState == 4 && this.status == 200){
+                            callbackFunction(this.responseText);
+                        }
+                    };
+
                     xhttp.open('GET', '/api-datas/historic/room'+room+'/'+measureName, true);
                     xhttp.overrideMimeType("text/javascript")
                     xhttp.send();
@@ -90,14 +88,21 @@
 			function  showGraphic(jsonTexte) {
 
 				var jsonData = JSON.parse(jsonTexte);
+				//console.log(jsonData);
 				var dps = [];
 				var unity = " kg/m²";
 
-				for (i in jsonData.DATA) {
+				for (var i in jsonData){
+
+                   //alert( jsonData[i].rpi_id);
+
 					dps.push({
-						x:  new Date(jsonData.DATA[i].TIME), y: jsonData.DATA[i].Y
+						x: jsonData[i].date , y: jsonData[i].measure_value
 					});
-				}
+                }
+
+				console.log(dps);
+
 
 				//Better to construct options first and then pass it as a parameter
 				var options = {
@@ -118,14 +123,15 @@
 					},
 					data: [
 					{
-						yValueFormatString: "###0.###"+unity,
-						xValueFormatString: "YYYY/MM/DD à HH:mm",
+						yValueFormatString: "###0.##"+unity,
+						xValueFormatString: "YYYY/MM/DD HH:mm:ss",
 						type: "spline",
 						dataPoints: dps
 					}
 					]
 				};
 
+				console.log(options);
 
 				var chart = new CanvasJS.Chart("chart-container",options);
 

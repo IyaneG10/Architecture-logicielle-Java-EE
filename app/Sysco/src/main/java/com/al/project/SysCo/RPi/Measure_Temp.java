@@ -12,7 +12,7 @@ public class Measure_Temp extends Measure {
     public double getValue() {
         Random r = new Random();
         value = min + r.nextDouble() * (max - min);
-        return value;
+        return Math.round(value*100.0)/100.0;
     }
 
 

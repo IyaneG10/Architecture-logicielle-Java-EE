@@ -52,7 +52,7 @@ public class RabbitMQService {
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 
             String jsonStringData = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + jsonStringData + "'");
+            System.out.println(" [i] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + jsonStringData + "'");
 
 
             if(delivery.getEnvelope().getRoutingKey().contains("Rpi.User.Room.")){
@@ -64,7 +64,9 @@ public class RabbitMQService {
 
                  //   DataService dataService= new DataService();
                     Data data= new Data(jsonStringData);
-                    System.out.println(data);
+
+                    System.out.println(" [+] Data saved in database...\n");
+                    //System.out.println(data);
                     //dataService.saveData(data);
 
                     mariaDBService.addData(data);
