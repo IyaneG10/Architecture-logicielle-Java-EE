@@ -1,23 +1,13 @@
 package com.al.project.SysCo.api;
 
 
-import com.al.project.SysCo.Model.Data;
-import com.al.project.SysCo.Service.DataService;
 import com.al.project.SysCo.Service.MariaDBService;
-import com.al.project.SysCo.Service.UserService;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.mariadb.jdbc.internal.logging.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Logger;
 
 
 @RestController

@@ -1,8 +1,8 @@
 package com.al.project.SysCo.RPi;
 
 import com.al.project.SysCo.Model.*;
-import com.al.project.SysCo.Model.Publisher;
-import com.al.project.SysCo.Model.Subscriber;
+import com.al.project.SysCo.Service.Publisher;
+import com.al.project.SysCo.Service.Subscriber;
 
 
 import java.text.SimpleDateFormat;

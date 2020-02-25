@@ -1,9 +1,9 @@
 package com.al.project.SysCo;
 
 import com.al.project.SysCo.Model.Data;
-import com.al.project.SysCo.Model.Publisher;
-import com.al.project.SysCo.Service.DataService;
 import com.al.project.SysCo.Service.MariaDBService;
+import com.al.project.SysCo.Service.Publisher;
+import com.al.project.SysCo.Service.DataService;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-import java .sql.*;
 
 
 @SpringBootApplication

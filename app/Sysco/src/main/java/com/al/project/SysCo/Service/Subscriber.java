@@ -1,4 +1,4 @@
-package com.al.project.SysCo.Model;
+package com.al.project.SysCo.Service;
 
 import com.al.project.SysCo.DataApplication;
 import com.al.project.SysCo.RPi.Rpi;
