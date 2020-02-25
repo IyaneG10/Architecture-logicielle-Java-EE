@@ -13,7 +13,7 @@ public class RpiApplication  {
 
 	public static void main(String[] args) {
 
-		final int numberRoom =50;
+		final int numberRoom =5;
 
 		ArrayList<Rpi> rpiList = new ArrayList<>();
 

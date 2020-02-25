@@ -26,11 +26,16 @@ public class DataAPI {
         return new ResponseEntity<String>(mariaDBService.getDataByRoom(id)+ "", HttpStatus.OK);
     }
 
-    @GetMapping("historic/room{room_id}/{sensor_id}")
-    public ResponseEntity<String> findDataByRoom(@PathVariable("room_id") int room_id,@PathVariable("sensor_id") String sensor_id)  throws SQLException, JSONException {
-        return new ResponseEntity<String>(mariaDBService.getDataByRoomAndSensor(room_id, sensor_id)+ "", HttpStatus.OK);
+    @GetMapping("historic/room{room_id}/{measureName}")
+    public ResponseEntity<String> getDataByRoomAndSensor(@PathVariable("room_id") int room_id,@PathVariable("measureName") String measureName)  throws SQLException, JSONException {
+        return new ResponseEntity<String>(mariaDBService.getDataByRoomAndSensor(room_id, measureName)+ "", HttpStatus.OK);
     }
 
+
+    @GetMapping("historic/roomlist")
+    public ResponseEntity<String> getRoom()  throws SQLException, JSONException {
+        return new ResponseEntity<String>(mariaDBService.getRoom()+ "", HttpStatus.OK);
+    }
 
   //  private static   DataService dataService;
 

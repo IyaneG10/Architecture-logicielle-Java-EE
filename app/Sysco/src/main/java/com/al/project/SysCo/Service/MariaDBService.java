@@ -75,7 +75,6 @@ public class MariaDBService {
 
     public static JSONArray getDataByAll() throws SQLException, JSONException {
 
-
         //STEP 4: Execute a query
         String sql = "SELECT * FROM data";
 
@@ -119,9 +118,9 @@ public class MariaDBService {
         return json;
     }
 
-    public  JSONArray getDataByRoomAndSensor(int room, String sensor) throws SQLException, JSONException {
+    public  JSONArray getDataByRoomAndSensor(int room, String measureName) throws SQLException, JSONException {
 
-       String sql = "SELECT * FROM data WHERE rpi_id = "+ room +" AND measure_name =" +"\"" +sensor+ "\"";
+       String sql = "SELECT * FROM data WHERE rpi_id = "+ room +" AND measure_name =" +"\"" +measureName+ "\"";
         ResultSet rs = stmt.executeQuery(sql);
 
         JSONArray json = new JSONArray();
@@ -138,6 +137,28 @@ public class MariaDBService {
         }
         return json;
     }
+
+
+    public  JSONArray getRoom() throws SQLException, JSONException {
+
+        String sql = "SELECT DISTINCT rpi_id FROM data ORDER BY rpi_id ASC;";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        JSONArray json = new JSONArray();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        while(rs.next()) {
+            int numColumns = rsmd.getColumnCount();
+            JSONObject obj = new JSONObject();
+            for (int i=1; i<=numColumns; i++) {
+                String column_name = rsmd.getColumnName(i);
+                obj.put(column_name, rs.getObject(column_name));
+
+            }
+            json.put(obj);
+        }
+        return json;
+    }
+
 
     public class ErrorSavingInDB extends Exception {
         public ErrorSavingInDB(String errorMessage) {

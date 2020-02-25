@@ -14,24 +14,32 @@
         <script src="./JS/canvasjs.min.js"></script>
     </head>
 
-	<body>
+	<body onload ="getRoomListFromServer(setRoomList)">
 
         <%@ include file="entete.jsp"%>
 
 		<script>
 
-			function setRoomList(fileContent){
+			function setRoomList(response){
 
-			    alert(fileContent);
-				var listeSalles = [];
-				listeSalles = (fileContent.split('\n'));				//récupere la liste des capteurs
+                var jsonData = JSON.parse(response);
 
 
 				var dropdownList = document.getElementById("listeSalles");
-				dropdownList.innerHTML='';
-				listeSalles.forEach(function(item) {
-                    dropdownList.innerHTML += '<option value=\"'+item+ ">" + item + "</option>"
-				});
+
+				var content ='';
+
+				for (var i in jsonData){
+
+                    //alert( jsonData[i].rpi_id);
+
+				    content += '<option value="' + jsonData[i].rpi_id.toString() + '">' + jsonData[i].rpi_id.toString() + '</option>'
+				}
+
+
+				dropdownList.innerHTML = '<option selected>Choose Room...</option>' + content;
+
+				//alert(dropdownList.innerHTML);
 			}
 
 
@@ -47,11 +55,14 @@
 				var listRoom =  document.getElementById("listeSalles");
 				var listMeasure = document.getElementById("listMeasures");
 
-				var room =listRoom.options[listRoom.selectedIndex].value;                                               //  récupérer la sélection
-                var measureName = listMeasure.options[listMeasure.selectedIndex].value; ;                               //  récupérer la sélection
+				var room =listRoom.options[listRoom.selectedIndex].text ;                                               //  récupérer la sélection
+                var measureName = listMeasure.options[listMeasure.selectedIndex].text; ;                               //  récupérer la sélection
 
+                //alert(room);
+                //alert(measureName);
                 if(room != "Choose Room..." && measureName != "Choose Sensor..."){
-                    xhttp.open('GET', '/api-datas/historic/'+room+'/'+measureName, true);
+                    alert('/api-datas/historic/'+room+'/'+measureName);
+                    xhttp.open('GET', '/api-datas/historic/room'+room+'/'+measureName, true);
                     xhttp.overrideMimeType("text/javascript")
                     xhttp.send();
                 }
@@ -131,7 +142,7 @@
 			<br>
 
             <div class="input-group">
-                <select class="custom-select" id="listeSalles" onclick="getRoomListFromServer(setRoomList)">
+                <select class="custom-select" id="listeSalles">
                     <option selected>Choose Room...</option>
                 </select>
 
