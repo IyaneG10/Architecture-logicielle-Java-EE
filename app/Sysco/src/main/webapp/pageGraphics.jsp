@@ -11,6 +11,7 @@
     <head>
         <title>Graphics Data</title>
         <%@ include file="head.jsp"%>
+        <script src="./JS/canvasjs.min.js"></script>
     </head>
 
 	<body>

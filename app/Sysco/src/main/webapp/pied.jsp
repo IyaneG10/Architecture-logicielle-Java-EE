@@ -11,15 +11,13 @@
   			<img src="./images/logoUnivLille.png" alt="">
   		</div>
 
-  		<!-- Optional JavaScript -->
+  		<!-- JavaScript -->
+        <script type="text/javascript">
 
-  		  		<script type="text/javascript">
-
-          			function ChangePage(arg1){
-          			window.location.replace(arg1);
-          			}
-
-          		</script>
+            function ChangePage(arg1){
+            window.location.replace(arg1);
+            }
+        </script>
 
   		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 

@@ -7,7 +7,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="./JS/jquery-1.11.1.min.js"></script>
         <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 
       	<div class="jumbotron text-center" style="margin-bottom:0;padding-top: 2rem;padding-bottom: 1rem;" onclick="ChangePage('welcome.jsp');">
@@ -39,14 +39,13 @@
                     </li>
                 </ul>
                 <span class="navbar-text">
-
-                    <form class="form-inline my-2 my-lg-0">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="document.forms['logoutForm'].submit()">
-                            <c:if test="${pageContext.request.userPrincipal.name != null}">
-                                Déconnecter, ${pageContext.request.userPrincipal.name}
-                         </c:if>
-                        </button>
-                    </form>
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+                        <form class="form-inline my-2 my-lg-0" id="logoutForm" method="POST" action="${contextPath}/logout">
+                            <button class="btn btn-outline-success my-2 my-sm-0"  name="${_csrf.parameterName}" value="${_csrf.token}">
+                                    Déconnecter, ${pageContext.request.userPrincipal.name}
+                            </button>
+                        </form>
+                    </c:if>
                 </span>
             </div>
         </nav>

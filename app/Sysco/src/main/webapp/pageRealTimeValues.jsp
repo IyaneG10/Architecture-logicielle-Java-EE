@@ -160,10 +160,10 @@
             }
 
             function animateDisplay3() {
-                            display3.setValue("'"+dispValue3+"'");
-                            dispValue3++;
-                            if(dispValue3>49)dispValue3=0;
-                        }
+                display3.setValue("'"+dispValue3+"'");
+                dispValue3++;
+                if(dispValue3>49)dispValue3=0;
+            }
         </script>
 	</body>
 </html>
