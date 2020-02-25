@@ -28,9 +28,9 @@ public class DataAPI {
     MariaDBService mariaDBService = new MariaDBService("jdbc:mariadb://localhost:3306/sysco", "admin", "admin");
 
 
-    @GetMapping("/getAll")
+    @GetMapping("/all")
     public ResponseEntity<String> findData() throws SQLException, JSONException {
-        return new ResponseEntity<String>(mariaDBService.getDataByAll()+ HttpStatus.OK.name(), HttpStatus.OK);
+        return new ResponseEntity<String>(mariaDBService.getDataByAll()+ "", HttpStatus.OK);
     }
   //  private static   DataService dataService;
 

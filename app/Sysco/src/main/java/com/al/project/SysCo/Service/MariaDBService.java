@@ -95,7 +95,6 @@ public class MariaDBService {
                 String column_name = rsmd.getColumnName(i);
                 obj.put(column_name, rs.getObject(column_name));
 
-
             }
             json.put(obj);
         }
