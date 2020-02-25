@@ -23,6 +23,7 @@ public class MariaDBService {
     java.sql.Connection conn = null;
     static Statement stmt = null;
 
+
     public MariaDBService(String DB_URL, String USER, String PASSWORD) {
         this.DB_URL = DB_URL;
         this.USER = USER;
@@ -34,10 +35,6 @@ public class MariaDBService {
     private void  configure(){
 
         try {
-            //STEP 2: Register JDBC driver
-            //Class.forName("org.mariadb.jdbc.Driver");
-            //Class.forName(JDBC_DRIVER);
-            //STEP 3: Open a connection
             System.out.println("Connecting to a selected database...");
             conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sysco?user=admin&password=admin");
             stmt = ((java.sql.Connection) conn).createStatement();
@@ -58,7 +55,6 @@ public class MariaDBService {
 
     public void addData(Data data) throws ErrorSavingInDB, SQLException {
 
-
         //STEP 4: Execute a query
         String sql = "INSERT INTO data"
                 + "(rpi_id, state, measure_name, measure_value, date) "
@@ -73,12 +69,11 @@ public class MariaDBService {
         //sql = "SHOW COLUMNS FROM data";
 
         ResultSet rs = stmt.executeQuery(sql);
-
-
         System.out.println(" Data saved in database...");
     }
 
-    public  JSONArray getDataByAll() throws SQLException, JSONException {
+
+    public static JSONArray getDataByAll() throws SQLException, JSONException {
 
 
         //STEP 4: Execute a query
@@ -94,7 +89,6 @@ public class MariaDBService {
             for (int i=1; i<=numColumns; i++) {
                 String column_name = rsmd.getColumnName(i);
                 obj.put(column_name, rs.getObject(column_name));
-
             }
             json.put(obj);
         }

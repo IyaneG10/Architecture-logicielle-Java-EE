@@ -16,9 +16,6 @@ public class DataApplication {
     public static void main(String[] args) {
 
         try {
-           // XmlRPCServer xmlRPCServerhread =  new XmlRPCServer();
-            //Thread t = new Thread(xmlRPCServerhread);
-            //t.start();
 
             System.out.println(" START !\n To stop, type 'exit'");
 

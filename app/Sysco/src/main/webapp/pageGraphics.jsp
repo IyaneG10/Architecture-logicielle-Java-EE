@@ -19,7 +19,10 @@
         <%@ include file="entete.jsp"%>
 
 		<script>
-			function scanSensorOnNetwork(fileContent){
+
+		    var roomSelected = null;
+		    
+			function setRoomList(fileContent){
 
 				var listeSalles = [];
 				listeSalles = (fileContent.split('\n'));				//récupere la liste des capteurs
@@ -34,7 +37,7 @@
 			}
 
 
-			function getFilesOnServer(url, callbackFunction){
+			function getDataFromServer(callbackFunction){
 				var xhttp = new XMLHttpRequest();
 
 				xhttp.onreadystatechange = function(){
@@ -42,16 +45,35 @@
 						callbackFunction(this.responseText);
 					}
 				};
+				var room = "";              //  récupérer la sélection du dropdownMenu2
+				var measureName = "";       //  récupérer la sélection du dropdownMenu3
 
-				xhttp.open("GET", url, true);
-				xhttp.overrideMimeType("text/plain")
-				xhttp.send();
+                xhttp.open('GET', '/api-datas/historic/'+room+'/'+measureName, true);
+                xhttp.overrideMimeType("text/javascript")
+                xhttp.send(data);
 			}
+
+
+			function getRoomListFromServer (callbackFunction){
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        callbackFunction(this.responseText);
+                    }
+                };
+
+                './api-datas/historic/
+
+                xhttp.open('GET', '/api-datas/historic/roomlist', true);
+                xhttp.overrideMimeType("text/javascript")
+                xhttp.send();
+            }
 
 
 			function  showGraphic(jsonTexte) {
 
-				var jsonData = JSON.parse(jsonTexte+"]}");
+				var jsonData = JSON.parse(jsonTexte);
 				var dps = [];
 				var unity = " kg/m²";
 
@@ -102,15 +124,32 @@
 				Vous pouvez selectionner une salle et la plage temporelle directement sur le graphique
 			</p>
 			<br>
-			<div class="dropdown"  align="right"  onclick="getFilesOnServer('./FilesSensors/listeSalles.txt',scanSensorOnNetwork)">
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Salles
-				</button>
-				<div id="listeSalles" class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
+			<div class="btn-group dropleft" >
+				<a class="btn btn-secondary dropdown-toggle"href="#"  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+				 onclick="showGraphic('{}')" onload="getRoomListFromServer(setRoomList)">
+					Salles
+				</a>
+				<div id="listeSalles" class="dropdown-menu"  aria-labelledby="dropdownMenu2">
 				</div>
 			</div>
+			<br>
+			<br>
 
+            <div class="btn-group dropleft">
+                <a class="btn btn-secondary dropdown-toggle" onclick="getDataFromServer(showGraphic)" role="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mesures
+                </a>
+                <div id="listMeasures" class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                    <a class="dropdown-item" href="#">  Oxygene                 </a>
+                    <a class="dropdown-item" href="#">  Monoxyde de carbone     </a>
+                    <a class="dropdown-item" href="#">  Dioxyde de carbone      </a>
+                    <a class="dropdown-item" href="#">  Temperature             </a>
+                    <a class="dropdown-item" href="#">  Humidite                </a>
+                    <a class="dropdown-item" href="#">  Pression atmospherique  </a>
+                    <a class="dropdown-item" href="#">  Particules fines        </a>
+                </div>
+            </div>
 
 			<br>
 			<div id="chart-container" style="height: 370px; max-width: 100%;">
