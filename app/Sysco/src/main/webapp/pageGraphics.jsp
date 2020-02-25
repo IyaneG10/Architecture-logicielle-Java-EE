@@ -20,19 +20,17 @@
 
 		<script>
 
-		    var roomSelected = null;
-		    
 			function setRoomList(fileContent){
 
+			    alert(fileContent);
 				var listeSalles = [];
 				listeSalles = (fileContent.split('\n'));				//récupere la liste des capteurs
 
 
 				var dropdownList = document.getElementById("listeSalles");
 				dropdownList.innerHTML='';
-				listeSalles.forEach(function(item, index) {
-
-					dropdownList.innerHTML += '<button class="dropdown-item" type="button" onclick=\'getFilesOnServer("./FilesSensors/'+item+".json"+'",showGraphic)\'>'+item+'</button>';
+				listeSalles.forEach(function(item) {
+                    dropdownList.innerHTML += '<option value=\"'+item+ ">" + item + "</option>"
 				});
 			}
 
@@ -45,12 +43,21 @@
 						callbackFunction(this.responseText);
 					}
 				};
-				var room = "";              //  récupérer la sélection du dropdownMenu2
-				var measureName = "";       //  récupérer la sélection du dropdownMenu3
 
-                xhttp.open('GET', '/api-datas/historic/'+room+'/'+measureName, true);
-                xhttp.overrideMimeType("text/javascript")
-                xhttp.send(data);
+				var listRoom =  document.getElementById("listeSalles");
+				var listMeasure = document.getElementById("listMeasures");
+
+				var room =listRoom.options[listRoom.selectedIndex].value;                                               //  récupérer la sélection
+                var measureName = listMeasure.options[listMeasure.selectedIndex].value; ;                               //  récupérer la sélection
+
+                if(room != "Choose Room..." && measureName != "Choose Sensor..."){
+                    xhttp.open('GET', '/api-datas/historic/'+room+'/'+measureName, true);
+                    xhttp.overrideMimeType("text/javascript")
+                    xhttp.send();
+                }
+                else{
+                    alert("Chosose a room and a type of sensor");
+                }
 			}
 
 
@@ -60,10 +67,8 @@
                 xhttp.onreadystatechange = function(){
                     if (this.readyState == 4 && this.status == 200){
                         callbackFunction(this.responseText);
-                    }
+                     }
                 };
-
-                './api-datas/historic/
 
                 xhttp.open('GET', '/api-datas/historic/roomlist', true);
                 xhttp.overrideMimeType("text/javascript")
@@ -125,29 +130,23 @@
 			</p>
 			<br>
 
-			<div class="btn-group dropleft" >
-				<a class="btn btn-secondary dropdown-toggle"href="#"  type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-				 onclick="showGraphic('{}')" onload="getRoomListFromServer(setRoomList)">
-					Salles
-				</a>
-				<div id="listeSalles" class="dropdown-menu"  aria-labelledby="dropdownMenu2">
-				</div>
-			</div>
-			<br>
-			<br>
+            <div class="input-group">
+                <select class="custom-select" id="listeSalles" onclick="getRoomListFromServer(setRoomList)">
+                    <option selected>Choose Room...</option>
+                </select>
 
-            <div class="btn-group dropleft">
-                <a class="btn btn-secondary dropdown-toggle" onclick="getDataFromServer(showGraphic)" role="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Mesures
-                </a>
-                <div id="listMeasures" class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                    <a class="dropdown-item" href="#">  Oxygene                 </a>
-                    <a class="dropdown-item" href="#">  Monoxyde de carbone     </a>
-                    <a class="dropdown-item" href="#">  Dioxyde de carbone      </a>
-                    <a class="dropdown-item" href="#">  Temperature             </a>
-                    <a class="dropdown-item" href="#">  Humidite                </a>
-                    <a class="dropdown-item" href="#">  Pression atmospherique  </a>
-                    <a class="dropdown-item" href="#">  Particules fines        </a>
+                <select class="custom-select" id="listMeasures">
+                    <option selected>Choose Sensor...</option>
+                    <option value="1">  Oxygene                 </a>
+                    <option value="2">  Monoxyde de carbone     </a>
+                    <option value="3">  Dioxyde de carbone      </a>
+                    <option value="4">  Temperature             </a>
+                    <option value="5">  Humidite                </a>
+                    <option value="6">  Pression atmospherique  </a>
+                    <option value="7">  Particules fines        </a>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="getDataFromServer(showGraphic)">Button</button>
                 </div>
             </div>
 
