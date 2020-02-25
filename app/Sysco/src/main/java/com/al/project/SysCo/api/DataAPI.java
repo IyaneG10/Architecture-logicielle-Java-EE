@@ -16,15 +16,22 @@ public class DataAPI {
     MariaDBService mariaDBService = new MariaDBService("jdbc:mariadb://localhost:3306/sysco", "admin", "admin");
 
 
-    @GetMapping("/all")
+    @GetMapping("historic/all")
     public ResponseEntity<String> findAllDatas() throws SQLException, JSONException {
         return new ResponseEntity<String>(mariaDBService.getDataByAll()+ "", HttpStatus.OK);
     }
 
-    @GetMapping("/room{room_id}")
+    @GetMapping("historic/room{room_id}")
     public ResponseEntity<String> findDataByRoom(@PathVariable("room_id") int id)  throws SQLException, JSONException {
         return new ResponseEntity<String>(mariaDBService.getDataByRoom(id)+ "", HttpStatus.OK);
     }
+
+    @GetMapping("historic/room{room_id}/{sensor_id}")
+    public ResponseEntity<String> findDataByRoom(@PathVariable("room_id") int room_id,@PathVariable("sensor_id") String sensor_id)  throws SQLException, JSONException {
+        return new ResponseEntity<String>(mariaDBService.getDataByRoomAndSensor(room_id, sensor_id)+ "", HttpStatus.OK);
+    }
+
+
   //  private static   DataService dataService;
 
     //@Autowired
