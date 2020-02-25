@@ -78,7 +78,7 @@ public class MariaDBService {
         System.out.println(" Data saved in database...");
     }
 
-    public static JSONArray getDataByAll() throws SQLException, JSONException {
+    public  JSONArray getDataByAll() throws SQLException, JSONException {
 
 
         //STEP 4: Execute a query
@@ -94,10 +94,12 @@ public class MariaDBService {
             for (int i=1; i<=numColumns; i++) {
                 String column_name = rsmd.getColumnName(i);
                 obj.put(column_name, rs.getObject(column_name));
+
+
             }
             json.put(obj);
         }
-        System.out.println(json);
+        //System.out.println(json);
         return json;
 
         //return DBManager.GetObjectsFromDB(Query, rs -> FetchUserFromDB(rs));

@@ -1,7 +1,9 @@
-package com.al.project.SysCo.Service;
+package com.al.project.SysCo;
 
 import com.al.project.SysCo.Model.Data;
 import com.al.project.SysCo.Model.Publisher;
+import com.al.project.SysCo.Service.DataService;
+import com.al.project.SysCo.Service.MariaDBService;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -67,7 +69,7 @@ public class RabbitMQService {
                     //dataService.saveData(data);
 
                     mariaDBService.addData(data);
-                    mariaDBService.getDataByAll();
+                    //System.out.println(mariaDBService.getDataByAll());
                     //DataAPI.saveData(new Data(jsonStringData));
                     //Data data = new Data(jsonStringData);
 
