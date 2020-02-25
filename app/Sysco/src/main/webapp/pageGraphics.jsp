@@ -56,7 +56,7 @@
 
                     xhttp.onreadystatechange = function(){
                         if (this.readyState == 4 && this.status == 200){
-                            callbackFunction(this.responseText);
+                            callbackFunction(this.responseText, measureName);
                         }
                     };
 
@@ -85,7 +85,7 @@
             }
 
 
-			function  showGraphic(jsonTexte) {
+			function  showGraphic(jsonTexte, measureName) {
 
 				var jsonData = JSON.parse(jsonTexte);
 				//console.log(jsonData);
@@ -97,7 +97,7 @@
                    //alert( jsonData[i].rpi_id);
 
 					dps.push({
-						x: jsonData[i].date , y: jsonData[i].measure_value
+						x: new Date(jsonData[i].date), y: jsonData[i].measure_value
 					});
                 }
 
@@ -163,7 +163,7 @@
                     <option value="7">  Particules fines        </a>
                 </select>
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" onclick="getDataFromServer(showGraphic)">Button</button>
+                    <button class="btn btn-outline-secondary" type="button" onclick="getDataFromServer(showGraphic)">Valider</button>
                 </div>
             </div>
 
