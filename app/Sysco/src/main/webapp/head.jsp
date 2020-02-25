@@ -21,9 +21,8 @@
 		<title> Green World | Home</title>
 		<link rel="icon" type="image/png" href="./images/logo2.png">
 
-
-</head>
-</body>
+    </head>
+    </body>
 </html>
 
 

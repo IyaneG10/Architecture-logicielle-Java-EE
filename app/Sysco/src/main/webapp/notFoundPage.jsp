@@ -21,54 +21,10 @@
 
 		<title> Green World | Home</title>
 		<link rel="icon" type="image/png" href="./images/logo2.png">
-</head>
+    </head>
+
 	<body>
-		<div class
-  <div class="container">
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-
-        <h2>Connecte en tant que: ${pageContext.request.userPrincipal.name} </h2>
-    </c:if>
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
-  	<div class="jumbotron text-center" style="margin-bottom:0;padding-top: 2rem;padding-bottom: 1rem;" onclick="ChangePage('welcome.jsp');">
-  			<h1>GREEN WORLD</h1>
-  			<p>Weather Station: Pollution</p>
-  		</div>
-
-  		<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-  			<a class="navbar-brand" href="welcome.jsp">
-  				<img src="./images/H.png" width="30" height="25" alt="">
-  			</a>
-
-  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  				<span class="navbar-toggler-icon"></span>
-  			</button>
-
-			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="pageRealTimeValues.jsp">
-							Valeurs Actuelles
-						</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link" href="pageGraphics.jsp">Historique
-						</a>
-					</li>
-				</ul>
-				<form class="form-inline my-2 my-lg-0">
-				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="document.forms['logoutForm'].submit()">Deconnexion</button>
-				</form>
-			</div>
-  		</nav>
-
+        <%@ include file="entete.jsp"%>
 		<div class="main">
 			<br>
 			<h2>Page Not Found:</h2>
@@ -90,27 +46,8 @@
 		<br>
 		<br>
 
-		<div class="jumbotron text-center" style="margin-bottom:0;padding-bottom: 1rem;padding-top: 1rem;">
-			<img src="./images/logoPolytech.png" alt="">
-			<img src="./images/logoUnivLille.png" alt="">
-		</div>
+		<!-- END MAIN -->
 
-		<!-- Optional JavaScript -->
-
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-		</script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-		</script>
-		<script type="text/javascript">
-
-			function ChangePage(arg1){
-			window.location.replace(arg1);
-			}
-
-		</script>
-	</body>
+        <%@ include file="pied.jsp"%>
+    </body>
 </html>
