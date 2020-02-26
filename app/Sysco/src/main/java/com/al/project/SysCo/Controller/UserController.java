@@ -49,7 +49,6 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
-        System.out.println(model);
         if (error != null)
             model.addAttribute("error", "Identifiant ou mot de passe incorrects");
 
@@ -63,7 +62,7 @@ public class UserController {
             value = "/logTest",
             method = RequestMethod.POST,
             consumes = "application/json")
-    public void process(@RequestBody String payload) throws Exception {
+    public String process(@RequestBody String payload) throws Exception {
 
         JSONObject jsonObject = new JSONObject(payload);
         String username;
@@ -75,17 +74,12 @@ public class UserController {
         System.out.println(username);
         System.out.println(password);
 
+        return "welcome";
     }
 
     @GetMapping({"/", "/welcome"})
     public String welcome(Model model) {
         return "welcome";
     }
-
-
-        @GetMapping("/products")
-        public String list(){
-            return "products";
-        }
 
 }

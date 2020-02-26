@@ -1,38 +1,39 @@
-rabbitmq-container:
-  image: rabbitmq:3-management
-  ports:
-    - 5672:5672
-    - 15672:15672
-  volumes:
-    - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
-    - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+version: '3'
+services:
+  app-container:
+    build:
+      context= .
+      dockerfile= Dockerfile
+    ports:
+      - 8787:8787
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mysql-container:3306/message?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_RABBITMQ_HOST=rabbitmq-container
+    #depends_on:
+      #- rabbitmq-container
+      #- mariadb-container
+
+  rabbitmq-container:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
 
 
-mariadb-container:
-  image: mariadb
-  ports:
-    - 3306:3306
-  environment:
-    - MYSQL_DATABASE= sysco
-    - MYSQL_ROOT_PASSWORD=glopglop
-    - MYSQL_USER= admin
-    - MYSQL_PASSWORD= admin
-    - MYSQL_ROOT_HOST= '%'
-  volumes:
-    - ./mariadb:/docker-entrypoint-initdb.d:ro
-
-app-container:
-  build:
-    context= .
-    dockerfile= Dockerfile
-  ports:
-    - 8787:8787
-  environment:
-    - SPRING_DATASOURCE_URL=jdbc:mariadb://mysql-container:3306/message?useSSL=false&allowPublicKeyRetrieval=true
-    - SPRING_DATASOURCE_USERNAME=admin
-    - SPRING_DATASOURCE_PASSWORD=admin
-    - SPRING_RABBITMQ_HOST=rabbitmq-container
-  depends_on:
-    - rabbitmq-container
-    - mariadb-container
-  
+  mariadb-container:
+    image: mariadb
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE= sysco
+      - MYSQL_ROOT_PASSWORD=glopglop
+      - MYSQL_USER= admin
+      - MYSQL_PASSWORD= admin
+      - MYSQL_ROOT_HOST= '%'
+    volumes:
+      - ./mariadb:/docker-entrypoint-initdb.d:ro
