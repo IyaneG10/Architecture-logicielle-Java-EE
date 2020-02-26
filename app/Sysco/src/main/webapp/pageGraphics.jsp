@@ -124,24 +124,20 @@
 				//Better to construct options first and then pass it as a parameter
 				var options = {
 					title: {
-						text: "Historique" + titleList[index]
+						text: "Historique " + titleList[index]
 					},
 					animationEnabled: true,
 					exportEnabled: true,
 					zoomEnabled: true,
 					axisY: {
 						title: titleList[index],
-						valueFormatString: "#0.",
-						suffix: unityList[index],
-						/*stripLines: [{
-							value: 3366500,
-							label: "Average"
-						}]*/
+						//valueFormatString: "#.0#",
+						suffix: unityList[index]
 					},
 					data: [
 					{
-						yValueFormatString: "###0.##"+unityList[index],
-						xValueFormatString: "YYYY/MM/DD HH:mm:ss",
+						yValueFormatString: '#,##0.##" ' + unityList[index] + '"',
+						xValueFormatString: "YYYY/MM/DD à HH:mm:ss",
 						type: "spline",
 						dataPoints: dps
 					}
