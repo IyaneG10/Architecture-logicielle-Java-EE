@@ -187,6 +187,8 @@
 			  <canvas id="mycanvas"></canvas>
 			</div>
 		</div>
+        <br>
+        <br>
 		<!-- END MAIN -->
 
         <%@ include file="pied.jsp"%>

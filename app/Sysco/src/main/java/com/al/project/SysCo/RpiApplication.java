@@ -13,30 +13,39 @@ public class RpiApplication  {
 
 	public static void main(String[] args) {
 
-		final int numberRoom =5;
+		try {
 
-		ArrayList<Rpi> rpiList = new ArrayList<>();
+			System.out.println(" START !\n To stop, type 'exit'");
+
+			final int numberRoom =50;
+
+			ArrayList<Rpi> rpiList = new ArrayList<>();
 
 
-		for (int id = 0; id<numberRoom; id++){
-			rpiList.add(new Rpi (id));
-			rpiList.get(id).start();
+			for (int id = 0; id<numberRoom; id++) {
+				rpiList.add(new Rpi(id));
+				Thread.sleep(500);
+				rpiList.get(id).start();
+			}
+
+			Scanner sc = new Scanner(System.in);
+
+			String txt = sc.nextLine();
+
+			while (! "exit".equalsIgnoreCase(txt)){
+				System.out.println(" Wrong command. Type 'exit'");
+				txt = sc.nextLine();
+			}
+
+			for (int i=0; i<numberRoom; i++){
+				rpiList.get(i).stopTasks();
+			}
+
+				System.out.println(" FIN ! ");
+			}
+
+		catch (InterruptedException e) {
+				e.printStackTrace();
 		}
-
-
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println(" START !\n To stop, type 'exit'");
-		String txt = sc.nextLine();
-
-		while (! "exit".equalsIgnoreCase(txt)){
-			System.out.println(" Wrong command. Type 'exit'");
-			txt = sc.nextLine();
-		}
-
-		for (int i=0; i<numberRoom; i++){
-			rpiList.get(i).stopTasks();
-		}
-		System.out.println(" FIN ! ");
 	}
 }
