@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+
                 .antMatchers(
                         "/resources/**",
                         "/registration**",
@@ -76,6 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
+
+
 
 
     @Autowired

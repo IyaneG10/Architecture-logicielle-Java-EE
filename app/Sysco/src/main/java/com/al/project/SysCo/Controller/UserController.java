@@ -5,10 +5,13 @@ import com.al.project.SysCo.Service.SecurityService;
 import com.al.project.SysCo.Service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import static com.al.project.SysCo.Model.Data.recurseKeys;
 
@@ -62,7 +65,7 @@ public class UserController {
             value = "/logTest",
             method = RequestMethod.POST,
             consumes = "application/json")
-    public String process(@RequestBody String payload) throws Exception {
+    public ResponseEntity<String> process(@RequestBody String payload) throws Exception {
 
         JSONObject jsonObject = new JSONObject(payload);
         String username;
@@ -74,8 +77,13 @@ public class UserController {
         System.out.println(username);
         System.out.println(password);
 
-        return "welcome";
+        //AuthenticationManagerBuilder auth = new AuthenticationManagerBuilder();
+        //auth.inMemoryAuthentication();
+        //System.out.println(auth);
+        //return "welcome";
+        return new ResponseEntity<String>("Réponse du serveur OK",  HttpStatus.OK);
     }
+
 
     @GetMapping({"/", "/welcome"})
     public String welcome(Model model) {
