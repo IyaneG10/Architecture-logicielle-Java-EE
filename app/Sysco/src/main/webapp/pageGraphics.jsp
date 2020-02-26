@@ -88,9 +88,26 @@
 			function  showGraphic(jsonTexte, measureName) {
 
 				var jsonData = JSON.parse(jsonTexte);
-				//console.log(jsonData);
 				var dps = [];
-				var unity = " kg/m²";
+				var titleList = [
+				    "Oxygene",
+                    "Monoxyde de carbone",
+                    "Dioxyde de carbone",
+                    "Temperature",
+                    "Humidite",
+                    "Pression atmospherique",
+                    "Particules fines"];
+				var unityList = [
+                    "%",
+                    "%",
+                    "%",
+                    "°C",
+                    "%",
+                    "hpa",
+                    "kg/m3"];
+
+                var listMeasure = document.getElementById("listMeasures");
+                var index = listMeasure.options[listMeasure.selectedIndex].value -1;
 
 				for (var i in jsonData){
 
@@ -107,15 +124,15 @@
 				//Better to construct options first and then pass it as a parameter
 				var options = {
 					title: {
-						text: "Historique Journalier"
+						text: "Historique" + titleList[index]
 					},
 					animationEnabled: true,
 					exportEnabled: true,
 					zoomEnabled: true,
 					axisY: {
-						title: "Taux CO2",
+						title: titleList[index],
 						valueFormatString: "#0.",
-						suffix: unity,
+						suffix: unityList[index],
 						/*stripLines: [{
 							value: 3366500,
 							label: "Average"
@@ -123,7 +140,7 @@
 					},
 					data: [
 					{
-						yValueFormatString: "###0.##"+unity,
+						yValueFormatString: "###0.##"+unityList[index],
 						xValueFormatString: "YYYY/MM/DD HH:mm:ss",
 						type: "spline",
 						dataPoints: dps
@@ -167,6 +184,8 @@
                 </div>
             </div>
 
+			<br>
+			<br>
 			<br>
 			<div id="chart-container" style="height: 370px; max-width: 100%;">
 			  <canvas id="mycanvas"></canvas>
