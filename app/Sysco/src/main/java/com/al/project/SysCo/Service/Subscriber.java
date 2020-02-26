@@ -1,14 +1,11 @@
 package com.al.project.SysCo.Service;
 
-import com.al.project.SysCo.DataApplication;
-import com.al.project.SysCo.RPi.Rpi;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 
 public class Subscriber {
