@@ -7,6 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <title>Graphics Data</title>
@@ -23,10 +24,7 @@
 			function setRoomList(response){
 
                 var jsonData = JSON.parse(response);
-
-
 				var dropdownList = document.getElementById("listeSalles");
-
 				var content ='';
 
 				for (var i in jsonData){
@@ -35,11 +33,7 @@
 
 				    content += '<option value="' + jsonData[i].rpi_id.toString() + '">' + jsonData[i].rpi_id.toString() + '</option>'
 				}
-
-
 				dropdownList.innerHTML = '<option selected>Choose Room...</option>' + content;
-
-				//alert(dropdownList.innerHTML);
 			}
 
 
