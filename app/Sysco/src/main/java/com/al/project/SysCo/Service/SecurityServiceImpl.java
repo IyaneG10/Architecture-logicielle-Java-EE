@@ -41,7 +41,5 @@ public class SecurityServiceImpl implements SecurityService{
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             logger.debug(String.format("Auto login %s successfully!", username));
         }
-        System.out.println("dans autologin"+username);
-        System.out.println("dans autologin"+password);
     }
 }

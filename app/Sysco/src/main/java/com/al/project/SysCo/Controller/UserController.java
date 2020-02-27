@@ -46,7 +46,6 @@ public class UserController {
             return "registration";
         }
 
-
         userService.save(userForm);
 
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
@@ -72,38 +71,34 @@ public class UserController {
     public ResponseEntity<String> process(@RequestBody String payload) throws Exception {
 
         JSONObject jsonObject = new JSONObject(payload);
-        String username;
-        String password;
+        String username, password;
 
         username= recurseKeys(jsonObject,"username");
         password= recurseKeys(jsonObject,"password");
-        System.out.println(payload);
-        //System.out.println(username);
-        //System.out.println(password);
-        securityService.autoLogin(username, password);
 
         User userToLog=  userService.findByUsername(username);
         //userToLog.setPassword(bCryptPasswordEncoder.encode(userToLog.getPassword()));
         System.out.println(password);
+        ResponseEntity response;
         if (userService.findByUsername(username)== null)
         {
-            return new ResponseEntity<String>("{\"Reponse\": \"Utilisateur inconnu\"}",  HttpStatus.FORBIDDEN);
+             response= new ResponseEntity<String>("{\"Reponse\": \"Utilisateur inconnu\"}",  HttpStatus.FORBIDDEN);
         }
         else {
             //System.out.println("encoded password: "+ userToLog.getPassword());
             if (userToLog.getPassword().equals(password)) {
-                return new ResponseEntity<String>("{\"Reponse\": \"Ca marche\"}",  HttpStatus.OK);
+                 response= new ResponseEntity<String>("{\"Reponse\": \"Ca marche\"}",  HttpStatus.OK);
             }
             else {
-                return new ResponseEntity<String>("{\"Reponse\": \"Mauvais mot de passe\"}",  HttpStatus.FORBIDDEN);
+                 response= new ResponseEntity<String>("{\"Reponse\": \"Mauvais mot de passe\"}",  HttpStatus.FORBIDDEN);
             }
+
+
+
         }
+        securityService.autoLogin(username, password);
+        return response;
 
-
-        //AuthenticationManagerBuilder auth = new AuthenticationManagerBuilder();
-        //auth.inMemoryAuthentication();
-        //System.out.println(auth);
-        //return "welcome";
     }
 
 
