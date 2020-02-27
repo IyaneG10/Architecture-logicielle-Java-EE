@@ -21,33 +21,26 @@
             <br>
             <h2>Valeurs instantanées :</h2>
 			<br>
-
             <div class="input-group">
-                <select class="custom-select" id="listeSalles">
+                <select class="custom-select" id="listeSalles" onchange="updateDisplay()">
                     <option selected>Choose Room...</option>
                 </select>
             </div>
-
 			<br>
-
-
             <div class="row" align="center">
                 <div class="column3">
                     <p>Oxygene</p>
-                    <div>
-                        <canvas id="display1" width="200" height="60"></canvas>
+                    <div class="divMeasure" id ="Oxygene">
                     </div>
                 </div>
                 <div class="column3">
                     <p>Monoxyde de carbone</p>
-                    <div>
-                        <canvas id="display2" width="200" height="60"></canvas>
+                    <div class="divMeasure" id ="Monoxyde de carbone">
                     </div>
                 </div>
                 <div class="column3">
                     <p>Dioxyde de carbone</p>
-                    <div>
-                        <canvas id="display33" width="200" height="60"></canvas>
+                    <div class="divMeasure" id ="Dioxyde de carbone">
                     </div>
                 </div>
             </div>
@@ -55,26 +48,22 @@
             <div class="row">
                 <div class="column4">
                     <p>Temperature</p>
-                    <div>
-                        <canvas id="display4" width="200" height="60"></canvas>
+                    <div class="divMeasure" class="divMeasure" id ="Temperature">
                     </div>
                 </div>
                 <div class="column4">
                     <p>Humidite</p>
-                    <div>
-                        <canvas id="display5" width="200" height="60"></canvas>
+                    <div class="divMeasure" id ="Humidite">
                     </div>
                 </div>
                 <div class="column4">
                     <p>Pression atmospherique</p>
-                    <div>
-                        <canvas id="display6" width="200" height="60"></canvas>
+                    <div class="divMeasure" id ="Pression atmospherique">
                     </div>
                 </div>
-                <div class="column4">
+                <div    class="column4">
                     <p>Particules fines</p>
-                    <div>
-                        <canvas id="display3" width="200" height="60"></canvas>
+                    <div class="divMeasure" id ="Particules fines">
                     </div>
                 </div>
             </div>
@@ -120,8 +109,6 @@
 
 				for (var i in jsonData){
 
-                    //alert( jsonData[i].rpi_id);
-
 				    content += '<option value="' + jsonData[i].rpi_id.toString() + '">' + jsonData[i].rpi_id.toString() + '</option>'
 				}
 				dropdownList.innerHTML = '<option selected>Choose Room...</option>' + content;
@@ -140,7 +127,7 @@
 
                     xhttp.onreadystatechange = function(){
                         if (this.readyState == 4 && this.status == 200){
-                            callbackFunction(this.responseText, measureName);
+                            callbackFunction(this.responseText);
                         }
                     };
 
@@ -148,66 +135,9 @@
                     xhttp.overrideMimeType("text/javascript")
                     xhttp.send();
                 }
-                else{
-                    alert("Chosose a room and a type of sensor");
-                }
 			}
 
-            var dispValue1=0;
-            var dispValue2=-10;
-            var dispValue3=5;
-
-            var display1 = new SegmentDisplay("display1");
-            display1.pattern         = "###";
-            display1.displayAngle    = 7.5;
-            display1.digitHeight     = 47.5;
-            display1.digitWidth      = 25;
-            display1.digitDistance   = 4.2;
-            display1.segmentWidth    = 2.9;
-            display1.segmentDistance = 1.5;
-            display1.segmentCount    = 16;
-            display1.cornerType      = 3;
-            display1.colorOn         = "rgba(0, 0, 0, 1)";
-            display1.colorOff        = "rgba(0, 0, 0, 0)";
-            display1.draw();
-
-            var display2 = new SegmentDisplay("display2");
-            display2.pattern         = "####";
-            display2.displayAngle    = 7.5;
-            display2.digitHeight     = 47.5;
-            display2.digitWidth      = 25;
-            display2.digitDistance   = 4.2;
-            display2.segmentWidth    = 2.9;
-            display2.segmentDistance = 1.5;
-            display2.segmentCount    = 16;
-            display2.cornerType      = 3;
-            display2.colorOn         = "rgba(100, 100, 0, 1)";
-            display2.colorOff        = "rgba(0, 0, 0, 0)";
-            display2.draw();
-
-            var display3 = new SegmentDisplay("display3");
-            display3.pattern         = "###";
-            display3.displayAngle    = 7.5;
-            display3.digitHeight     = 47.5;
-            display3.digitWidth      = 25;
-            display3.digitDistance   = 4.2;
-            display3.segmentWidth    = 2.9;
-            display3.segmentDistance = 1.5;
-            display3.segmentCount    = 16;
-            display3.cornerType      = 3;
-            display3.colorOn         = "rgba(0, 0, 0, 1)";
-            display3.colorOff        = "rgba(0, 0, 0, 0)";
-            display3.draw();
-
-            display1.setValue("'"+dispValue1+"'");
-            display2.setValue("'"+dispValue2+"'");
-            display3.setValue("'"+dispValue3+"'");
-
-            //window.setInterval('updateDisplay()',10000);
-            window.setInterval('animateDisplay1()', 500);
-            window.setInterval('animateDisplay2()', 1000);
-            window.setInterval('animateDisplay3()', 2000);
-
+            window.setInterval('updateDisplay()',10000);
 
             function updateDisplay(){
 
@@ -215,31 +145,24 @@
             }
 
 
-            function popValues(){
+            function popValues(jsonArrayString){
 
 
+
+                var jsonArray = JSON.parse(jsonArrayString);
+                var dropdownList = document.getElementById("listeSalles");
+                var content ='';
+
+                for (var i in jsonArray){
+
+                    var divDisplayer = document.getElementById(jsonArray[i].measure_name);
+
+                    //console.log(divDisplayer);
+                    //content += '<option value="' + jsonArray[i].rpi_id.toString() + '">' + jsonArray[i].rpi_id.toString() + '</option>'
+
+				    divDisplayer.innerHTML = jsonArray[i].measure_value;//'<option selected>Choose Room...</option>' + content;
+                }
             }
-
-            function animateDisplay1() {
-                dispValue1+=1;
-                if(dispValue1>=9)dispValue1=0;
-                display1.setValue("'"+dispValue1+"'");
-            }
-
-
-            function animateDisplay2() {
-                display2.setValue("'"+dispValue2+"'");
-                dispValue2++;
-                if(dispValue2>99)dispValue2=0;
-            }
-
-
-            function animateDisplay3() {
-                display3.setValue("'"+dispValue3+"'");
-                dispValue3++;
-                if(dispValue3>49)dispValue3=0;
-            }
-
 
             function ChangePage(arg1){
                 window.location.replace(arg1);

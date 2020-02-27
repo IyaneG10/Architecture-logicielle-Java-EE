@@ -12,18 +12,23 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 
 @SpringBootApplication
 public class RabbitMQService {
 
     @Autowired
-   private static DataService dataService;
-    private HashMap<String, String> capitalCities = new HashMap<String, String>();
-
+    private static DataService dataService;
+    /*private HashMap<String, String> listLastMeasures = new HashMap<String, String>();
+    private HashMap<String, listLastMeasures> listRpi = new HashMap<String, listLastMeasures>();
+    */
 
     public static void main(String[] args)  throws Exception{
+
+        //Map<String, HashMap<String, Integer>> map1 = new HashMap<String, HashMap<String, Integer>> ();
 
         System.out.println(" START !\n To stop, type 'exit'");
 
