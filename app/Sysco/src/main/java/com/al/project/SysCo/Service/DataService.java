@@ -26,17 +26,12 @@ public class DataService {
         return ret;
     }
 
-    private void getData( int rpiId, String topicName){
+    public static String  getRealTimeData( int rpiId, String request){
 
-        //get data from database
+        return  GetRealTimeTopics(String.valueOf(rpiId), request);
     }
 
-    private void  getRealTimeData( int rpiId, String request){
-
-        GetRealTimeTopics(Integer.toString(rpiId),request);
-    }
-
-    private void sendDataToUser(){
+    public void sendDataToUser(){
 
         //Send real-time topic to user
     }

@@ -81,7 +81,7 @@ public class UserController {
         //auth.inMemoryAuthentication();
         //System.out.println(auth);
         //return "welcome";
-        return new ResponseEntity<String>("Réponse du serveur OK",  HttpStatus.OK);
+        return new ResponseEntity<String>("{\"Reponse\": \"Ca marche\"}",  HttpStatus.OK);
     }
 
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Objects;
 
 
@@ -20,6 +21,9 @@ public class RabbitMQService {
 
     @Autowired
    private static DataService dataService;
+    private HashMap<String, String> capitalCities = new HashMap<String, String>();
+    private HashMap<String, String> capitalCities = new HashMap<String, String>();
+
 
     public static void main(String[] args)  throws Exception{
 
@@ -30,7 +34,6 @@ public class RabbitMQService {
         final String username = "ima2a5-4fun";
         final String password = "glopglop";
         MariaDBService mariaDBService = new MariaDBService("jdbc:mariadb://localhost:3306/sysco", "admin", "admin");
-
 
         ConnectionFactory factory = new ConnectionFactory();
 
@@ -62,26 +65,16 @@ public class RabbitMQService {
             else{
                 try {
 
-                 //   DataService dataService= new DataService();
                     Data data= new Data(jsonStringData);
 
                     System.out.println(" [+] Data saved in database...\n");
-                    //System.out.println(data);
-                    //dataService.saveData(data);
-
                     mariaDBService.addData(data);
-                    //System.out.println(mariaDBService.getDataByAll());
-                    //DataAPI.saveData(new Data(jsonStringData));
-                    //Data data = new Data(jsonStringData);
-
-                    //dataService.saveData(data);''''''''''''''''''''''''''''''''''y
                 }
 
                  catch (Exception ex){
 
                     System.out.println(ex);
                 }
-
             }
         };
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
@@ -89,23 +82,21 @@ public class RabbitMQService {
     }
 
 
-    public static void GetRealTimeTopics(String idRpi, String request){
+    public static String GetRealTimeTopics(String idRpi, String request){
 
         try {
             String EXCHANGE_NAME = "RpiTopics";
-
-
-
-
-
 
             Publisher publisher = new Publisher();
 
             if(Objects.nonNull(idRpi)) {                                                                              // Avoids filling DB with values when sensor if off
                 publisher.publish(EXCHANGE_NAME,"User.RPi.Room."+idRpi,request);
             }
+
+            return "";
         } catch (Exception e){
             e.printStackTrace();
+            return null;
         }
     }
 }

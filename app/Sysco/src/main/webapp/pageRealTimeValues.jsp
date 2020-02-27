@@ -13,13 +13,23 @@
 		<link href="./CSS/pageRealTimeValues.css" rel="stylesheet" type="text/css"/>
     </head>
 
-	<body>
+	<body onload ="getRoomListFromServer(setRoomList)">
 
         <%@ include file="entete.jsp"%>
 
 		<div class="main" align="center">
             <br>
             <h2>Valeurs instantanées :</h2>
+			<br>
+
+            <div class="input-group">
+                <select class="custom-select" id="listeSalles">
+                    <option selected>Choose Room...</option>
+                </select>
+            </div>
+
+			<br>
+
 
             <div class="row" align="center">
                 <div class="column3">
@@ -86,9 +96,63 @@
 
         <script type="text/javascript">
 
-            function ChangePage(arg1){
-                window.location.replace(arg1);
+
+			function getRoomListFromServer (callbackFunction){
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.onreadystatechange = function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        callbackFunction(this.responseText);
+                     }
+                };
+
+                xhttp.open('GET', '/api-datas/historic/roomlist', true);
+                xhttp.overrideMimeType("text/javascript")
+                xhttp.send();
             }
+
+
+			function setRoomList(response){
+
+                var jsonData = JSON.parse(response);
+				var dropdownList = document.getElementById("listeSalles");
+				var content ='';
+
+				for (var i in jsonData){
+
+                    //alert( jsonData[i].rpi_id);
+
+				    content += '<option value="' + jsonData[i].rpi_id.toString() + '">' + jsonData[i].rpi_id.toString() + '</option>'
+				}
+				dropdownList.innerHTML = '<option selected>Choose Room...</option>' + content;
+			}
+
+
+
+			function getDataFromServer(callbackFunction){
+
+				var listRoom =  document.getElementById("listeSalles");
+				var room =listRoom.options[listRoom.selectedIndex].text ;                                               //  récupérer la sélection
+
+                if(room != "Choose Room..."){
+
+                    var xhttp = new XMLHttpRequest();
+
+                    xhttp.onreadystatechange = function(){
+                        if (this.readyState == 4 && this.status == 200){
+                            callbackFunction(this.responseText, measureName);
+                        }
+                    };
+
+                    xhttp.open('GET', '/api-datas/realtime/room'+room, true);
+                    xhttp.overrideMimeType("text/javascript")
+                    xhttp.send();
+                }
+                else{
+                    alert("Chosose a room and a type of sensor");
+                }
+			}
+
             var dispValue1=0;
             var dispValue2=-10;
             var dispValue3=5;
@@ -135,23 +199,33 @@
             display3.colorOff        = "rgba(0, 0, 0, 0)";
             display3.draw();
 
-
-
             display1.setValue("'"+dispValue1+"'");
             display2.setValue("'"+dispValue2+"'");
             display3.setValue("'"+dispValue3+"'");
 
+            //window.setInterval('updateDisplay()',10000);
             window.setInterval('animateDisplay1()', 500);
             window.setInterval('animateDisplay2()', 1000);
             window.setInterval('animateDisplay3()', 2000);
+
+
+            function updateDisplay(){
+
+                getDataFromServer(popValues);
+            }
+
+
+            function popValues(){
+
+
+            }
 
             function animateDisplay1() {
                 dispValue1+=1;
                 if(dispValue1>=9)dispValue1=0;
                 display1.setValue("'"+dispValue1+"'");
-
-
             }
+
 
             function animateDisplay2() {
                 display2.setValue("'"+dispValue2+"'");
@@ -159,10 +233,16 @@
                 if(dispValue2>99)dispValue2=0;
             }
 
+
             function animateDisplay3() {
                 display3.setValue("'"+dispValue3+"'");
                 dispValue3++;
                 if(dispValue3>49)dispValue3=0;
+            }
+
+
+            function ChangePage(arg1){
+                window.location.replace(arg1);
             }
         </script>
 	</body>

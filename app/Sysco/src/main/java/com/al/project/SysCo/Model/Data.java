@@ -130,6 +130,7 @@ public class Data {
         return finalValue;
     }
 
+
     public String dataToJsonstring() {
         try {
             String st1 = Integer.toString(this.getRpiId());
@@ -138,20 +139,19 @@ public class Data {
             String st4 = Boolean.toString(this.isState());
             String st5 = this.getDate().toString();
 
-
             return "{" +
-                    "\"Rpi\":" +
-                    "{" +
-                    "\"Id\":"+ st1+"," +
-                    "\"Measure\":" +
-                    "{" +
-                    "\"Name\":\""+ st2+"\"," +
-                    "\"Value\":"+ st3 +
-                    "}," +
-                    "\"State\":"+ st4+ "," +
-                    "\"Date\":\""+st5 +
-                    "\"}" +
-                    "}";
+                "\"Rpi\":" +
+                "{" +
+                "\"Id\":"+ st1+"," +
+                "\"Measure\":" +
+                "{" +
+                "\"Name\":\""+ st2+"\"," +
+                "\"Value\":"+ st3 +
+                "}," +
+                "\"State\":"+ st4+ "," +
+                "\"Date\":\""+st5 +
+                "\"}" +
+                "}";
         }
         catch (Exception e){
             return null;
