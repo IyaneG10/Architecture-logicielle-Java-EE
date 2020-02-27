@@ -1,9 +1,8 @@
 package com.al.project.SysCo;
 
 import com.al.project.SysCo.Model.Data;
-import com.al.project.SysCo.Service.MariaDBService;
-import com.al.project.SysCo.Service.Publisher;
 import com.al.project.SysCo.Service.DataService;
+import com.al.project.SysCo.Service.Publisher;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -32,7 +31,7 @@ public class RabbitMQService {
         final String hostIP = "193.48.57.166";
         final String username = "ima2a5-4fun";
         final String password = "glopglop";
-        MariaDBService mariaDBService = new MariaDBService("jdbc:mariadb://localhost:3306/sysco", "admin", "admin");
+        DataService dataService = new DataService("jdbc:mariadb://localhost:3306/sysco", "admin", "admin");
 
         ConnectionFactory factory = new ConnectionFactory();
 
@@ -67,7 +66,7 @@ public class RabbitMQService {
                     Data data= new Data(jsonStringData);
 
                     System.out.println(" [+] Data saved in database...\n");
-                    mariaDBService.addData(data);
+                    dataService.addData(data);
                 }
 
                  catch (Exception ex){
