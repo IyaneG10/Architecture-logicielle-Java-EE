@@ -45,29 +45,4 @@ public class DataAPI {
         return new ResponseEntity<String>(dataService.getRoom()+ "", HttpStatus.OK);
     }
 
-  //  private static   DataService dataService;
-
-    //@Autowired
-    //public DataAPI(DataService dataService) {
-      //  this.dataService = dataService;
-    //}
-/*
-    @GetMapping
-    public static ResponseEntity<Data> saveData(Data data) {
-        //dataService.save(data);
-        System.out.println("METHODE BIEN APPELLEE DANS API");
-        dataService.saveData(data);
-        return null;
-    }
-*/
-
-
-/*
-
-    @GetMapping
-    public ResponseEntity<JSONArray> findData() throws SQLException, JSONException {
-        return ResponseEntity.ok(MariaDBService.getDataByAll());
-    }
-*/
-
 }

@@ -6,6 +6,7 @@ import com.al.project.SysCo.Service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -74,16 +78,19 @@ public class UserController {
         username= recurseKeys(jsonObject,"username");
         password= recurseKeys(jsonObject,"password");
         System.out.println(payload);
-        System.out.println(username);
-        System.out.println(password);
+        //System.out.println(username);
+        //System.out.println(password);
+        securityService.autoLogin(username, password);
 
         User userToLog=  userService.findByUsername(username);
+        //userToLog.setPassword(bCryptPasswordEncoder.encode(userToLog.getPassword()));
+        System.out.println(password);
         if (userService.findByUsername(username)== null)
         {
             return new ResponseEntity<String>("{\"Reponse\": \"Utilisateur inconnu\"}",  HttpStatus.FORBIDDEN);
         }
         else {
-            System.out.println(userToLog.getPassword());
+            //System.out.println("encoded password: "+ userToLog.getPassword());
             if (userToLog.getPassword().equals(password)) {
                 return new ResponseEntity<String>("{\"Reponse\": \"Ca marche\"}",  HttpStatus.OK);
             }
