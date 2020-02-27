@@ -77,11 +77,26 @@ public class UserController {
         System.out.println(username);
         System.out.println(password);
 
+        User userToLog=  userService.findByUsername(username);
+        if (userService.findByUsername(username)== null)
+        {
+            return new ResponseEntity<String>("{\"Reponse\": \"Utilisateur inconnu\"}",  HttpStatus.FORBIDDEN);
+        }
+        else {
+            System.out.println(userToLog.getPassword());
+            if (userToLog.getPassword().equals(password)) {
+                return new ResponseEntity<String>("{\"Reponse\": \"Ca marche\"}",  HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<String>("{\"Reponse\": \"Mauvais mot de passe\"}",  HttpStatus.FORBIDDEN);
+            }
+        }
+
+
         //AuthenticationManagerBuilder auth = new AuthenticationManagerBuilder();
         //auth.inMemoryAuthentication();
         //System.out.println(auth);
         //return "welcome";
-        return new ResponseEntity<String>("{\"Reponse\": \"Ca marche\"}",  HttpStatus.OK);
     }
 
 

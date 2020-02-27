@@ -7,6 +7,8 @@ import org.json.JSONObject;
 
 import java.sql.*;
 
+import static com.al.project.SysCo.RabbitMQService.GetRealTimeTopics;
+
 public class MariaDBService {
 
 
@@ -70,6 +72,29 @@ public class MariaDBService {
 
         ResultSet rs = stmt.executeQuery(sql);
     }
+
+    public static JSONArray  getRealTimeData( int rpiId) throws SQLException, JSONException {
+
+        String sql = "select measure_name, measure_value from (select * from data where rpi_id="+ rpiId+" group by date desc ) t1 group by measure_name";
+
+
+        ResultSet rs = stmt.executeQuery(sql);
+
+        JSONArray json = new JSONArray();
+        ResultSetMetaData rsmd = rs.getMetaData();
+        while(rs.next()) {
+            int numColumns = rsmd.getColumnCount();
+            JSONObject obj = new JSONObject();
+            for (int i=1; i<=numColumns; i++) {
+                String column_name = rsmd.getColumnName(i);
+                obj.put(column_name, rs.getObject(column_name));
+
+            }
+            json.put(obj);
+        }
+        return json;
+    }
+
 
 
     public static JSONArray getDataByAll() throws SQLException, JSONException {

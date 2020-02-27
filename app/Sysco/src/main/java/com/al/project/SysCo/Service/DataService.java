@@ -26,11 +26,6 @@ public class DataService {
         return ret;
     }
 
-    public static String  getRealTimeData( int rpiId, String request){
-
-        return  GetRealTimeTopics(String.valueOf(rpiId), request);
-    }
-
     public void sendDataToUser(){
 
         //Send real-time topic to user
