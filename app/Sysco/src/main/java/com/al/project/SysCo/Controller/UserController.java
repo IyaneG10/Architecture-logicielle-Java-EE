@@ -69,7 +69,7 @@ public class UserController {
             method = RequestMethod.POST,
             consumes = "application/json")
     public ResponseEntity<String> process(@RequestBody String payload) throws Exception {
-
+        System.out.println("BONJOUR");
         JSONObject jsonObject = new JSONObject(payload);
         String username, password;
 
@@ -79,22 +79,21 @@ public class UserController {
         User userToLog=  userService.findByUsername(username);
         //userToLog.setPassword(bCryptPasswordEncoder.encode(userToLog.getPassword()));
         System.out.println(password);
-        ResponseEntity response;
+        System.out.println("hashed password: "+ bCryptPasswordEncoder.encode(password));
+        ResponseEntity<String> response;
+
         if (userService.findByUsername(username)== null)
         {
-             response= new ResponseEntity<String>("{\"Reponse\": \"Utilisateur inconnu\"}",  HttpStatus.FORBIDDEN);
+            response= new ResponseEntity<String>("{\"Reponse\": \"Utilisateur inconnu\"}",  HttpStatus.FORBIDDEN);
         }
         else {
             //System.out.println("encoded password: "+ userToLog.getPassword());
             if (userToLog.getPassword().equals(password)) {
-                 response= new ResponseEntity<String>("{\"Reponse\": \"Ca marche\"}",  HttpStatus.OK);
+                response= new ResponseEntity<String>("{\"Reponse\": \"Ca marche\"}",  HttpStatus.OK);
             }
             else {
-                 response= new ResponseEntity<String>("{\"Reponse\": \"Mauvais mot de passe\"}",  HttpStatus.FORBIDDEN);
+                response= new ResponseEntity<String>("{\"Reponse\": \"Mauvais mot de passe\"}",  HttpStatus.FORBIDDEN);
             }
-
-
-
         }
         securityService.autoLogin(username, password);
         return response;
