@@ -22,7 +22,6 @@ public class RabbitMQService {
     @Autowired
    private static DataService dataService;
     private HashMap<String, String> capitalCities = new HashMap<String, String>();
-    private HashMap<String, String> capitalCities = new HashMap<String, String>();
 
 
     public static void main(String[] args)  throws Exception{
