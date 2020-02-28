@@ -26,15 +26,7 @@
             <h2>Référent pédagogique: Thomas VANTROYS</h2>
 
             <br>
-            <br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
+
             <!-- <div class="fakeimg">Fake Image</div> -->
             <p>
             </p>

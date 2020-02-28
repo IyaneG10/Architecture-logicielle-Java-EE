@@ -36,15 +36,6 @@
 			</p>
 		<!-- END MAIN -->
 		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
 
 		<!-- END MAIN -->
 

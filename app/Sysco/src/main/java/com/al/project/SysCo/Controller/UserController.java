@@ -5,7 +5,6 @@ import com.al.project.SysCo.Service.SecurityService;
 import com.al.project.SysCo.Service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +25,7 @@ public class UserController {
     private SecurityService securityService;
 
     @Autowired
-    private UserValidator userValidator;
+    private UserRegistration userRegistration;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -40,7 +39,7 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-        userValidator.validate(userForm, bindingResult);
+        userRegistration.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
