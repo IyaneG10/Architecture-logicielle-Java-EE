@@ -39,17 +39,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/resources/**",
                         "/registration**",
                         "/webapp**",
-                        "/api**",
-                        "/templates**",
                         "/logTest**",
                         "/login**",
                         "/static**",
                         "/js/**",
                         "/css/**",
-                        "/img/**",
-                        "/webjars/**").permitAll()
-                .anyRequest().authenticated()
-                //.anyRequest().permitAll()
+                        "/images/**",
+                        "/api**").permitAll()
+
+                //.anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
