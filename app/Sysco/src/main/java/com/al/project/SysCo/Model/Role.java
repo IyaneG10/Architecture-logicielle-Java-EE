@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "role") // si le nom de la table n'est pas précisée, celui de la classe sera pris par défaut
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -75,40 +75,16 @@ public class UserController {
 
         username= recurseKeys(jsonObject,"username");
         password= recurseKeys(jsonObject,"password");
-/*
-        System.out.println("given login"+username);
-        System.out.println("given pwd"+password);
-        System.out.println("hashed given pwd: "+ bCryptPasswordEncoder.encode(password));
 
-        User userToLog=  userService.findByUsername(username);
-        System.out.println("stored login"+userToLog.getUsername());
-        System.out.println("stored pwd"+userToLog.getPassword());
-        System.out.println("stored  repeated pwd"+userToLog.getPasswordConfirm());
-        System.out.println("stored role"+userToLog.getRoles());
-  */
         ResponseEntity<String> response = null;
-/*
-        if (userService.findByUsername(username)== null)
-        {
-            response= new ResponseEntity<String>("{\"Reponse\": \"Utilisateur inconnu\"}",  HttpStatus.FORBIDDEN);
-        }
-        else {
-            //System.out.println("encoded password: "+ userToLog.getPassword());
-            if (userToLog.getPassword().equals(password)) {
-                response= new ResponseEntity<String>("{\"Reponse\": \"Ca marche\"}",  HttpStatus.OK);
-            }
-            else {
-                response= new ResponseEntity<String>("{\"Reponse\": \"Mauvais mot de passe\"}",  HttpStatus.OK);
-            }
-        }
-        */
+
 if(0 == securityService.autoLogin(username, password)){
     response= new ResponseEntity<String>("{\"Reponse\": \"Connexion reussie\"}",  HttpStatus.OK);
 }
 else{
     response= new ResponseEntity<String>("{\"Reponse\": \"Identifiant ou mot de passe inconnu\"}",  HttpStatus.FORBIDDEN);
 }
-        //securityService.autoLogin(username, password);
+
         return response;
 
     }

@@ -22,13 +22,8 @@ public class RabbitMQService {
 
     @Autowired
     private static DataService dataService;
-    /*private HashMap<String, String> listLastMeasures = new HashMap<String, String>();
-    private HashMap<String, listLastMeasures> listRpi = new HashMap<String, listLastMeasures>();
-    */
 
     public static void main(String[] args)  throws Exception{
-
-        //Map<String, HashMap<String, Integer>> map1 = new HashMap<String, HashMap<String, Integer>> ();
 
         System.out.println(" START !\n To stop, type 'exit'");
 
@@ -62,8 +57,7 @@ public class RabbitMQService {
 
 
             if(delivery.getEnvelope().getRoutingKey().contains("Rpi.User.Room.")){
-                //se connecter au controller
-                //Voir avec MAlick
+
             }
             else{
                 try {
