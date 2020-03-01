@@ -147,8 +147,6 @@
 
             function popValues(jsonArrayString){
 
-
-
                 var jsonArray = JSON.parse(jsonArrayString);
                 var dropdownList = document.getElementById("listeSalles");
                 var content ='';
@@ -157,10 +155,14 @@
 
                     var divDisplayer = document.getElementById(jsonArray[i].measure_name);
 
-                    //console.log(divDisplayer);
-                    //content += '<option value="' + jsonArray[i].rpi_id.toString() + '">' + jsonArray[i].rpi_id.toString() + '</option>'
+                    if(jsonArray[i].state){
 
-				    divDisplayer.innerHTML = jsonArray[i].measure_value;//'<option selected>Choose Room...</option>' + content;
+				        divDisplayer.innerHTML = jsonArray[i].measure_value;
+                    }
+                    else{
+
+				        divDisplayer.innerHTML = '<img src=\"./images/offline.svg\"  width=\"30\" alt=\"OFFLINE\"></img> ';
+                    }
                 }
             }
 

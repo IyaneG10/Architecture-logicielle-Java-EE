@@ -35,10 +35,10 @@ public class DataService {
     private void  configure(){
 
         try {
-            System.out.println("Connecting to a selected database...");
+            System.out.println(" [i] Connecting to a selected database...");
             conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sysco?user=admin&password=admin");
             stmt = ((java.sql.Connection) conn).createStatement();
-            System.out.println("Connected database successfully...");
+            System.out.println(" [i] Connected database successfully...\n");
 
         }
         catch (SQLException se) {
@@ -73,7 +73,7 @@ public class DataService {
 
     public static JSONArray  getRealTimeData( int rpiId) throws SQLException, JSONException {
 
-        String sql = "select measure_name, measure_value from (select * from data where rpi_id="+ rpiId+" group by date desc ) t1 group by measure_name";
+        String sql = "select measure_name, state, measure_value from (select * from data where rpi_id="+ rpiId+" group by date desc ) t1 group by measure_name";
 
 
         ResultSet rs = stmt.executeQuery(sql);
@@ -98,7 +98,7 @@ public class DataService {
     public static JSONArray getDataByAll() throws SQLException, JSONException {
 
         //STEP 4: Execute a query
-        String sql = "SELECT * FROM data";
+        String sql = "SELECT * FROM data where state=true";
 
         ResultSet rs = stmt.executeQuery(sql);
 
