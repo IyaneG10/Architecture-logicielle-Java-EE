@@ -38,7 +38,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/resources/**",
                         "/registration**",
-                        "/webapp**",
                         "/logTest**",
                         "/login**",
                         "/static**",
@@ -46,9 +45,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/images/**",
                         "/api**").permitAll()
-
-                //.anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .antMatchers(
+                        "/welcome","/","/**.jsp").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

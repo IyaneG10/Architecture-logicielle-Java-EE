@@ -18,6 +18,6 @@ spring:
 
 logins:
     name: "rabbitmq"
-    username: "ima2a5-4fun"
-    password: "glopglop"
+    username: "pifou"
+    password: "pasglop"
 
