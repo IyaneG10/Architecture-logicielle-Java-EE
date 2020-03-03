@@ -2,7 +2,7 @@
 
 Architecture:
 
-[![](architecture.PNG](d)
+[![](architecture.PNG]
 
 ### Prerequisites
 
