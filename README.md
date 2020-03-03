@@ -7,10 +7,11 @@ Architecture:
 ### Prerequisites
 
 Pour pour tester et développer, il faut faut installer:
- RabbitMQ Server
- MariaDB
- IntelliJ
- JDK11
+ 
+ * [RabbitMQ Server]
+ * MariaDB
+ * IntelliJ
+ * JDK8
  
 Pour plus d'informations concernant les installations, voir la section Wiki
 ```
