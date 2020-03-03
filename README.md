@@ -2,7 +2,7 @@
 
 Architecture:
 
-[<img src="architecture.PNG" width="100">](architecture.PNG)
+[<img src="architecture.PNG" width="500">](architecture.PNG)
 
 ### Prerequisites
 
