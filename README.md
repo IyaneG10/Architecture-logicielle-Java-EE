@@ -2,7 +2,7 @@
 
 Architecture:
 
- archi![](architecture.PNG)
+ [](architecture.PNG)
 ### Prerequisites
 
 Pour pour tester et développer, il faut faut installer:
