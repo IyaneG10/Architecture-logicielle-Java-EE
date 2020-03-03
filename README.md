@@ -1,6 +1,6 @@
 # EXEMPLE DE README (à adapter à nos besoins)
 
-One Paragraph of project description goes here
+Architecture:
 
 ## Getting Started
 
@@ -8,8 +8,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
+Pour pour tester et développer, il faut faut installer:
+ RabbitMQ Server
+ MariaDB
+ IntelliJ
+ JDK11
 ```
 Give examples
 ```
@@ -58,9 +61,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Spring Boot Initializer](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
 * [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [IntelliJ](https://rometools.github.io/rome/) - IDE
 
 ## Contributing
 
