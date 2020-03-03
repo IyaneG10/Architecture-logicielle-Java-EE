@@ -2,10 +2,6 @@
 
 Architecture:
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
 Pour pour tester et développer, il faut faut installer:
@@ -13,9 +9,14 @@ Pour pour tester et développer, il faut faut installer:
  MariaDB
  IntelliJ
  JDK11
+ 
+Pour plus d'informations concernant les installations, voir la section Wiki
 ```
 Give examples
 ```
+
+## Getting Started
+
 
 ### Installing
 
@@ -35,56 +36,28 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
-## Running the tests
+## Running deployement
 
 Explain how to run the automated tests for this system
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Les applications ont été déployées sur la machine viturelle à l'adresse 193.48.57.164
+dans le répertoire: ~/Sysco_deploy
+
+Dans ce répertoire vous trouverez trois autres dossiers contenant les fichiers de déploiement: .jar et .classe
 
 ## Built With
 
-* [Spring Boot Initializer](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
+* [Spring Initializr](rhttps://start.spring.io) - The spring boot project generator
+* [Maven](https://maven.apache.org/) - Dependency management
 * [IntelliJ](https://rometools.github.io/rome/) - IDE
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+* [RabbitMQ](https://www.rabbitmq.com/) - Message broker
+* [MariaDB](https://mariadb.org/) - Database
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* **CABRRAL Jorge**
+* **FAHIM Hamza**
+* **MOLLET Loïck**
+* **SECK Malick**
