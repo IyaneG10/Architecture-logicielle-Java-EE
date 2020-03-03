@@ -11,9 +11,13 @@ Pour pour tester et développer, il faut faut installer:
  * IntelliJ
  * JDK8
  
-Pour plus d'informations concernant les installations, voir la section Wiki
+Pour plus d'informations concernant les installations, voir les fichiers dans la section Wiki
 ```
-Give examples
+- Cahier des charges
+- Lexique
+- Setup
+- Structure des données
+- tutoAndroid
 ```
 
 
