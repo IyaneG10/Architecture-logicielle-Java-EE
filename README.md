@@ -1,7 +1,7 @@
 # EXEMPLE DE README (à adapter à nos besoins)
 
 Architecture:
-
+ ![](architecture.png)
 ### Prerequisites
 
 Pour pour tester et développer, il faut faut installer:
