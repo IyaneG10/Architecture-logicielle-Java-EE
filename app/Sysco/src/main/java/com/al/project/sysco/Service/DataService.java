@@ -67,8 +67,6 @@ public class DataService {
                 + ", '" + data.getDate()
                 + "')";
 
-        //sql = "SHOW COLUMNS FROM data";
-
         ResultSet rs = stmt.executeQuery(sql);
     }
 

@@ -108,7 +108,7 @@
                    //alert( jsonData[i].rpi_id);
 
 					dps.push({
-						x: new Date(jsonData[i].date), y: jsonData[i].measure_value
+						x: new Date(jsonData[i].date), y: (jsonData[i].measure_value ==0.00)?NaN:jsonData[i].measure_value
 					});
                 }
 

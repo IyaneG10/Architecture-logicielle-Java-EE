@@ -10,7 +10,7 @@ public class RpiApplication  {
 
 	public static void main(String[] args) {
 
-		int numberRoom =50;
+		int numberRoom =2;
 
 		try {
 
