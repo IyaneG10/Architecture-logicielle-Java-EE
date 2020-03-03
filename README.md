@@ -13,11 +13,11 @@ Pour pour tester et développer, il faut faut installer:
  
 Pour plus d'informations concernant les installations, voir les fichiers dans la section Wiki
 ```
-- Cahier des charges
-- Lexique
-- Setup
-- Structure des données
-- tutoAndroid
+- [Cahier des charges](Cahier des charges)
+- [Lexique](Lexique.md)
+- [Setup](Setup.md)
+- [Structure des données](Structure des données.md)
+- [Tutoriels androis](tutoAndroid)
 ```
 
 
