@@ -1,6 +1,4 @@
-# EXEMPLE DE README (à adapter à nos besoins)
-
-Architecture:
+# Architecture
 
 [<img src="architecture.PNG" width="500">](architecture.PNG)
 
