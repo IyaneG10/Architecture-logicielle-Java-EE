@@ -2,7 +2,8 @@
 
 Architecture:
 
- [](architecture.PNG)
+[![](architecture.PNG](d)
+
 ### Prerequisites
 
 Pour pour tester et développer, il faut faut installer:
