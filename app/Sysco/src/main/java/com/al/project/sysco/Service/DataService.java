@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.sql.*;
 
+
 public class DataService {
 
 
@@ -71,7 +72,7 @@ public class DataService {
         ResultSet rs = stmt.executeQuery(sql);
     }
 
-    public static JSONArray  getRealTimeData( int rpiId) throws SQLException, JSONException {
+    public JSONArray  getRealTimeData( int rpiId) throws SQLException, JSONException {
 
         String sql = "select measure_name, state, measure_value from (select * from data where rpi_id="+ rpiId+" group by date desc ) t1 group by measure_name";
 
@@ -113,10 +114,7 @@ public class DataService {
             }
             json.put(obj);
         }
-        //System.out.println(json);
         return json;
-
-        //return DBManager.GetObjectsFromDB(Query, rs -> FetchUserFromDB(rs));
     }
 
     public  JSONArray getDataByRoom(int room) throws SQLException, JSONException {
@@ -133,7 +131,6 @@ public class DataService {
             for (int i=1; i<=numColumns; i++) {
                 String column_name = rsmd.getColumnName(i);
                 obj.put(column_name, rs.getObject(column_name));
-
             }
             json.put(obj);
         }
@@ -153,7 +150,6 @@ public class DataService {
             for (int i=1; i<=numColumns; i++) {
                 String column_name = rsmd.getColumnName(i);
                 obj.put(column_name, rs.getObject(column_name));
-
             }
             json.put(obj);
         }
@@ -174,7 +170,6 @@ public class DataService {
             for (int i=1; i<=numColumns; i++) {
                 String column_name = rsmd.getColumnName(i);
                 obj.put(column_name, rs.getObject(column_name));
-
             }
             json.put(obj);
         }
