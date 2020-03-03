@@ -13,7 +13,7 @@ Pour pour tester et développer, il faut faut installer:
  
 Pour plus d'informations concernant les installations, voir les fichiers dans la section Wiki
 ```
-- [Cahier des charges](/Structure-des-charges.md)
+- [Cahier des charges](/wikis/Structure-des-charges.md)
 - [Lexique](/Lexique.md)
 - [Setup](/Setup.md)
 - [Structure des données](/Structure-des-données.md)
