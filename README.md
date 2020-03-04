@@ -1,15 +1,18 @@
 # Architecture
 
+
 [<img src="architecture.PNG" width="500">](architecture.PNG)
 
-## Pré-requis
 
+
+## Pré-requis
 Pour pour tester et développer, il faut faut installer:
  
  * RabbitMQ Server
  * MariaDB
  * IntelliJ
  * JDK8
+ * Android Studio
  
 Pour plus d'informations concernant les installations, voir les fichiers dans la section Wiki
 
@@ -45,6 +48,17 @@ les fichiers init. correspondants se trouvent dans le répertoire:
 * /etc/init.d/web-application
 
 
+## Tester fonctionnalité
+
+Pour tester et visualiser l'envoi et la réception des topics, vous pouvez vous connecter sur le manager graphique 
+de RabbitMQ au :
+* adresse: 193.48.57.164
+* port : 15672
+* user: pifou
+* password: (c'est le mdp habituel pour pifou)
+
+Pour tester l'application android, vous pouvez vous connecter avec : "Admin (user) "abc" (password)
+Cependant, vous ne serait pas connecter avec le Serveur.
 
 ## Construit avec
 
@@ -53,6 +67,8 @@ les fichiers init. correspondants se trouvent dans le répertoire:
 * [IntelliJ](https://rometools.github.io/rome/) - IDE
 * [RabbitMQ](https://www.rabbitmq.com/) - Message broker
 * [MariaDB](https://mariadb.org/) - Database
+
+
 
 ## Auteurs
 
