@@ -23,7 +23,10 @@ Pour plus d'informations concernant les installations, voir les fichiers dans la
 
 ## Démarrer deploiement
 
+Site web: http://193.48.57.164:8787/
+
 Les applications ont été déployées sur la machine viturelle à l'adresse 193.48.57.164
+
 dans le répertoire: ~/Sysco_deploy
 
 Dans ce répertoire vous trouverez trois autres dossiers contenant les fichiers de déploiement: .jar et .classe
