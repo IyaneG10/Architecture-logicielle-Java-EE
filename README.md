@@ -29,7 +29,22 @@ Les applications ont été déployées sur la machine viturelle à l'adresse 193
 
 dans le répertoire: ~/Sysco_deploy
 
-Dans ce répertoire vous trouverez trois autres dossiers contenant les fichiers de déploiement: .jar et .classe
+Dans ce répertoire vous trouverez trois autres dossiers (WebApplication, RpiApplication, DataApplication) contenant les fichiers de déploiement: .jar, .jsp, .classe etc.
+
+Afin de faciliter le lancement des trois application, nous avons mis en place des services permettant des les démarrer, arreter et redémarrer 
+sans avoir à garder des terminaux ouverts:
+
+* service   rpi-application   [start | restart | stop]
+* service   data-application  [start | restart | stop]
+* service    web-application   [start | restart | stop]
+
+les fichiers init. correspondants se trouvent dans le répertoire: 
+
+* /etc/init.d/rpi-application
+* /etc/init.d/data-application
+* /etc/init.d/web-application
+
+
 
 ## Construit avec
 
