@@ -2,7 +2,7 @@
 
 [<img src="architecture.PNG" width="500">](architecture.PNG)
 
-### Pré-requis
+## Pré-requis
 
 Pour pour tester et développer, il faut faut installer:
  
