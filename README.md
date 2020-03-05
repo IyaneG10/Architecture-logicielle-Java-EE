@@ -1,3 +1,5 @@
+# Latest version in vranch V3
+
 # Architecture
 
 
@@ -41,6 +43,7 @@ sans avoir à garder des terminaux ouverts:
 * service   data-application  [start | restart | stop]
 * service    web-application   [start | restart | stop]
 
+
 les fichiers init. correspondants se trouvent dans le répertoire: 
 
 * /etc/init.d/rpi-application
@@ -58,7 +61,7 @@ de RabbitMQ au :
 * password: (c'est le mdp habituel pour pifou)
 
 Pour tester l'application android, vous pouvez vous connecter avec : "Admin (user) "abc" (password)
-Cependant, vous ne serait pas connecter avec le Serveur.
+Cependant, vous ne serait pas connecté avec le Serveur.
 
 ## Construit avec
 
