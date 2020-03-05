@@ -77,12 +77,12 @@ public class UserController {
 
         ResponseEntity<String> response = null;
 
-if(0 == securityService.autoLogin(username, password)){
-    response= new ResponseEntity<String>("{\"Reponse\": \"Connexion reussie\"}",  HttpStatus.OK);
-}
-else{
-    response= new ResponseEntity<String>("{\"Reponse\": \"Identifiant ou mot de passe inconnu\"}",  HttpStatus.FORBIDDEN);
-}
+        if(0 == securityService.autoLogin(username, password)){
+            response= new ResponseEntity<String>("Vous êtes connecté",  HttpStatus.OK);
+        }
+        else{
+            response= new ResponseEntity<String>("Identifiant ou mot de passe inconnu",  HttpStatus.FORBIDDEN);
+        }
 
         return response;
 

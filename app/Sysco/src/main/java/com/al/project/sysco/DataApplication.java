@@ -26,6 +26,7 @@ public class DataApplication {
         final String hostIP = "localhost";
         final String username = "pifou";
         final String password = "pasglop";
+        final int port = 5672;
 
         DataService dataService = new DataService("jdbc:mariadb://localhost:3306/sysco", "admin", "admin");
 
@@ -34,6 +35,7 @@ public class DataApplication {
         factory.setHost(hostIP);
         factory.setUsername(username);
         factory.setPassword(password);
+        factory.setPort(port);
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
@@ -42,7 +44,6 @@ public class DataApplication {
         String queueName = channel.queueDeclare().getQueue();
 
         channel.queueBind(queueName, EXCHANGE_NAME, "Rpi.DataBase.Room.*");
-        channel.queueBind(queueName, EXCHANGE_NAME, "Rpi.User.Room.*");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 
@@ -50,23 +51,19 @@ public class DataApplication {
             System.out.println(" [i] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + jsonStringData + "'");
 
 
-            if(delivery.getEnvelope().getRoutingKey().contains("Rpi.User.Room.")){
+            try {
 
+                Data data= new Data(jsonStringData);
+
+                System.out.println(" [+] Data saved in database...\n");
+                dataService.addData(data);
             }
-            else{
-                try {
 
-                    Data data= new Data(jsonStringData);
+            catch (Exception ex){
 
-                    System.out.println(" [+] Data saved in database...\n");
-                    dataService.addData(data);
-                }
-
-                catch (Exception ex){
-
-                    System.out.println(ex);
-                }
+                System.out.println(ex);
             }
+
         };
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
         });

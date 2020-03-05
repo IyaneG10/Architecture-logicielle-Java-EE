@@ -11,6 +11,7 @@ public class Publisher {
     private final String hostIP = "localhost";
     private final String username = "pifou";
     private final String password = "pasglop";
+    private final int port = 5672;
 
 
     public void publish(String EXCHANGE_NAME, String routingKey, String message) throws Exception{
@@ -18,7 +19,9 @@ public class Publisher {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(hostIP);
         factory.setUsername(username);
-        factory.setPassword(password);
+        factory.setPassword(password);;
+        factory.setPort(port);
+
 
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
