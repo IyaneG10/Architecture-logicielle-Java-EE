@@ -31,17 +31,20 @@
                 <div class="column3">
                     <p>Oxygene</p>
                     <div class="divMeasure" id ="Oxygene">
-                    </div>
+                        ----
+                    </div>%
                 </div>
                 <div class="column3">
                     <p>Monoxyde de carbone</p>
                     <div class="divMeasure" id ="Monoxyde de carbone">
-                    </div>
+                        ----
+                    </div>%
                 </div>
                 <div class="column3">
                     <p>Dioxyde de carbone</p>
                     <div class="divMeasure" id ="Dioxyde de carbone">
-                    </div>
+                        ----
+                    </div>%
                 </div>
             </div>
 
@@ -49,22 +52,26 @@
                 <div class="column4">
                     <p>Temperature</p>
                     <div class="divMeasure" class="divMeasure" id ="Temperature">
-                    </div>
+                        ----
+                    </div>°C
                 </div>
                 <div class="column4">
                     <p>Humidite</p>
                     <div class="divMeasure" id ="Humidite">
-                    </div>
+                        ----
+                    </div>%
                 </div>
                 <div class="column4">
                     <p>Pression atmospherique</p>
                     <div class="divMeasure" id ="Pression atmospherique">
-                    </div>
+                        ----
+                    </div>hpa
                 </div>
                 <div    class="column4">
                     <p>Particules fines</p>
                     <div class="divMeasure" id ="Particules fines">
-                    </div>
+                        ----
+                    </div>kg/cm3
                 </div>
             </div>
 
@@ -113,7 +120,6 @@
 				}
 				dropdownList.innerHTML = '<option selected>Choose Room...</option>' + content;
 			}
-
 
 
 			function getDataFromServer(callbackFunction){
