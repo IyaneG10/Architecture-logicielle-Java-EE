@@ -63,6 +63,7 @@ public class Data {
     private String measureName;
     private double measureValue;
     private String date;
+
     public Data(){
 
     }
@@ -77,26 +78,6 @@ public class Data {
         this.setMeasureName(recurseKeys(jsonObject,"Name"));
         this.setMeasureValue(Double.parseDouble(recurseKeys(jsonObject,"Value")));
     }
-
-    /*public Data jsonstringToData(String dataString) throws JSONException, ParseException {
-
-        Data newDataObj = new Data();
-
-        JSONObject jsonObject = new JSONObject(dataString);
-
-        //newDataObj.setDate(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(jsonObject.getString("Date")));
-        //String str = recurseKeys(jsonObject,"Date");
-        //Date currentDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(str);
-
-        newDataObj.setDate(recurseKeys(jsonObject,"Date"));
-        newDataObj.setRpiId(Integer.parseInt(recurseKeys(jsonObject,"Id")));
-        newDataObj.setState(Boolean.parseBoolean(recurseKeys(jsonObject,"State")));
-        newDataObj.setmeasureName(recurseKeys(jsonObject,"Name"));
-        newDataObj.setmeasureValue(Double.parseDouble(recurseKeys(jsonObject,"Value")));
-
-        return newDataObj;
-    }*/
-
 
     public static String recurseKeys(JSONObject jObj, String findKey) throws JSONException {
         String finalValue = "";
@@ -126,7 +107,6 @@ public class Data {
             }
         }
 
-        // key is not found
         return finalValue;
     }
 
@@ -134,10 +114,10 @@ public class Data {
     public String dataToJsonstring() {
         try {
             String st1 = Integer.toString(this.getRpiId());
-            String st2 = this.getMeasureName().toString();
+            String st2 = this.getMeasureName();
             String st3 = Double.toString(this.getMeasureValue());
             String st4 = Boolean.toString(this.isState());
-            String st5 = this.getDate().toString();
+            String st5 = this.getDate();
 
             return "{" +
                 "\"Rpi\":" +
